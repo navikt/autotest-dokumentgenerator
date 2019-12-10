@@ -49,8 +49,8 @@
             <!-- Kontraktsavhengigheter -->
             <dependency>
                 <groupId>no.nav.foreldrepenger.kontrakter</groupId>
-                <artifactId>foreldrepenger-kontrakter-root</artifactId>
-                <version>5.0_20190921120419_f1d52a6</version>
+                <artifactId>fp-kontrakter-root</artifactId>
+                <version>5.1_20191210141010_6a7f399</version>
                 <scope>import</scope>
                 <type>pom</type>
             </dependency>
