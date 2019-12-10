@@ -24,6 +24,12 @@
         <java.version>11</java.version>
     </properties>
 
+    <scm>
+        <connection>scm:git:https://github.com/navikt/fpsak-autotest-dokumentgenerator.git</connection>
+        <developerConnection>scm:git:https://github.com/navikt/fpsak-autotest-dokumentgenerator.git</developerConnection>
+        <url>https://github.com/navikt/fpsak-autotest-dokumentgenerator/</url>
+    </scm>
+
     <dependencyManagement>
         <dependencies>
             <!-- Prosjektavhengigheter -->
@@ -132,4 +138,17 @@
             </plugins>
         </pluginManagement>
     </build>
+
+    <profiles>
+        <profile>
+            <id>publishGithub</id>
+            <distributionManagement>
+                <repository>
+                    <id>github-1</id>
+                    <name>Github navikt Maven Packages</name>
+                    <url>https://maven.pkg.github.com/navikt/fpsak-autotest-dokumentgenerator</url>
+                </repository>
+            </distributionManagement>
+        </profile>
+    </profiles>
 </project>
