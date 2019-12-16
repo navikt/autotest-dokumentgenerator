@@ -4,14 +4,15 @@
 
     <modelVersion>4.0.0</modelVersion>
     <groupId>no.nav.foreldrepenger.autotest.dokumentgenerator</groupId>
-    <artifactId>autotest-dokumentgenerator</artifactId>
+    <artifactId>dokumentgenerator</artifactId>
     <packaging>pom</packaging>
-    <name>VTP :: Root</name>
+    <name>Dokumentgenerator :: Root</name>
     <version>${revision}${sha1}${changelist}</version>
 
 
     <modules>
-        <module>dokumentgenerator</module>
+        <module>foreldrepengesoknad</module>
+        <module>inntektsmelding</module>
     </modules>
 
     <properties>
@@ -32,12 +33,6 @@
 
     <dependencyManagement>
         <dependencies>
-            <!-- Prosjektavhengigheter -->
-            <dependency>
-                <groupId>no.nav.foreldrepenger.vtp</groupId>
-                <artifactId>dokumentgenerator</artifactId>
-                <version>${project.version}</version>
-            </dependency>
 
             <!-- Kontraktsavhengigheter -->
             <dependency>
@@ -89,6 +84,12 @@
                 <groupId>com.sun.xml.ws</groupId>
                 <artifactId>jaxws-rt</artifactId>
                 <version>2.3.2</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.jvnet.jaxb2_commons</groupId>
+                <artifactId>jaxb2-basics-runtime</artifactId>
+                <version>1.11.1</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
