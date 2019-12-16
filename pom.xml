@@ -4,7 +4,7 @@
 
     <modelVersion>4.0.0</modelVersion>
     <groupId>no.nav.foreldrepenger.autotest.dokumentgenerator</groupId>
-    <artifactId>fpsak-autotest-dokumentgenerator</artifactId>
+    <artifactId>autotest-dokumentgenerator</artifactId>
     <packaging>pom</packaging>
     <name>VTP :: Root</name>
     <version>${revision}${sha1}${changelist}</version>
@@ -25,9 +25,9 @@
     </properties>
 
     <scm>
-        <connection>scm:git:https://github.com/navikt/fpsak-autotest-dokumentgenerator.git</connection>
-        <developerConnection>scm:git:https://github.com/navikt/fpsak-autotest-dokumentgenerator.git</developerConnection>
-        <url>https://github.com/navikt/fpsak-autotest-dokumentgenerator/</url>
+        <connection>scm:git:https://github.com/navikt/autotest-dokumentgenerator.git</connection>
+        <developerConnection>scm:git:https://github.com/navikt/autotest-dokumentgenerator.git</developerConnection>
+        <url>https://github.com/navikt/autotest-dokumentgenerator/</url>
     </scm>
 
     <dependencyManagement>
