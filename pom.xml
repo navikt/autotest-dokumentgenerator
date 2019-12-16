@@ -33,13 +33,6 @@
     <dependencyManagement>
         <dependencies>
             <!-- Prosjektavhengigheter -->
-            <!--
-            <dependency>
-                <groupId>no.nav.foreldrepenger.vtp</groupId>
-                <artifactId>core</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            -->
             <dependency>
                 <groupId>no.nav.foreldrepenger.vtp</groupId>
                 <artifactId>dokumentgenerator</artifactId>
