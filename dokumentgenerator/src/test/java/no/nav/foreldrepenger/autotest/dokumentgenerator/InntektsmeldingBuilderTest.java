@@ -36,7 +36,8 @@ public class InntektsmeldingBuilderTest{
                 .medArbeidsgiver("13213123", "3333333")
                 .medArbeidstakerFNR("121313212313")
                 .medYtelse(YtelseKodeliste.FORELDREPENGER)
-                .medAarsakTilInnsending(ÅrsakInnsendingKodeliste.NY);
+                .medAarsakTilInnsending(ÅrsakInnsendingKodeliste.NY)
+                .medFørsteFraværsdag(LocalDate.now().minusWeeks(3));
         InntektsmeldingM im = inntektsmeldingBuilder.build();
         System.out.println("end");
     }
