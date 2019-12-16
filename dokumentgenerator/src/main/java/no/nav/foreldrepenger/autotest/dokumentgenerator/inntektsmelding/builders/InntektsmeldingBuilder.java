@@ -99,6 +99,10 @@ public class InntektsmeldingBuilder {
         this.skjemainnholdBuilderKladd.medArbeidsforhold(arbeidsforhold);
         return this;
     }
+    public InntektsmeldingBuilder medFørsteFraværsdag(LocalDate førsteFraværsdag) {
+        this.arbeidsforholdBuilderKladd.medFørsteFraværsdag(førsteFraværsdag);
+        return this;
+    }
 
     public InntektsmeldingBuilder medRefusjonsBelopPerMnd(BigDecimal refusjonsBelopPerMnd) {
         if(refusjonBuilderKladd == null) {
