@@ -6,7 +6,7 @@
 
     <parent>
         <groupId>no.nav.foreldrepenger.autotest.dokumentgenerator</groupId>
-        <artifactId>fpsak-autotest-dokumentgenerator</artifactId>
+        <artifactId>autotest-dokumentgenerator</artifactId>
         <version>${revision}${sha1}${changelist}</version>
     </parent>
 
