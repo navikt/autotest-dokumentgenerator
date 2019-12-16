@@ -139,7 +139,7 @@
                 <repository>
                     <id>github-1</id>
                     <name>Github navikt Maven Packages</name>
-                    <url>https://maven.pkg.github.com/navikt/fpsak-autotest-dokumentgenerator</url>
+                    <url>https://maven.pkg.github.com/navikt/autotest-dokumentgenerator</url>
                 </repository>
             </distributionManagement>
         </profile>
