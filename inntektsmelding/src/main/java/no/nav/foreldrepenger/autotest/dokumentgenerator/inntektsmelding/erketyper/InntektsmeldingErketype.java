@@ -1,4 +1,4 @@
-package no.nav.foreldreenger.autotest.dokumentgenerator.inntektsmelding.erketyper;
+package no.nav.foreldrepenger.autotest.dokumentgenerator.inntektsmelding.erketyper;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
