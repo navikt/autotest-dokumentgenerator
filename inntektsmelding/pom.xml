@@ -6,26 +6,20 @@
 
     <parent>
         <groupId>no.nav.foreldrepenger.autotest.dokumentgenerator</groupId>
-        <artifactId>autotest-dokumentgenerator</artifactId>
+        <artifactId>dokumentgenerator</artifactId>
         <version>${revision}${sha1}${changelist}</version>
     </parent>
 
-    <artifactId>dokumentgenerator</artifactId>
+    <artifactId>inntektsmelding</artifactId>
     <packaging>jar</packaging>
-    <name>VTP ::Dokumentgenerator</name>
+    <name>Dokumentgenerator :: Inntektsmelding</name>
 
 
     <dependencies>
-        <!-- Engangsstønad -og foreldrepenger-skjema for Utbyggeren -->
-        <dependency>
-            <groupId>no.nav.foreldrepenger.kontrakter</groupId>
-            <artifactId>soeknad-v3</artifactId>
-        </dependency>
 
         <dependency>
             <groupId>org.jvnet.jaxb2_commons</groupId>
             <artifactId>jaxb2-basics-runtime</artifactId>
-            <version>1.11.1</version>
         </dependency>
 
         <dependency>

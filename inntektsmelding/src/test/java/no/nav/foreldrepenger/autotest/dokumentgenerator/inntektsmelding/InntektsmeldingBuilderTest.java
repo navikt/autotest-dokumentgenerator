@@ -1,16 +1,16 @@
-package no.nav.foreldrepenger.autotest.dokumentgenerator;
+package no.nav.foreldrepenger.autotest.dokumentgenerator.inntektsmelding;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import no.nav.foreldrepenger.autotest.dokumentgenerator.inntektsmelding.erketyper.InntektsmeldingErketype;
 import no.nav.foreldrepenger.autotest.dokumentgenerator.inntektsmelding.builders.InntektsmeldingBuilder;
 import no.seres.xsd.nav.inntektsmelding_m._20181211.InntektsmeldingM;
 import org.junit.Assert;
 import org.junit.Test;
 
-import no.nav.foreldrepenger.autotest.dokumentgenerator.inntektsmelding.erketyper.InntektsmeldingErketype;
 import no.nav.inntektsmelding.xml.kodeliste._20180702.YtelseKodeliste;
 import no.nav.inntektsmelding.xml.kodeliste._20180702.ÅrsakInnsendingKodeliste;
 import no.seres.xsd.nav.inntektsmelding_m._20181211.DelvisFravaer;

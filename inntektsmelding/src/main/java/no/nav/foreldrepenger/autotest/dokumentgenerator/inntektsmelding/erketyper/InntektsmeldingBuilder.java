@@ -1,7 +1,6 @@
 package no.nav.foreldrepenger.autotest.dokumentgenerator.inntektsmelding.erketyper;
 
 
-import no.nav.foreldrepenger.autotest.dokumentgenerator.foreldrepengesoknad.erketyper.FordelingErketyper;
 import no.nav.inntektsmelding.xml.kodeliste._20180702.*;
 import no.seres.xsd.nav.inntektsmelding_m._20181211.ObjectFactory;
 import no.seres.xsd.nav.inntektsmelding_m._20181211.*;
@@ -611,10 +610,10 @@ public class InntektsmeldingBuilder {
     }
 
     private ÅrsakUtsettelseKodeliste map(String årsak) {
-        if (FordelingErketyper.UTSETTELSETYPE_LOVBESTEMT_FERIE.equals(årsak)) {
+        if ("LOVBESTEMT_FERIE".equals(årsak)) {
             return ÅrsakUtsettelseKodeliste.LOVBESTEMT_FERIE;
         }
-        if (FordelingErketyper.UTSETTELSETYPE_ARBEID.equals(årsak)) {
+        if ("ARBEID".equals(årsak)) {
             return ÅrsakUtsettelseKodeliste.ARBEID;
         }
         throw new IllegalStateException("Ukjent utsettelseårsak " + årsak);
