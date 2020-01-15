@@ -45,7 +45,6 @@ public class RefusjonBuilder {
     }
 
     Refusjon build() {
-        Objects.requireNonNull(refusjonKladd.getRefusjonsbeloepPrMnd(), "refusjonsBelopPerMnd kan ikke være null");
         return refusjonKladd;
     }
 
