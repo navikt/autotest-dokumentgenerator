@@ -1,4 +1,4 @@
-package no.nav.foreldrepenger.autotest.dokumentgenerator.foreldrepengesoknad.builders;
+package no.nav.foreldrepenger.autotest.dokumentgenerator.foreldrepengesoknad.builders.perioder;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -36,6 +36,7 @@ public class UttaksperiodeBuilder {
         this.kladd.setSamtidigUttakProsent(samtidigUttakProsent.doubleValue());
         return this;
     }
+
     public Uttaksperiode build(){
         return this.kladd;
     }

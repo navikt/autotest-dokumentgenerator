@@ -1,4 +1,4 @@
-package no.nav.foreldrepenger.autotest.dokumentgenerator.foreldrepengesoknad.builders;
+package no.nav.foreldrepenger.autotest.dokumentgenerator.foreldrepengesoknad.builders.perioder;
 
 import no.nav.vedtak.felles.xml.soeknad.kodeverk.v3.Uttaksperiodetyper;
 import no.nav.vedtak.felles.xml.soeknad.uttak.v3.Gradering;

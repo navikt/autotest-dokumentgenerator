@@ -1,41 +1,65 @@
 package no.nav.foreldrepenger.autotest.dokumentgenerator.foreldrepengesoknad.builders;
 
-import java.time.LocalDate;
-import java.util.List;
-
-import javax.xml.bind.JAXBElement;
-import javax.xml.bind.JAXBException;
-
 import no.nav.foreldrepenger.autotest.dokumentgenerator.foreldrepengesoknad.SøkersRolle;
 import no.nav.foreldrepenger.autotest.dokumentgenerator.foreldrepengesoknad.util.JaxbHelper;
-import org.xml.sax.SAXException;
-
 import no.nav.foreldrepenger.søknad.v3.SøknadConstants;
 import no.nav.vedtak.felles.xml.soeknad.endringssoeknad.v3.Endringssoeknad;
 import no.nav.vedtak.felles.xml.soeknad.engangsstoenad.v3.Engangsstønad;
-import no.nav.vedtak.felles.xml.soeknad.felles.v3.Vedlegg;
-import no.nav.vedtak.felles.xml.soeknad.felles.v3.Ytelse;
+import no.nav.vedtak.felles.xml.soeknad.felles.v3.*;
 import no.nav.vedtak.felles.xml.soeknad.foreldrepenger.v3.Foreldrepenger;
+import no.nav.vedtak.felles.xml.soeknad.kodeverk.v3.Brukerroller;
 import no.nav.vedtak.felles.xml.soeknad.svangerskapspenger.v1.Svangerskapspenger;
 import no.nav.vedtak.felles.xml.soeknad.v3.ObjectFactory;
 import no.nav.vedtak.felles.xml.soeknad.v3.OmYtelse;
 import no.nav.vedtak.felles.xml.soeknad.v3.Soeknad;
+import org.xml.sax.SAXException;
 
-import static no.nav.foreldrepenger.autotest.dokumentgenerator.foreldrepengesoknad.erketyper.SoekerErketyper.soekerAvType;
+import javax.xml.bind.JAXBElement;
+import javax.xml.bind.JAXBException;
+import java.time.LocalDate;
+import java.util.List;
 
-public class SøknadBuilder {
+public abstract class SøknadBuilder<B extends SøknadBuilder<B>> {
 
-    private Soeknad kladd;
+    protected Soeknad søknadKladd;
 
-    public SøknadBuilder(Ytelse ytelse, String aktørID, SøkersRolle søkersRolle) {
-        kladd = new Soeknad();
-        withYtelse(ytelse);
-        withSoeker(aktørID, søkersRolle);
+    SøknadBuilder() {
+        søknadKladd = new Soeknad();
     }
-    private SøknadBuilder withSoeker(String aktoerId, SøkersRolle søkerRolle){
-        kladd.setSoeker(soekerAvType(aktoerId, søkerRolle));
-        return this;
-    }
+    protected abstract B self();
+    protected abstract SøknadBuilder medYtelse(Ytelse ytelse);
+
+    public B medSøker(String aktoerId, SøkersRolle søkerRolle) {
+        søknadKladd.setSoeker(soekerAvType(aktoerId, søkerRolle));
+        return self();
+    };
+    public B medMottattDato(LocalDate mottattDato) {
+        søknadKladd.setMottattDato(mottattDato);
+        return self();
+    };
+    public B medBegrunnelseForSenSoeknad(String begrunnelseForSenSoeknad){
+        søknadKladd.setBegrunnelseForSenSoeknad(begrunnelseForSenSoeknad);
+        return self();
+    };
+    public B medTilleggsopplysninger(String tilleggsopplysninger){
+        søknadKladd.setTilleggsopplysninger(tilleggsopplysninger);
+        return self();
+    };
+    public B medAndreVedlegg(List<Vedlegg> andreVedlegg){
+        if(andreVedlegg != null){
+            andreVedlegg.forEach(av -> søknadKladd.getAndreVedlegg().add(av));
+        }
+        return self();
+    };
+    public B medPåkrevdeVedlegg(List<Vedlegg> påkrevdeVedlegg) {
+        if(påkrevdeVedlegg != null) {
+            påkrevdeVedlegg.forEach(pv -> søknadKladd.getPaakrevdeVedlegg().add(pv));
+        }
+        return self();
+    };
+
+
+
     /**
      * Konverterer {@link Soeknad} til XML, eller kaster en {@link RuntimeException} ved feil
      */
@@ -53,69 +77,50 @@ public class SøknadBuilder {
         }
         return xml;
     }
-    public SøknadBuilder withMottattDato(LocalDate mottattDato) {
-        kladd.setMottattDato(mottattDato);
-        return this;
-    }
-    public SøknadBuilder withBegrunnelseForSenSoeknad(String begrunnelseForSenSoeknad) {
-        kladd.setBegrunnelseForSenSoeknad(begrunnelseForSenSoeknad);
-        return this;
-    }
-    public SøknadBuilder withYtelse(Ytelse ytelse) {
-        if (ytelse instanceof Foreldrepenger) {
-            setOmYtelseJAXBElement((new no.nav.vedtak.felles.xml.soeknad.foreldrepenger.v3.ObjectFactory()).createForeldrepenger((Foreldrepenger) ytelse));
-        }
-        else if (ytelse instanceof Endringssoeknad) {
-            setOmYtelseJAXBElement((new no.nav.vedtak.felles.xml.soeknad.endringssoeknad.v3.ObjectFactory()).createEndringssoeknad((Endringssoeknad) ytelse));
-        }
-        else if (ytelse instanceof Engangsstønad) {
-            setOmYtelseJAXBElement((new no.nav.vedtak.felles.xml.soeknad.engangsstoenad.v3.ObjectFactory()).createEngangsstønad((Engangsstønad) ytelse));
-        }
-        else if (ytelse instanceof Svangerskapspenger){
-            JAXBElement<? extends Ytelse> omYtelseJAXBElementKladd = (new no.nav.vedtak.felles.xml.soeknad.svangerskapspenger.v1.ObjectFactory()).createSvangerskapspenger((Svangerskapspenger) ytelse);
-            Svangerskapspenger svangerskapspenger = (Svangerskapspenger)omYtelseJAXBElementKladd.getValue();
-            svangerskapspenger.getTilretteleggingListe().getTilrettelegging().forEach((tilrettelegging) -> {
-                tilrettelegging.getVedlegg().forEach((vedlegg) -> {
-                    this.kladd.getPaakrevdeVedlegg().add((Vedlegg)vedlegg.getValue());
-                });
-            });
-            this.setOmYtelseJAXBElement(omYtelseJAXBElementKladd);
-        }
-        return this;
-    }
-    private void setOmYtelseJAXBElement(JAXBElement<? extends Ytelse> omYtelseJAXBElement) {
+
+    protected OmYtelse setOmYtelseJAXBElement(JAXBElement<? extends Ytelse> omYtelseJAXBElement) {
         OmYtelse omYtelseKladd = new OmYtelse();
         omYtelseKladd.getAny().add(omYtelseJAXBElement);
-        this.kladd.setOmYtelse(omYtelseKladd);
+        return omYtelseKladd;
     }
 
-    public SøknadBuilder withTilleggsopplysninger(String tilleggsopplysninger) {
-        kladd.setTilleggsopplysninger(tilleggsopplysninger);
-        return this;
+    protected Bruker soekerAvType(String aktoerId, SøkersRolle søkersRolle) {
+        Bruker bruker = new Bruker();
+        bruker.setAktoerId(aktoerId);
+        Brukerroller brukerroller = new Brukerroller();
+        if (søkersRolle ==  SøkersRolle.MOR) {
+            brukerroller.setKode("MOR");
+        }
+        else if (søkersRolle ==  SøkersRolle.FAR) {
+            brukerroller.setKode("FAR");
+        }
+        else if (søkersRolle == SøkersRolle.MEDMOR) {
+            brukerroller.setKode("MEDMOR");
+        }
+        else {
+            brukerroller.setKode("ANDRE");
+        }
+        brukerroller.setKodeverk("FORELDRE_TYPE");
+        bruker.setSoeknadsrolle(brukerroller);
+        return bruker;
     }
-    public SøknadBuilder withAndreVedlegg(List<Vedlegg> andreVedlegg) {
-        if(andreVedlegg != null){
-            andreVedlegg.forEach(av -> kladd.getAndreVedlegg().add(av));
-        }
-        return this;
+    protected AnnenForelder standardAnnenForelder(String aktørId) {
+        AnnenForelderMedNorskIdent forelder = new AnnenForelderMedNorskIdent();
+        forelder.setAktoerId(aktørId);
+        return forelder;
     }
-    public SøknadBuilder withPaakrevdeVedlegg(List<Vedlegg> paakrevdeVedlegg) {
-        if(paakrevdeVedlegg != null) {
-            paakrevdeVedlegg.forEach(pv -> kladd.getPaakrevdeVedlegg().add(pv));
+
+
+    Soeknad build() {
+        if(søknadKladd.getBegrunnelseForSenSoeknad() == null){
+            søknadKladd.setBegrunnelseForSenSoeknad((String) null);
         }
-        return this;
-    }
-    public Soeknad build() {
-        //Hvis ikke verdiene for ikke kritiske variabler er satt blir de satt til en defaultverdi.
-        if(kladd.getBegrunnelseForSenSoeknad() == null){
-            kladd.setBegrunnelseForSenSoeknad((String) null);
+        if(søknadKladd.getTilleggsopplysninger() == null){
+            søknadKladd.setTilleggsopplysninger("");
         }
-        if(kladd.getTilleggsopplysninger() == null){
-            kladd.setTilleggsopplysninger("");
+        if(søknadKladd.getMottattDato() == null){
+            søknadKladd.setMottattDato(LocalDate.now());
         }
-        if(kladd.getMottattDato() == null){
-            kladd.setMottattDato(LocalDate.now());
-        }
-        return kladd;
+        return søknadKladd;
     }
 }

@@ -1,70 +1,69 @@
 package no.nav.foreldrepenger.autotest.dokumentgenerator;
 
 import no.nav.foreldrepenger.autotest.dokumentgenerator.foreldrepengesoknad.SøkersRolle;
+import no.nav.foreldrepenger.autotest.dokumentgenerator.foreldrepengesoknad.builders.EngangstønadBuilder;
+import no.nav.foreldrepenger.autotest.dokumentgenerator.foreldrepengesoknad.builders.ForeldrepengerBuilder;
+import no.nav.foreldrepenger.autotest.dokumentgenerator.foreldrepengesoknad.builders.SvangerskapspengerBuilder;
 import no.nav.foreldrepenger.autotest.dokumentgenerator.foreldrepengesoknad.builders.SøknadBuilder;
-import no.nav.foreldrepenger.autotest.dokumentgenerator.foreldrepengesoknad.builders.ytelse.EngangstønadYtelseBuilder;
-import no.nav.foreldrepenger.autotest.dokumentgenerator.foreldrepengesoknad.builders.ytelse.ForeldrepengerYtelseBuilder;
-import no.nav.foreldrepenger.autotest.dokumentgenerator.foreldrepengesoknad.builders.ytelse.SvangerskapspengerYtelseBuilder;
-import no.nav.foreldrepenger.autotest.dokumentgenerator.foreldrepengesoknad.erketyper.ArbeidsforholdErketyper;
-import no.nav.foreldrepenger.autotest.dokumentgenerator.foreldrepengesoknad.erketyper.MedlemskapErketyper;
-import no.nav.foreldrepenger.autotest.dokumentgenerator.foreldrepengesoknad.erketyper.TilretteleggingsErketyper;
-import no.nav.vedtak.felles.xml.soeknad.engangsstoenad.v3.Engangsstønad;
-import no.nav.vedtak.felles.xml.soeknad.foreldrepenger.v3.Foreldrepenger;
-import no.nav.vedtak.felles.xml.soeknad.svangerskapspenger.v1.Svangerskapspenger;
 import no.nav.vedtak.felles.xml.soeknad.svangerskapspenger.v1.Tilrettelegging;
+import no.nav.vedtak.felles.xml.soeknad.v3.Soeknad;
 import org.junit.Test;
 
 import java.time.LocalDate;
 import java.util.Collections;
 
-import static no.nav.foreldrepenger.autotest.dokumentgenerator.foreldrepengesoknad.erketyper.FordelingErketyper.fordelingHappyCase;
-import static no.nav.foreldrepenger.autotest.dokumentgenerator.foreldrepengesoknad.erketyper.SoekersRelasjonErketyper.fødsel;
-import static no.nav.foreldrepenger.autotest.dokumentgenerator.foreldrepengesoknad.erketyper.SoekersRelasjonErketyper.termin;
 import static org.assertj.core.api.Assertions.assertThatCode;
+import static org.hamcrest.CoreMatchers.instanceOf;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThat;
 
 public class SøknadBuilderTest {
 
     @Test
-    public void foreldrepengersøknadKasterIngenExceptionHvisIkkeAlleNødvendigeFelterErSatt() {
-        LocalDate terminDato = LocalDate.now().plusWeeks(3);
-        Foreldrepenger foreldrepenger = new ForeldrepengerYtelseBuilder(
-                termin(1, terminDato),
-                fordelingHappyCase(terminDato,SøkersRolle.MOR))
-                .build();
-        SøknadBuilder soeknad = new SøknadBuilder(foreldrepenger, "123", SøkersRolle.MOR);
+    public void foreldrepengerBuilderByggerRiktig() {
+        ForeldrepengerBuilder søknad = new ForeldrepengerBuilder("1234", SøkersRolle.MOR)
+                .medDekningsgrad("80")
+                .medMottattDato(LocalDate.now().minusWeeks(10));
 
-        assertThatCode(() -> soeknad.build()).doesNotThrowAnyException();
-    }
-    @Test
-    public void svangerskappengersøknadKasterIngenExceptionHvisIkkeAlleNødvendigeFelterErSatt() {
-        Tilrettelegging tilrettelegging = TilretteleggingsErketyper.ingenTilrettelegging(
-                LocalDate.now(),
-                LocalDate.now().plusDays(2),
-                ArbeidsforholdErketyper.virksomhet("11111111"));
-        Svangerskapspenger svangerskapspenger = new SvangerskapspengerYtelseBuilder(
-                    LocalDate.now().plusWeeks(4),
-                    MedlemskapErketyper.medlemskapNorge(),
-                    Collections.singletonList(tilrettelegging)
-                    )
-                .build();
+        assertThat(søknad, instanceOf(SøknadBuilder.class));
+        assertThat(søknad, instanceOf(ForeldrepengerBuilder.class));
+        assertThatCode(søknad::build).doesNotThrowAnyException();
+        assertThat(søknad.build(), instanceOf(Soeknad.class));
+        assertEquals("mottatt dato er default verdi, medMottattDato overskriver ikke default", 0,
+                søknad.build().getMottattDato().compareTo(LocalDate.now().minusWeeks(10)));
 
-        SøknadBuilder soeknad = new SøknadBuilder(svangerskapspenger, "123", SøkersRolle.MOR);
-
-        assertThatCode(() -> soeknad.build()).doesNotThrowAnyException();
 
     }
 
+    @Test
+    public void svangerskappengerBuilderByggerRiktig() {
+        SvangerskapspengerBuilder søknad = new SvangerskapspengerBuilder("1234",
+                SøkersRolle.FAR, Collections.singletonList(new Tilrettelegging()))
+                .medTermindato(LocalDate.now().plusWeeks(8))
+                .medTilleggsopplysninger("Test Test");
+
+
+        assertThat(søknad, instanceOf(SøknadBuilder.class));
+        assertThat(søknad, instanceOf(SvangerskapspengerBuilder.class));
+        assertThatCode(søknad::build).doesNotThrowAnyException();
+        assertThat(søknad.build(), instanceOf(Soeknad.class));
+        assertEquals("Tilleggsopplysninger er default verdi, medTilleggsopplysninger overskriver ikke default",
+                0, søknad.build().getTilleggsopplysninger().compareTo("Test Test"));
+    }
+
 
 
     @Test
-    public void engangsstønadsøknadKasterIngenExceptionHvisIkkeAlleNødvendigeFelterErSatt() {
-        LocalDate fødselsDato = LocalDate.now().minusMonths(1);
-
-        Engangsstønad engangsstønad = new EngangstønadYtelseBuilder(fødsel(1, fødselsDato))
-                .build();
-        SøknadBuilder soeknad = new SøknadBuilder(engangsstønad, "123112312312", SøkersRolle.MEDMOR);
-
-        assertThatCode(() -> soeknad.build()).doesNotThrowAnyException();
+    public void engangsstønadBuilderByggerRiktig() {
+        EngangstønadBuilder søknad = new EngangstønadBuilder("113322", SøkersRolle.MEDMOR)
+                .medBegrunnelseForSenSoeknad("Viste ikke at man må søke")
+                .medAnnenForelder("6622");
+        assertThat(søknad, instanceOf(SøknadBuilder.class));
+        assertThat(søknad, instanceOf(EngangstønadBuilder.class));
+        assertThatCode(søknad::build).doesNotThrowAnyException();
+        assertThat(søknad.build(), instanceOf(Soeknad.class));
+        assertEquals("Begrunnelse for sen søknad er default verdi, medBegrunnelseForSenSoeknad overskriver ikke default",
+                0, søknad.build().getBegrunnelseForSenSoeknad().compareTo("Viste ikke at man må søke"));
 
     }
 
