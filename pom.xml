@@ -38,7 +38,7 @@
             <dependency>
                 <groupId>no.nav.foreldrepenger.kontrakter</groupId>
                 <artifactId>fp-kontrakter-root</artifactId>
-                <version>5.1_20191210141010_6a7f399</version>
+                <version>5.1-20200319151632-d72fd00</version>
                 <scope>import</scope>
                 <type>pom</type>
             </dependency>
