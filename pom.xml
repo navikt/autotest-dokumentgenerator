@@ -23,13 +23,35 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
         <java.version>11</java.version>
+        <fp-kontrakter.version>5.1_20191210141010_6a7f399</fp-kontrakter.version>
     </properties>
 
     <scm>
-        <connection>scm:git:https://github.com/navikt/autotest-dokumentgenerator.git</connection>
-        <developerConnection>scm:git:https://github.com/navikt/autotest-dokumentgenerator.git</developerConnection>
-        <url>https://github.com/navikt/autotest-dokumentgenerator/</url>
+        <developerConnection>scm:git:git@github.com:navikt/autotest-dokumentgenerator.git</developerConnection>
+        <connection>scm:git:git@github.com:navikt/autotest-dokumentgenerator.git</connection>
+        <url>https://github.com/navikt/autotest-dokumentgenerator</url>
+        <tag>HEAD</tag>
     </scm>
+
+    <organization>
+        <name>no.nav</name>
+        <url>https://github.com/navikt</url>
+    </organization>
+
+    <licenses>
+        <license>
+            <name>MIT License</name>
+            <url>https://opensource.org/licenses/MIT</url>
+        </license>
+    </licenses>
+
+    <developers>
+        <developer>
+            <organization>NAV (Arbeids- og velferdsdirektoratet) - The Norwegian Labour and Welfare Administration
+            </organization>
+            <organizationUrl>https://www.nav.no</organizationUrl>
+        </developer>
+    </developers>
 
     <dependencyManagement>
         <dependencies>
@@ -38,9 +60,14 @@
             <dependency>
                 <groupId>no.nav.foreldrepenger.kontrakter</groupId>
                 <artifactId>fp-kontrakter-root</artifactId>
-                <version>5.1-20200319151632-d72fd00</version>
+                <version>${fp-kontrakter.version}</version>
                 <scope>import</scope>
                 <type>pom</type>
+            </dependency>
+            <dependency>
+                <groupId>no.nav.foreldrepenger.kontrakter</groupId>
+                <artifactId>soeknad-v3</artifactId>
+                <version>${fp-kontrakter.version}</version>
             </dependency>
 
             <!-- Testavhengigheter -->
@@ -159,16 +186,11 @@
         </plugins>
     </build>
 
-    <profiles>
-        <profile>
-            <id>publishGithub</id>
-            <distributionManagement>
-                <repository>
-                    <id>github-1</id>
-                    <name>Github navikt Maven Packages</name>
-                    <url>https://maven.pkg.github.com/navikt/autotest-dokumentgenerator</url>
-                </repository>
-            </distributionManagement>
-        </profile>
-    </profiles>
+    <distributionManagement>
+        <repository>
+            <id>github</id>
+            <name>Github navikt Maven Packages</name>
+            <url>https://maven.pkg.github.com/navikt/autotest-dokumentgenerator/</url>
+        </repository>
+    </distributionManagement>
 </project>
