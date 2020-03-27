@@ -57,21 +57,6 @@
 
     <dependencyManagement>
         <dependencies>
-
-            <!-- Kontraktsavhengigheter -->
-            <dependency>
-                <groupId>no.nav.foreldrepenger.kontrakter</groupId>
-                <artifactId>fp-kontrakter-root</artifactId>
-                <version>${fp-kontrakter.version}</version>
-                <scope>import</scope>
-                <type>pom</type>
-            </dependency>
-            <dependency>
-                <groupId>no.nav.foreldrepenger.kontrakter</groupId>
-                <artifactId>soeknad-v3</artifactId>
-                <version>${fp-kontrakter.version}</version>
-            </dependency>
-
             <!-- Testavhengigheter -->
             <dependency>
                 <groupId>org.junit.jupiter</groupId>
@@ -120,6 +105,20 @@
                 <artifactId>jaxb2-basics-runtime</artifactId>
                 <version>1.11.1</version>
             </dependency>
+
+            <!-- Kontraktsavhengigheter -->
+            <dependency>
+                <groupId>no.nav.foreldrepenger.kontrakter</groupId>
+                <artifactId>fp-kontrakter-root</artifactId>
+                <version>${fp-kontrakter.version}</version>
+                <scope>import</scope>
+                <type>pom</type>
+            </dependency>
+            <dependency>
+                <groupId>no.nav.foreldrepenger.kontrakter</groupId>
+                <artifactId>soeknad-v3</artifactId>
+                <version>${fp-kontrakter.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
     <dependencies>
@@ -147,11 +146,6 @@
                         <encoding>UTF-8</encoding>
                         <release>${java.version}</release>
                     </configuration>
-                </plugin>
-                <plugin>
-                    <groupId>org.jacoco</groupId>
-                    <artifactId>jacoco-maven-plugin</artifactId>
-                    <version>0.8.5</version>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
