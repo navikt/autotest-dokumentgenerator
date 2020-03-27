@@ -11,22 +11,46 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v1
-      - uses: actions/cache@v1
+      - name: Sjekk ut kode
+        uses: actions/checkout@v2
+      - run:  git fetch --prune --unshallow
+
+      - name: Cache maven repository
+        uses: actions/cache@v1
         with:
           path: ~/.m2/repository
           key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
-          restore-keys: |
-            ${{ runner.os }}-maven-
-      - uses: actions/setup-java@v1
+
+      - name: Setup Java 11
+        uses: actions/setup-java@v1
         with:
           java-version: 1.11
-      - name: build & deploy
+
+      - name: Hent tag
+        run: |
+          echo "::set-env name=TAG::$(git log -1 --pretty='%ad' --date=format:'%Y%m%d%H%M%S')-$(echo $GITHUB_SHA | cut -c1-7)"
+
+      - name: Hent maven version
+        run: |
+          echo "::set-env name=MVN_VERSION::$(mvn help:evaluate -Dsha1=${TAG} -Dexpression=project.version -q -DforceStdout)"
+
+      - name: Build artifacts & deploy
         shell: bash
         run: |
-          echo "Building $(echo $GITHUB_SHA | cut -c1-7)"
-          mvn clean deploy --batch-mode --settings ./.m2/settings.xml --activate-profiles publishGithub -Dmaven.wagon.http.pool=false --file pom.xml -Dchangelist= -Dsha1=-$(git log -1 --pretty='%ad' --date=format:'%Y%m%d%H%M%S')-$(echo $GITHUB_SHA | cut -c1-7) -Dfile.encoding=UTF-8 -DinstallAtEnd=true -DdeployAtEnd=true
-          echo "Deployed artifacts"
+          mvn versions:set -DnewVersion=${MVN_VERSION}
+          mvn versions:revert
         env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_USERNAME: x-access-token
           GITHUB_PASSWORD: ${{ secrets.GITHUB_ACCESS_TOKEN }}
+
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ env.MVN_VERSION }}
+          release_name: Release ${{ env.MVN_VERSION }}
+          draft: false
+          prerelease: false

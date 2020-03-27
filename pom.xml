@@ -7,8 +7,8 @@
     <artifactId>dokumentgenerator</artifactId>
     <packaging>pom</packaging>
     <name>Dokumentgenerator :: Root</name>
-    <version>${revision}${sha1}${changelist}</version>
-
+    <version>${revision}-${sha1}</version>
+    <url>https://github.com/navikt/autotest-dokumentgenerator</url>
 
     <modules>
         <module>foreldrepengesoknad</module>
@@ -17,8 +17,7 @@
 
     <properties>
         <revision>1.0</revision>
-        <sha1></sha1>
-        <changelist>-SNAPSHOT</changelist>
+        <sha1>SNAPSHOT</sha1>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
@@ -26,10 +25,31 @@
         <fp-kontrakter.version>5.1-20200319151632-d72fd00</fp-kontrakter.version>
     </properties>
 
+    <organization>
+        <name>no.nav</name>
+        <url>https://github.com/navikt</url>
+    </organization>
+
+    <licenses>
+        <license>
+            <name>MIT License</name>
+            <url>https://opensource.org/licenses/MIT</url>
+        </license>
+    </licenses>
+
+    <developers>
+        <developer>
+            <organization>NAV (Arbeids- og velferdsdirektoratet) - The Norwegian Labour and Welfare Administration
+            </organization>
+            <organizationUrl>https://www.nav.no</organizationUrl>
+        </developer>
+    </developers>
+
     <scm>
         <connection>scm:git:https://github.com/navikt/autotest-dokumentgenerator.git</connection>
         <developerConnection>scm:git:https://github.com/navikt/autotest-dokumentgenerator.git</developerConnection>
         <url>https://github.com/navikt/autotest-dokumentgenerator/</url>
+        <tag>HEAD</tag>
     </scm>
 
     <dependencyManagement>
@@ -165,16 +185,11 @@
         </plugins>
     </build>
 
-    <profiles>
-        <profile>
-            <id>publishGithub</id>
-            <distributionManagement>
-                <repository>
-                    <id>github-1</id>
-                    <name>Github navikt Maven Packages</name>
-                    <url>https://maven.pkg.github.com/navikt/autotest-dokumentgenerator</url>
-                </repository>
-            </distributionManagement>
-        </profile>
-    </profiles>
+    <distributionManagement>
+        <repository>
+            <id>github</id>
+            <name>GitHub navikt Apache Maven Packages</name>
+            <url>https://maven.pkg.github.com/navikt/autotest-dokumentgenerator</url>
+        </repository>
+    </distributionManagement>
 </project>
