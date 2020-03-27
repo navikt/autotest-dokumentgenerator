@@ -7,7 +7,7 @@
     <artifactId>dokumentgenerator</artifactId>
     <packaging>pom</packaging>
     <name>Dokumentgenerator :: Root</name>
-    <version>${revision}-${sha1}</version>
+    <version>${revision}${sha1}${changelist}</version>
     <url>https://github.com/navikt/autotest-dokumentgenerator</url>
 
     <modules>
@@ -20,7 +20,8 @@
         <sonar.organization>navit</sonar.organization>
         <sonar.projectKey>navikt_autotest-dokumentgenerator</sonar.projectKey>
         <revision>1.0</revision>
-        <sha1>SNAPSHOT</sha1>
+        <sha1></sha1>
+        <changelist>-SNAPSHOT</changelist>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
