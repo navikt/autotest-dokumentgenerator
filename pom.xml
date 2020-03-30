@@ -29,6 +29,7 @@
         <fp-kontrakter.version>5.1-20200319151632-d72fd00</fp-kontrakter.version>
     </properties>
 
+
     <organization>
         <name>no.nav</name>
         <url>https://github.com/navikt</url>
@@ -58,6 +59,7 @@
 
     <dependencyManagement>
         <dependencies>
+            <!-- Testavhengigheter -->
             <!-- Testavhengigheter -->
             <dependency>
                 <groupId>org.junit.jupiter</groupId>
