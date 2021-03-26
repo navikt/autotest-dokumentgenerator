@@ -111,6 +111,17 @@ public class InntektsmeldingBuilder {
         this.refusjonBuilderKladd.medRefusjonsBelopPerMnd(refusjonsBelopPerMnd);
         return this;
     }
+
+    public InntektsmeldingBuilder medRefusjonsBelopPerMnd(int prosentAvBeregnetInntekt) {
+        if(refusjonBuilderKladd == null) {
+            refusjonBuilderKladd = new RefusjonBuilder();
+        }
+        var multiplikand = prosentAvBeregnetInntekt / 100.0;
+        var refusjonsBelopPerMnd = arbeidsforholdBuilderKladd.beregnetInntektBelop.multiply(BigDecimal.valueOf(multiplikand));
+        this.refusjonBuilderKladd.medRefusjonsBelopPerMnd(refusjonsBelopPerMnd);
+        return this;
+    }
+
     public InntektsmeldingBuilder medEndringIRefusjonslist(List<EndringIRefusjon> endringIRefusjonList) {
         if(refusjonBuilderKladd == null) {
             refusjonBuilderKladd = new RefusjonBuilder();
@@ -137,6 +148,14 @@ public class InntektsmeldingBuilder {
         this.arbeidsforholdBuilderKladd.medBeregnetInntekt(beregnetInntektBelop);
         return this;
     }
+
+    public InntektsmeldingBuilder medBeregnetInntekt(int prosentAvvik) {
+        var multiplikand = (100 + prosentAvvik) / 100.0;
+        var beregnetInntektBelop = arbeidsforholdBuilderKladd.beregnetInntektBelop.multiply(BigDecimal.valueOf(multiplikand));
+        this.arbeidsforholdBuilderKladd.medBeregnetInntekt(beregnetInntektBelop);
+        return this;
+    }
+
     public InntektsmeldingBuilder medÅrsakVedEndring(ÅrsakBeregnetInntektEndringKodeliste aarsakVedEndring){
         this.arbeidsforholdBuilderKladd.medÅrsakVedEndring(aarsakVedEndring);
         return this;

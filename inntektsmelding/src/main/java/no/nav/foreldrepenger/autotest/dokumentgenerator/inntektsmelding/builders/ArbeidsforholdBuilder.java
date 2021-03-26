@@ -18,7 +18,7 @@ public class ArbeidsforholdBuilder {
 
     private String arbeidsforholdId = null;
     private ÅrsakBeregnetInntektEndringKodeliste aarsakVedEndring;
-    private BigDecimal beregnetInntektBelop;
+    protected BigDecimal beregnetInntektBelop;
     private List<UtsettelseAvForeldrepenger> utsettelseAvForeldrepengerList;
     private List<GraderingIForeldrepenger> graderingIForeldrepengerList;
     private List<Periode> avtaltFerieListeList;
