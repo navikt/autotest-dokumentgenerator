@@ -1,14 +1,15 @@
 package no.nav.foreldrepenger.autotest.dokumentgenerator.inntektsmelding.builders;
 
-import no.seres.xsd.nav.inntektsmelding_m._20181211.ObjectFactory;
-import no.seres.xsd.nav.inntektsmelding_m._20181211.*;
-
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.stream.Collectors;
+
+import no.seres.xsd.nav.inntektsmelding_m._20181211.EndringIRefusjon;
+import no.seres.xsd.nav.inntektsmelding_m._20181211.ObjectFactory;
+import no.seres.xsd.nav.inntektsmelding_m._20181211.Refusjon;
 
 
 public class RefusjonBuilder {
@@ -24,8 +25,8 @@ public class RefusjonBuilder {
         return this;
     }
     RefusjonBuilder medEndringIRefusjonslist(List<EndringIRefusjon> endringIRefusjonList) {
-        if (endringIRefusjonList != null && endringIRefusjonList.size() > 0) {
-            EndringIRefusjonsListe endringIRefusjonsListe = objectFactory.createEndringIRefusjonsListe();
+        if (endringIRefusjonList != null && !endringIRefusjonList.isEmpty()) {
+            var endringIRefusjonsListe = objectFactory.createEndringIRefusjonsListe();
             endringIRefusjonsListe.getEndringIRefusjon().addAll(endringIRefusjonList);
             refusjonKladd.setEndringIRefusjonListe(
                     objectFactory.createRefusjonEndringIRefusjonListe(endringIRefusjonsListe)
@@ -50,10 +51,10 @@ public class RefusjonBuilder {
     }
 
     private EndringIRefusjon createEndringIRefusjon(LocalDate endringsdato, BigDecimal refusjonsbeloepPrMnd) {
-        ObjectFactory objectFactory = new ObjectFactory();
-        EndringIRefusjon endringIRefusjon = objectFactory.createEndringIRefusjon();
-        endringIRefusjon.setEndringsdato(objectFactory.createEndringIRefusjonEndringsdato(endringsdato));
-        endringIRefusjon.setRefusjonsbeloepPrMnd(objectFactory.createEndringIRefusjonRefusjonsbeloepPrMnd(refusjonsbeloepPrMnd));
+        var of = new ObjectFactory();
+        var endringIRefusjon = of.createEndringIRefusjon();
+        endringIRefusjon.setEndringsdato(of.createEndringIRefusjonEndringsdato(endringsdato));
+        endringIRefusjon.setRefusjonsbeloepPrMnd(of.createEndringIRefusjonRefusjonsbeloepPrMnd(refusjonsbeloepPrMnd));
         return endringIRefusjon;
     }
 

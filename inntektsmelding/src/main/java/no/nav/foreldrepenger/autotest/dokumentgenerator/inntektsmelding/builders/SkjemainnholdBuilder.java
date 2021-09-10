@@ -1,13 +1,26 @@
 package no.nav.foreldrepenger.autotest.dokumentgenerator.inntektsmelding.builders;
 
-import no.nav.inntektsmelding.xml.kodeliste._20180702.NaturalytelseKodeliste;
-import no.nav.inntektsmelding.xml.kodeliste._20180702.YtelseKodeliste;
-import no.nav.inntektsmelding.xml.kodeliste._20180702.ÅrsakInnsendingKodeliste;
-import no.seres.xsd.nav.inntektsmelding_m._20181211.*;
-
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.Objects;
+
+import no.nav.inntektsmelding.xml.kodeliste._20180702.NaturalytelseKodeliste;
+import no.nav.inntektsmelding.xml.kodeliste._20180702.YtelseKodeliste;
+import no.nav.inntektsmelding.xml.kodeliste._20180702.ÅrsakInnsendingKodeliste;
+import no.seres.xsd.nav.inntektsmelding_m._20181211.Arbeidsforhold;
+import no.seres.xsd.nav.inntektsmelding_m._20181211.Arbeidsgiver;
+import no.seres.xsd.nav.inntektsmelding_m._20181211.ArbeidsgiverPrivat;
+import no.seres.xsd.nav.inntektsmelding_m._20181211.Avsendersystem;
+import no.seres.xsd.nav.inntektsmelding_m._20181211.GjenopptakelseNaturalytelseListe;
+import no.seres.xsd.nav.inntektsmelding_m._20181211.Kontaktinformasjon;
+import no.seres.xsd.nav.inntektsmelding_m._20181211.NaturalytelseDetaljer;
+import no.seres.xsd.nav.inntektsmelding_m._20181211.ObjectFactory;
+import no.seres.xsd.nav.inntektsmelding_m._20181211.Omsorgspenger;
+import no.seres.xsd.nav.inntektsmelding_m._20181211.OpphoerAvNaturalytelseListe;
+import no.seres.xsd.nav.inntektsmelding_m._20181211.PleiepengerPeriodeListe;
+import no.seres.xsd.nav.inntektsmelding_m._20181211.Refusjon;
+import no.seres.xsd.nav.inntektsmelding_m._20181211.Skjemainnhold;
+import no.seres.xsd.nav.inntektsmelding_m._20181211.SykepengerIArbeidsgiverperioden;
 
 public class SkjemainnholdBuilder {
 
@@ -118,36 +131,35 @@ public class SkjemainnholdBuilder {
     }
 
     private Avsendersystem createAvsendersystem(String avsenderSystem, String systemVersjon) {
-        Avsendersystem avsendersystem = new Avsendersystem();
-        avsendersystem.setSystemnavn(avsenderSystem);
-        avsendersystem.setSystemversjon(systemVersjon);
-
-        return avsendersystem;
+        var as = new Avsendersystem();
+        as.setSystemnavn(avsenderSystem);
+        as.setSystemversjon(systemVersjon);
+        return as;
     }
     private Arbeidsgiver createArbeidsgiver(String virksomhetsnummer, String kontaktinformasjonTLF) {
-        Arbeidsgiver arbeidsgiver = new Arbeidsgiver();
-        arbeidsgiver.setVirksomhetsnummer(virksomhetsnummer);
-        Kontaktinformasjon kontaktinformasjon = new Kontaktinformasjon();
+        var ag = new Arbeidsgiver();
+        ag.setVirksomhetsnummer(virksomhetsnummer);
+        var kontaktinformasjon = new Kontaktinformasjon();
         kontaktinformasjon.setTelefonnummer(kontaktinformasjonTLF);
         kontaktinformasjon.setKontaktinformasjonNavn("Corpolarsen");
-        arbeidsgiver.setKontaktinformasjon(kontaktinformasjon);
-        return arbeidsgiver;
+        ag.setKontaktinformasjon(kontaktinformasjon);
+        return ag;
     }
     private ArbeidsgiverPrivat createArbeidsgiverPrivat(String arbeidsgiverFnr, String kontaktinformasjonTLF) {
-        ArbeidsgiverPrivat arbeidsgiver = new ArbeidsgiverPrivat();
-        arbeidsgiver.setArbeidsgiverFnr(arbeidsgiverFnr);
-        Kontaktinformasjon kontaktinformasjon = new Kontaktinformasjon();
+        var ag = new ArbeidsgiverPrivat();
+        ag.setArbeidsgiverFnr(arbeidsgiverFnr);
+        var kontaktinformasjon = new Kontaktinformasjon();
         kontaktinformasjon.setTelefonnummer(kontaktinformasjonTLF);
         kontaktinformasjon.setKontaktinformasjonNavn("Corpolarsen");
-        arbeidsgiver.setKontaktinformasjon(kontaktinformasjon);
-        return arbeidsgiver;
+        ag.setKontaktinformasjon(kontaktinformasjon);
+        return ag;
     }
     private NaturalytelseDetaljer createNaturalytelseDetaljer(BigDecimal belopPrMnd, LocalDate fom, NaturalytelseKodeliste kodelisteNaturalytelse) {
-        ObjectFactory objectFactory = new ObjectFactory();
-        NaturalytelseDetaljer naturalytelseDetaljer = objectFactory.createNaturalytelseDetaljer();
-        naturalytelseDetaljer.setBeloepPrMnd(objectFactory.createNaturalytelseDetaljerBeloepPrMnd(belopPrMnd));
-        naturalytelseDetaljer.setFom(objectFactory.createNaturalytelseDetaljerFom(fom));
-        naturalytelseDetaljer.setNaturalytelseType(objectFactory.createNaturalytelseDetaljerNaturalytelseType(kodelisteNaturalytelse.value()));
+        var of = new ObjectFactory();
+        var naturalytelseDetaljer = of.createNaturalytelseDetaljer();
+        naturalytelseDetaljer.setBeloepPrMnd(of.createNaturalytelseDetaljerBeloepPrMnd(belopPrMnd));
+        naturalytelseDetaljer.setFom(of.createNaturalytelseDetaljerFom(fom));
+        naturalytelseDetaljer.setNaturalytelseType(of.createNaturalytelseDetaljerNaturalytelseType(kodelisteNaturalytelse.value()));
 
         return naturalytelseDetaljer;
 
