@@ -1,16 +1,20 @@
 package no.nav.foreldrepenger.autotest.dokumentgenerator.inntektsmelding.builders;
 
-import no.nav.inntektsmelding.xml.kodeliste._20180702.ÅrsakUtsettelseKodeliste;
-import no.seres.xsd.nav.inntektsmelding_m._20181211.Arbeidsforhold;
-import no.nav.inntektsmelding.xml.kodeliste._20180702.ÅrsakBeregnetInntektEndringKodeliste;
-import no.seres.xsd.nav.inntektsmelding_m._20181211.*;
-import javax.xml.bind.JAXBElement;
-
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+
+import javax.xml.bind.JAXBElement;
+
+import no.nav.inntektsmelding.xml.kodeliste._20180702.ÅrsakBeregnetInntektEndringKodeliste;
+import no.nav.inntektsmelding.xml.kodeliste._20180702.ÅrsakUtsettelseKodeliste;
+import no.seres.xsd.nav.inntektsmelding_m._20181211.Arbeidsforhold;
+import no.seres.xsd.nav.inntektsmelding_m._20181211.GraderingIForeldrepenger;
+import no.seres.xsd.nav.inntektsmelding_m._20181211.ObjectFactory;
+import no.seres.xsd.nav.inntektsmelding_m._20181211.Periode;
+import no.seres.xsd.nav.inntektsmelding_m._20181211.UtsettelseAvForeldrepenger;
 
 public class ArbeidsforholdBuilder {
     private ObjectFactory objectFactory = new ObjectFactory();
@@ -73,7 +77,7 @@ public class ArbeidsforholdBuilder {
     }
 
     private Periode createPeriode(LocalDate periodeFom, LocalDate periodeTom) {
-        Periode periode = objectFactory.createPeriode();
+        var periode = objectFactory.createPeriode();
 
         periode.setTom(objectFactory.createPeriodeTom(periodeTom));
         periode.setFom(objectFactory.createPeriodeFom(periodeFom));
@@ -90,7 +94,7 @@ public class ArbeidsforholdBuilder {
         throw new IllegalStateException("Ukjent utsettelseårsak " + årsak);
     }
     private GraderingIForeldrepenger createGraderingIForeldrepenger(BigDecimal arbeidstidIProsent, LocalDate periodeFom, LocalDate periodeTom) {
-        GraderingIForeldrepenger graderingIForeldrepenger = new GraderingIForeldrepenger();
+        var graderingIForeldrepenger = new GraderingIForeldrepenger();
         graderingIForeldrepenger.setPeriode(objectFactory.createGraderingIForeldrepengerPeriode(
                 createPeriode(periodeFom, periodeTom)));
         graderingIForeldrepenger.setArbeidstidprosent(
@@ -98,7 +102,7 @@ public class ArbeidsforholdBuilder {
         return graderingIForeldrepenger;
     }
     private UtsettelseAvForeldrepenger createUtsettelseAvForeldrepenger(ÅrsakUtsettelseKodeliste aarsakTilUtsettelse, LocalDate periodeFom, LocalDate periodeTom) {
-        UtsettelseAvForeldrepenger utsettelseAvForeldrepenger = objectFactory.createUtsettelseAvForeldrepenger();
+        var utsettelseAvForeldrepenger = objectFactory.createUtsettelseAvForeldrepenger();
         utsettelseAvForeldrepenger.setAarsakTilUtsettelse(objectFactory
                 .createUtsettelseAvForeldrepengerAarsakTilUtsettelse(aarsakTilUtsettelse.value()));
         utsettelseAvForeldrepenger.setPeriode(objectFactory.createUtsettelseAvForeldrepengerPeriode(createPeriode(periodeFom, periodeTom)));
@@ -106,24 +110,24 @@ public class ArbeidsforholdBuilder {
     }
 
     public Arbeidsforhold build() {
-        Arbeidsforhold arbeidsforhold = objectFactory.createArbeidsforhold();
+        var arbeidsforhold = objectFactory.createArbeidsforhold();
 
         arbeidsforhold.setArbeidsforholdId(objectFactory.createArbeidsforholdArbeidsforholdId(arbeidsforholdId));
 
-        if (utsettelseAvForeldrepengerList != null && utsettelseAvForeldrepengerList.size() > 0) {
-            UtsettelseAvForeldrepengerListe utsettelseAvForeldrepengerListe = objectFactory.createUtsettelseAvForeldrepengerListe();
+        if (utsettelseAvForeldrepengerList != null && !utsettelseAvForeldrepengerList.isEmpty()) {
+            var utsettelseAvForeldrepengerListe = objectFactory.createUtsettelseAvForeldrepengerListe();
             utsettelseAvForeldrepengerListe.getUtsettelseAvForeldrepenger().addAll(utsettelseAvForeldrepengerList);
             arbeidsforhold.setUtsettelseAvForeldrepengerListe(
                     objectFactory.createArbeidsforholdUtsettelseAvForeldrepengerListe(utsettelseAvForeldrepengerListe));
         }
-        if (avtaltFerieListeList != null && avtaltFerieListeList.size() > 0) {
-            AvtaltFerieListe avtaltFerieListe = objectFactory.createAvtaltFerieListe();
+        if (avtaltFerieListeList != null && !avtaltFerieListeList.isEmpty()) {
+            var avtaltFerieListe = objectFactory.createAvtaltFerieListe();
             avtaltFerieListe.getAvtaltFerie().addAll(avtaltFerieListeList);
             arbeidsforhold.setAvtaltFerieListe(
                     objectFactory.createArbeidsforholdAvtaltFerieListe(avtaltFerieListe));
         }
-        if (graderingIForeldrepengerList != null && graderingIForeldrepengerList.size() > 0) {
-            GraderingIForeldrepengerListe graderingIForeldrepengerListe = objectFactory.createGraderingIForeldrepengerListe();
+        if (graderingIForeldrepengerList != null && !graderingIForeldrepengerList.isEmpty()) {
+            var graderingIForeldrepengerListe = objectFactory.createGraderingIForeldrepengerListe();
             graderingIForeldrepengerListe.getGraderingIForeldrepenger().addAll(graderingIForeldrepengerList);
             arbeidsforhold.setGraderingIForeldrepengerListe(
                     objectFactory.createArbeidsforholdGraderingIForeldrepengerListe(graderingIForeldrepengerListe));
@@ -135,7 +139,7 @@ public class ArbeidsforholdBuilder {
 
         Objects.requireNonNull(beregnetInntektBelop, "Beregnet inntekt kan ikke være null");
 
-        Inntekt inntekt = objectFactory.createInntekt();
+        var inntekt = objectFactory.createInntekt();
         inntekt.setBeloep(objectFactory.createInntektBeloep(beregnetInntektBelop));
         if (this.aarsakVedEndring != null) {
             inntekt.setAarsakVedEndring(objectFactory.createInntektAarsakVedEndring(aarsakVedEndring.value()));
