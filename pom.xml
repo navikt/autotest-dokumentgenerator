@@ -104,20 +104,6 @@
                 <artifactId>soeknad-v3</artifactId>
                 <version>${fp-kontrakter.version}</version>
             </dependency>
-
-            <!-- fjernet fra SE i Java11 -->
-            <dependency>
-                <groupId>com.sun.xml.ws</groupId>
-                <artifactId>jaxws-rt</artifactId>
-                <version>3.0.2</version>
-            </dependency>
-
-            <dependency>
-                <groupId>org.jvnet.jaxb2_commons</groupId>
-                <artifactId>jaxb2-basics-runtime</artifactId>
-                <version>1.11.1</version>
-            </dependency>
-
             <dependency>
                 <groupId>org.projectlombok</groupId>
                 <artifactId>lombok</artifactId>
@@ -146,11 +132,6 @@
         </dependencies>
     </dependencyManagement>
     <dependencies>
-        <!-- fjernet fra SE i Java11. legger derfor til -->
-        <dependency>
-            <groupId>com.sun.xml.ws</groupId>
-            <artifactId>jaxws-rt</artifactId>
-        </dependency>
         <dependency>
             <groupId>no.nav.foreldrepenger.felles</groupId>
             <artifactId>felles-log</artifactId>
