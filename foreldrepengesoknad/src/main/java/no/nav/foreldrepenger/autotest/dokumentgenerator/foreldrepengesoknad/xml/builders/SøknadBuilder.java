@@ -71,18 +71,16 @@ public abstract class SøknadBuilder<B extends SøknadBuilder<B>> {
      * Konverterer {@link Soeknad} til XML, eller kaster en {@link RuntimeException} ved feil
      */
     public static String tilXML(Soeknad soeknad) {
-        String xml = null;
         try {
             JAXBElement<Soeknad> soeknadsskjemaForeldrepengerJAXBElement = (new ObjectFactory().createSoeknad(soeknad));
-            xml = JaxbHelper.marshalAndValidateJaxb(SøknadConstants.JAXB_CLASS,
+            return JaxbHelper.marshalAndValidateJaxb(SøknadConstants.JAXB_CLASS,
                     soeknadsskjemaForeldrepengerJAXBElement,
                     SøknadConstants.XSD_LOCATION,
                     SøknadConstants.ADDITIONAL_XSD_LOCATION,
                     SøknadConstants.ADDITIONAL_CLASSES);
         } catch (JAXBException | SAXException e) {
-            e.printStackTrace();
+            throw new IllegalArgumentException("Noe gikk galt ved oversetting av soknadsobjekt til XML", e);
         }
-        return xml;
     }
 
     protected OmYtelse setOmYtelseJAXBElement(JAXBElement<? extends Ytelse> omYtelseJAXBElement) {

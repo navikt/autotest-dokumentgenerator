@@ -1,5 +1,6 @@
 package no.nav.foreldrepenger.autotest.dokumentgenerator.inntektsmelding.builders;
 
+import java.io.IOException;
 import java.io.StringWriter;
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -206,14 +207,11 @@ public class InntektsmeldingBuilder {
         return this;
     }
 
-
     public String createInntektesmeldingXML() {
         return createInntektsmeldingXML(this.build());
     }
     private String createInntektsmeldingXML(InntektsmeldingM inntektsmelding) {
-
-        var sw = new StringWriter();
-        try {
+        try (var sw = new StringWriter()){
             var objectFactory = new ObjectFactory();
             var jaxbContext = JAXBContext.newInstance(InntektsmeldingM.class);
             var jaxbMarshaller = jaxbContext.createMarshaller();
@@ -222,11 +220,9 @@ public class InntektsmeldingBuilder {
                     objectFactory.createMelding(inntektsmelding), sw
             );
             return sw.toString();
-        } catch (JAXBException jaxbe) {
-
+        } catch (JAXBException | IOException e) {
+            throw new IllegalArgumentException("Noe gikk galt ved oversetting av inntektsmelding til XML", e);
         }
-        return null; //TODO: Håndtere på en bedre måte.
-
     }
 
 
