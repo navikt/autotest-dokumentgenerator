@@ -2,9 +2,9 @@ package no.nav.foreldrepenger.autotest.dokumentgenerator.inntektsmelding.erketyp
 
 import java.math.BigDecimal;
 
-import no.nav.foreldrepenger.autotest.dokumentgenerator.foreldrepengesoknad.json.modell.Fødselsnummer;
-import no.nav.foreldrepenger.autotest.dokumentgenerator.foreldrepengesoknad.json.modell.felles.Orgnummer;
 import no.nav.foreldrepenger.autotest.dokumentgenerator.inntektsmelding.builders.InntektsmeldingBuilder;
+import no.nav.foreldrepenger.common.domain.Fødselsnummer;
+import no.nav.foreldrepenger.common.domain.Orgnummer;
 import no.nav.inntektsmelding.xml.kodeliste._20180702.YtelseKodeliste;
 import no.nav.inntektsmelding.xml.kodeliste._20180702.ÅrsakInnsendingKodeliste;
 
@@ -15,7 +15,7 @@ public class InntektsmeldingSvangerskapspengerErketyper {
 
     public static InntektsmeldingBuilder lagSvangerskapspengerInntektsmelding(Fødselsnummer fnr, Integer beløp,
                                                                               Orgnummer orgnummer) {
-        return lagSvangerskapspengerInntektsmelding(fnr.toString(), beløp, orgnummer.toString());
+        return lagSvangerskapspengerInntektsmelding(fnr.getFnr(), beløp, orgnummer.orgnr());
     }
     public static InntektsmeldingBuilder lagSvangerskapspengerInntektsmelding(String fnr, Integer beløp,
             String orgnummer) {

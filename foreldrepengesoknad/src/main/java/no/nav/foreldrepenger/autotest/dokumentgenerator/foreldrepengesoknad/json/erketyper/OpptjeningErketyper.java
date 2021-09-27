@@ -5,16 +5,16 @@ import java.util.List;
 
 import com.neovisionaries.i18n.CountryCode;
 
-import no.nav.foreldrepenger.autotest.dokumentgenerator.foreldrepengesoknad.json.modell.felles.Orgnummer;
-import no.nav.foreldrepenger.autotest.dokumentgenerator.foreldrepengesoknad.json.modell.felles.ProsentAndel;
-import no.nav.foreldrepenger.autotest.dokumentgenerator.foreldrepengesoknad.json.modell.felles.opptjening.Frilans;
-import no.nav.foreldrepenger.autotest.dokumentgenerator.foreldrepengesoknad.json.modell.felles.opptjening.FrilansOppdrag;
-import no.nav.foreldrepenger.autotest.dokumentgenerator.foreldrepengesoknad.json.modell.felles.opptjening.NorskOrganisasjon;
-import no.nav.foreldrepenger.autotest.dokumentgenerator.foreldrepengesoknad.json.modell.felles.opptjening.Opptjening;
-import no.nav.foreldrepenger.autotest.dokumentgenerator.foreldrepengesoknad.json.modell.felles.opptjening.Regnskapsfører;
-import no.nav.foreldrepenger.autotest.dokumentgenerator.foreldrepengesoknad.json.modell.felles.opptjening.UtenlandskArbeidsforhold;
-import no.nav.foreldrepenger.autotest.dokumentgenerator.foreldrepengesoknad.json.modell.felles.opptjening.Virksomhetstype;
-import no.nav.foreldrepenger.autotest.dokumentgenerator.foreldrepengesoknad.json.modell.felles.ÅpenPeriode;
+import no.nav.foreldrepenger.common.domain.Orgnummer;
+import no.nav.foreldrepenger.common.domain.felles.ProsentAndel;
+import no.nav.foreldrepenger.common.domain.felles.opptjening.Frilans;
+import no.nav.foreldrepenger.common.domain.felles.opptjening.FrilansOppdrag;
+import no.nav.foreldrepenger.common.domain.felles.opptjening.NorskOrganisasjon;
+import no.nav.foreldrepenger.common.domain.felles.opptjening.Opptjening;
+import no.nav.foreldrepenger.common.domain.felles.opptjening.Regnskapsfører;
+import no.nav.foreldrepenger.common.domain.felles.opptjening.UtenlandskArbeidsforhold;
+import no.nav.foreldrepenger.common.domain.felles.opptjening.Virksomhetstype;
+import no.nav.foreldrepenger.common.domain.felles.ÅpenPeriode;
 
 public final class OpptjeningErketyper {
 
@@ -39,7 +39,7 @@ public final class OpptjeningErketyper {
     }
 
     public static Opptjening medEgenNaeringOpptjening(LocalDate fom, LocalDate tom, Boolean erNyIArbeidslivet,
-                                                     Number næringsInntekt, Boolean varigEndretNæring) {
+                                                      Number næringsInntekt, Boolean varigEndretNæring) {
         var norskOrganisasjon = lagNorskOrganisasjon(fom, tom, erNyIArbeidslivet, næringsInntekt, varigEndretNæring);
         return Opptjening.builder()
                 .egenNæring(List.of(norskOrganisasjon))
@@ -84,7 +84,7 @@ public final class OpptjeningErketyper {
                 .erVarigEndring(varigEndretNæring)
                 .erNyIArbeidslivet(erNyIArbeidslivet)
                 .næringsinntektBrutto(næringsInntekt.longValue())
-                .endringsDato(varigEndretNæring ? LocalDate.now().minusWeeks(1) : null)
+                .endringsDato(varigEndretNæring.equals(Boolean.TRUE) ? LocalDate.now().minusWeeks(1) : null)
                 .oppstartsDato(LocalDate.now().minusYears(4))
                 .beskrivelseEndring("Endringsbeskrivelse")
                 .stillingsprosent(new ProsentAndel(100.0))

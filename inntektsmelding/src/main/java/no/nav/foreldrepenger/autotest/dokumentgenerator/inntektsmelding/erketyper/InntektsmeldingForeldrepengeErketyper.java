@@ -6,9 +6,9 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
-import no.nav.foreldrepenger.autotest.dokumentgenerator.foreldrepengesoknad.json.modell.Fødselsnummer;
-import no.nav.foreldrepenger.autotest.dokumentgenerator.foreldrepengesoknad.json.modell.felles.Orgnummer;
 import no.nav.foreldrepenger.autotest.dokumentgenerator.inntektsmelding.builders.InntektsmeldingBuilder;
+import no.nav.foreldrepenger.common.domain.Fødselsnummer;
+import no.nav.foreldrepenger.common.domain.Orgnummer;
 import no.nav.foreldrepenger.vtp.kontrakter.TestscenarioDto;
 import no.nav.foreldrepenger.vtp.testmodell.inntektytelse.arbeidsforhold.Arbeidsforhold;
 import no.nav.foreldrepenger.vtp.testmodell.inntektytelse.inntektkomponent.Inntektsperiode;
@@ -64,7 +64,7 @@ public class InntektsmeldingForeldrepengeErketyper {
     }
 
     public static InntektsmeldingBuilder lagInntektsmelding(Integer beløp, Fødselsnummer fnr, LocalDate fpStartdato, Orgnummer orgNr) {
-        return lagInntektsmelding(beløp, fnr.toString(), fpStartdato, orgNr.toString());
+        return lagInntektsmelding(beløp, fnr.getFnr(), fpStartdato, orgNr.orgnr());
     }
 
     public static InntektsmeldingBuilder lagInntektsmelding(Integer beløp, String fnr, LocalDate fpStartdato, String orgNr) {

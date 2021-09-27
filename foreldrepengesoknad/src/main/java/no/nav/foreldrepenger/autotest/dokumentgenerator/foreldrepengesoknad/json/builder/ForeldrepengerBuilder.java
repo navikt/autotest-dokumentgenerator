@@ -1,24 +1,24 @@
 package no.nav.foreldrepenger.autotest.dokumentgenerator.foreldrepengesoknad.json.builder;
 
-import no.nav.foreldrepenger.autotest.dokumentgenerator.foreldrepengesoknad.json.modell.BrukerRolle;
-import no.nav.foreldrepenger.autotest.dokumentgenerator.foreldrepengesoknad.json.modell.Søknad;
-import no.nav.foreldrepenger.autotest.dokumentgenerator.foreldrepengesoknad.json.modell.Ytelse;
-import no.nav.foreldrepenger.autotest.dokumentgenerator.foreldrepengesoknad.json.modell.felles.SpråkKode;
-import no.nav.foreldrepenger.autotest.dokumentgenerator.foreldrepengesoknad.json.modell.felles.annenforelder.AnnenForelder;
-import no.nav.foreldrepenger.autotest.dokumentgenerator.foreldrepengesoknad.json.modell.felles.medlemskap.Medlemsskap;
-import no.nav.foreldrepenger.autotest.dokumentgenerator.foreldrepengesoknad.json.modell.felles.opptjening.Opptjening;
-import no.nav.foreldrepenger.autotest.dokumentgenerator.foreldrepengesoknad.json.modell.felles.relasjontilbarn.RelasjonTilBarn;
-import no.nav.foreldrepenger.autotest.dokumentgenerator.foreldrepengesoknad.json.modell.foreldrepenger.Dekningsgrad;
-import no.nav.foreldrepenger.autotest.dokumentgenerator.foreldrepengesoknad.json.modell.foreldrepenger.Foreldrepenger;
-import no.nav.foreldrepenger.autotest.dokumentgenerator.foreldrepengesoknad.json.modell.foreldrepenger.Rettigheter;
-import no.nav.foreldrepenger.autotest.dokumentgenerator.foreldrepengesoknad.json.modell.foreldrepenger.fordeling.Fordeling;
+import no.nav.foreldrepenger.common.domain.BrukerRolle;
+import no.nav.foreldrepenger.common.domain.Søknad;
+import no.nav.foreldrepenger.common.domain.Ytelse;
+import no.nav.foreldrepenger.common.domain.felles.annenforelder.AnnenForelder;
+import no.nav.foreldrepenger.common.domain.felles.medlemskap.Medlemsskap;
+import no.nav.foreldrepenger.common.domain.felles.opptjening.Opptjening;
+import no.nav.foreldrepenger.common.domain.felles.relasjontilbarn.RelasjonTilBarn;
+import no.nav.foreldrepenger.common.domain.foreldrepenger.Dekningsgrad;
+import no.nav.foreldrepenger.common.domain.foreldrepenger.Foreldrepenger;
+import no.nav.foreldrepenger.common.domain.foreldrepenger.Rettigheter;
+import no.nav.foreldrepenger.common.domain.foreldrepenger.fordeling.Fordeling;
+import no.nav.foreldrepenger.common.oppslag.dkif.Målform;
 
 public class ForeldrepengerBuilder extends SøknadBuilder<ForeldrepengerBuilder> {
 
-    private final Foreldrepenger foreldrepengerKladd = new Foreldrepenger();
+    private final Foreldrepenger.ForeldrepengerBuilder foreldrepengerBuilder = Foreldrepenger.builder();
 
     public ForeldrepengerBuilder(BrukerRolle brukerRolle) {
-        this.medSøker(brukerRolle, SpråkKode.NB);
+        this.medSøker(brukerRolle, Målform.standard());
     }
 
     @Override
@@ -28,48 +28,48 @@ public class ForeldrepengerBuilder extends SøknadBuilder<ForeldrepengerBuilder>
 
     @Override
     protected ForeldrepengerBuilder medYtelse(Ytelse ytelse) {
-        søknadKladd.setYtelse(ytelse);
+        søknadKladd.ytelse(ytelse);
         return this;
     }
 
     public ForeldrepengerBuilder medAnnenForelder(AnnenForelder annenForelder) {
-        foreldrepengerKladd.setAnnenForelder(annenForelder);
+        foreldrepengerBuilder.annenForelder(annenForelder);
         return this;
     }
 
     public ForeldrepengerBuilder medRelasjonTilBarn(RelasjonTilBarn relasjonTilBarn) {
-        foreldrepengerKladd.setRelasjonTilBarn(relasjonTilBarn);
+        foreldrepengerBuilder.relasjonTilBarn(relasjonTilBarn);
         return this;
     }
 
     public ForeldrepengerBuilder medRettigheter(Rettigheter rettigheter) {
-        foreldrepengerKladd.setRettigheter(rettigheter);
+        foreldrepengerBuilder.rettigheter(rettigheter);
         return this;
     }
 
     public ForeldrepengerBuilder medDekningsgrad(Dekningsgrad dekningsgrad) {
-        foreldrepengerKladd.setDekningsgrad(dekningsgrad);
+        foreldrepengerBuilder.dekningsgrad(dekningsgrad);
         return this;
     }
 
     public ForeldrepengerBuilder medOpptjening(Opptjening opptjening) {
-        foreldrepengerKladd.setOpptjening(opptjening);
+        foreldrepengerBuilder.opptjening(opptjening);
         return this;
     }
 
     public ForeldrepengerBuilder medFordeling(Fordeling fordeling) {
-        foreldrepengerKladd.setFordeling(fordeling);
+        foreldrepengerBuilder.fordeling(fordeling);
         return this;
     }
 
     public ForeldrepengerBuilder medMedlemsskap(Medlemsskap medlemsskap) {
-        foreldrepengerKladd.setMedlemsskap(medlemsskap);
+        foreldrepengerBuilder.medlemsskap(medlemsskap);
         return this;
     }
 
     @Override
     public Søknad build() {
-        this.medYtelse(this.foreldrepengerKladd);
+        this.medYtelse(this.foreldrepengerBuilder.build());
         return super.build();
     }
 }

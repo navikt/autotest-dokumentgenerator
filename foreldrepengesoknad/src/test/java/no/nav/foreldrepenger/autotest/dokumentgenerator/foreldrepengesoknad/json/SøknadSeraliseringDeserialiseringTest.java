@@ -11,8 +11,8 @@ import static no.nav.foreldrepenger.autotest.dokumentgenerator.foreldrepengesokn
 import static no.nav.foreldrepenger.autotest.dokumentgenerator.foreldrepengesoknad.json.erketyper.TilretteleggingsErketyper.delvisTilrettelegging;
 import static no.nav.foreldrepenger.autotest.dokumentgenerator.foreldrepengesoknad.json.erketyper.TilretteleggingsErketyper.helTilrettelegging;
 import static no.nav.foreldrepenger.autotest.dokumentgenerator.foreldrepengesoknad.json.erketyper.TilretteleggingsErketyper.ingenTilrettelegging;
-import static no.nav.foreldrepenger.autotest.dokumentgenerator.foreldrepengesoknad.json.modell.BrukerRolle.MOR;
-import static no.nav.foreldrepenger.autotest.dokumentgenerator.foreldrepengesoknad.json.modell.felles.relasjontilbarn.OmsorgsOvertakelsesÅrsak.SKAL_OVERTA_ALENE;
+import static no.nav.foreldrepenger.common.domain.BrukerRolle.MOR;
+import static no.nav.foreldrepenger.common.domain.felles.relasjontilbarn.OmsorgsOvertakelsesÅrsak.SKAL_OVERTA_ALENE;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -23,8 +23,8 @@ import org.junit.jupiter.api.Test;
 import no.nav.foreldrepenger.autotest.dokumentgenerator.foreldrepengesoknad.json.erketyper.ArbeidsforholdErketyper;
 import no.nav.foreldrepenger.autotest.dokumentgenerator.foreldrepengesoknad.json.erketyper.MedlemsskapErketyper;
 import no.nav.foreldrepenger.autotest.dokumentgenerator.foreldrepengesoknad.json.erketyper.OpptjeningErketyper;
-import no.nav.foreldrepenger.autotest.dokumentgenerator.foreldrepengesoknad.json.modell.Søknad;
-import no.nav.foreldrepenger.autotest.dokumentgenerator.foreldrepengesoknad.json.modell.felles.Orgnummer;
+import no.nav.foreldrepenger.common.domain.Orgnummer;
+import no.nav.foreldrepenger.common.domain.Søknad;
 
 public class SøknadSeraliseringDeserialiseringTest extends SerializationTestBase {
 
@@ -67,7 +67,7 @@ public class SøknadSeraliseringDeserialiseringTest extends SerializationTestBas
 
     @Test
     public void tilretteleggingTest() {
-        test(helTilrettelegging(LocalDate.now(), LocalDate.now().plusDays(5), ArbeidsforholdErketyper.virksomhet(new Orgnummer("999035462"))));
+        test(helTilrettelegging(LocalDate.now(), LocalDate.now().plusDays(5), ArbeidsforholdErketyper.virksomhet(Orgnummer.valueOf("993110469"))));
         test(delvisTilrettelegging(LocalDate.now(), LocalDate.now().plusDays(5), ArbeidsforholdErketyper.privatArbeidsgiver("12345678910"), 50));
         test(ingenTilrettelegging(LocalDate.now(), LocalDate.now().plusDays(5), ArbeidsforholdErketyper.selvstendigNæringsdrivende()));
     }

@@ -3,7 +3,7 @@ package no.nav.foreldrepenger.autotest.dokumentgenerator.foreldrepengesoknad.jso
 
 import java.time.LocalDate;
 
-import no.nav.foreldrepenger.autotest.dokumentgenerator.foreldrepengesoknad.json.modell.foreldrepenger.Rettigheter;
+import no.nav.foreldrepenger.common.domain.foreldrepenger.Rettigheter;
 
 public final class RettigheterErketyper {
 

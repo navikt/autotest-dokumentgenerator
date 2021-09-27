@@ -3,17 +3,18 @@ package no.nav.foreldrepenger.autotest.dokumentgenerator.foreldrepengesoknad.jso
 import java.time.LocalDate;
 import java.util.List;
 
-import no.nav.foreldrepenger.autotest.dokumentgenerator.foreldrepengesoknad.json.modell.felles.Orgnummer;
-import no.nav.foreldrepenger.autotest.dokumentgenerator.foreldrepengesoknad.json.modell.felles.ProsentAndel;
-import no.nav.foreldrepenger.autotest.dokumentgenerator.foreldrepengesoknad.json.modell.foreldrepenger.fordeling.GradertUttaksPeriode;
-import no.nav.foreldrepenger.autotest.dokumentgenerator.foreldrepengesoknad.json.modell.foreldrepenger.fordeling.OppholdsPeriode;
-import no.nav.foreldrepenger.autotest.dokumentgenerator.foreldrepengesoknad.json.modell.foreldrepenger.fordeling.Oppholdsårsak;
-import no.nav.foreldrepenger.autotest.dokumentgenerator.foreldrepengesoknad.json.modell.foreldrepenger.fordeling.OverføringsPeriode;
-import no.nav.foreldrepenger.autotest.dokumentgenerator.foreldrepengesoknad.json.modell.foreldrepenger.fordeling.Overføringsårsak;
-import no.nav.foreldrepenger.autotest.dokumentgenerator.foreldrepengesoknad.json.modell.foreldrepenger.fordeling.StønadskontoType;
-import no.nav.foreldrepenger.autotest.dokumentgenerator.foreldrepengesoknad.json.modell.foreldrepenger.fordeling.UtsettelsesPeriode;
-import no.nav.foreldrepenger.autotest.dokumentgenerator.foreldrepengesoknad.json.modell.foreldrepenger.fordeling.UtsettelsesÅrsak;
-import no.nav.foreldrepenger.autotest.dokumentgenerator.foreldrepengesoknad.json.modell.foreldrepenger.fordeling.UttaksPeriode;
+import no.nav.foreldrepenger.common.domain.Orgnummer;
+import no.nav.foreldrepenger.common.domain.felles.ProsentAndel;
+import no.nav.foreldrepenger.common.domain.foreldrepenger.fordeling.FriUtsettelsesPeriode;
+import no.nav.foreldrepenger.common.domain.foreldrepenger.fordeling.GradertUttaksPeriode;
+import no.nav.foreldrepenger.common.domain.foreldrepenger.fordeling.OppholdsPeriode;
+import no.nav.foreldrepenger.common.domain.foreldrepenger.fordeling.Oppholdsårsak;
+import no.nav.foreldrepenger.common.domain.foreldrepenger.fordeling.OverføringsPeriode;
+import no.nav.foreldrepenger.common.domain.foreldrepenger.fordeling.Overføringsårsak;
+import no.nav.foreldrepenger.common.domain.foreldrepenger.fordeling.StønadskontoType;
+import no.nav.foreldrepenger.common.domain.foreldrepenger.fordeling.UtsettelsesPeriode;
+import no.nav.foreldrepenger.common.domain.foreldrepenger.fordeling.UtsettelsesÅrsak;
+import no.nav.foreldrepenger.common.domain.foreldrepenger.fordeling.UttaksPeriode;
 
 
 public final class UttaksperioderErketyper {
@@ -22,7 +23,7 @@ public final class UttaksperioderErketyper {
     }
 
     public static UttaksPeriode uttaksperiode(StønadskontoType stønadskontoType, LocalDate fom, LocalDate tom) {
-        return UttaksPeriode.builder()
+        return UttaksPeriode.UttaksPeriodeBuilder()
                 .uttaksperiodeType(stønadskontoType)
                 .fom(fom)
                 .tom(tom)
@@ -38,7 +39,7 @@ public final class UttaksperioderErketyper {
     public static UttaksPeriode uttaksperiode(StønadskontoType stønadskontoType, LocalDate fom, LocalDate tom,
                                               Boolean flerbarnsdager,
                                               Boolean samtidigUttak, int uttaksprosent) {
-        return UttaksPeriode.builder()
+        return UttaksPeriode.UttaksPeriodeBuilder()
                 .uttaksperiodeType(stønadskontoType)
                 .fom(fom)
                 .tom(tom)
@@ -50,11 +51,11 @@ public final class UttaksperioderErketyper {
 
     public static GradertUttaksPeriode graderingsperiodeArbeidstaker(StønadskontoType stønadskontoType, LocalDate fom, LocalDate tom,
                                                                      Orgnummer orgnummer, Integer arbeidstidsprosentIOrgnr) {
-        return GradertUttaksPeriode.GraderingBuilder()
+        return GradertUttaksPeriode.GradertUttaksPeriodeBuilder()
                 .uttaksperiodeType(stønadskontoType)
                 .fom(fom)
                 .tom(tom)
-                .virksomhetsnummer(List.of(orgnummer))
+                .virksomhetsnummer(List.of(orgnummer.orgnr()))
                 .arbeidsForholdSomskalGraderes(true)
                 .arbeidstidProsent(new ProsentAndel(Double.valueOf(arbeidstidsprosentIOrgnr)))
                 .erArbeidstaker(true)
@@ -66,7 +67,7 @@ public final class UttaksperioderErketyper {
     public static GradertUttaksPeriode graderingsperiodeFL(StønadskontoType stønadskontoType,
                                                            LocalDate fom, LocalDate tom,
                                                            Integer arbeidstidsprosent) {
-        return GradertUttaksPeriode.GraderingBuilder()
+        return GradertUttaksPeriode.GradertUttaksPeriodeBuilder()
                 .uttaksperiodeType(stønadskontoType)
                 .fom(fom)
                 .tom(tom)
@@ -81,7 +82,7 @@ public final class UttaksperioderErketyper {
     public static GradertUttaksPeriode graderingsperiodeSN(StønadskontoType stønadskontoType,
                                                            LocalDate fom, LocalDate tom,
                                                            Integer arbeidstidsprosent) {
-        return GradertUttaksPeriode.GraderingBuilder()
+        return GradertUttaksPeriode.GradertUttaksPeriodeBuilder()
                 .uttaksperiodeType(stønadskontoType)
                 .fom(fom)
                 .tom(tom)
@@ -94,7 +95,17 @@ public final class UttaksperioderErketyper {
     }
 
     public static UtsettelsesPeriode utsettelsesperiode(UtsettelsesÅrsak utsettelseÅrsak, LocalDate fom, LocalDate tom) {
-        return UtsettelsesPeriode.builder()
+        return UtsettelsesPeriode.UtsettelsesPeriodeBuilder()
+                .fom(fom)
+                .tom(tom)
+                .årsak(utsettelseÅrsak)
+                // TODO: Følgende eksistere ikke i Utsettelsesperiode for XML.
+                //  stønadskontotype, erarbeidstaker, virksomhetsnummer og morsaktiattstype
+                .build();
+    }
+
+    public static UtsettelsesPeriode friutsettelsesperiode(UtsettelsesÅrsak utsettelseÅrsak, LocalDate fom, LocalDate tom) {
+        return FriUtsettelsesPeriode.FriUtsettelsesPeriodeBuilder()
                 .fom(fom)
                 .tom(tom)
                 .årsak(utsettelseÅrsak)

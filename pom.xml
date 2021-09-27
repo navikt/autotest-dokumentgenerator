@@ -28,6 +28,7 @@
         <java.version>16</java.version>
         <felles.versjon>4.0.8</felles.versjon>
         <fp-kontrakter.version>6.0.4</fp-kontrakter.version>
+        <mottak-felles.version>0.2.1</mottak-felles.version>
         <vtp.versjon>1.0.15</vtp.versjon>
     </properties>
 
@@ -105,6 +106,19 @@
                 <version>${fp-kontrakter.version}</version>
             </dependency>
             <dependency>
+                <groupId>no.nav.foreldrepenger</groupId>
+                <artifactId>fpsoknad-felles</artifactId>
+                <version>${mottak-felles.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>no.nav.foreldrepenger</groupId>
+                <artifactId>fpsoknad-felles</artifactId>
+                <version>${mottak-felles.version}</version>
+                <type>test-jar</type>
+                <scope>test</scope>
+            </dependency>
+
+            <dependency>
                 <groupId>org.projectlombok</groupId>
                 <artifactId>lombok</artifactId>
                 <version>1.18.20</version>
@@ -181,7 +195,16 @@
                         <release>${java.version}</release>
                         <compilerArgs>
                             <arg>-parameters</arg>
+                            <arg>--enable-preview</arg>
                         </compilerArgs>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <version>3.0.0-M5</version>
+                    <configuration>
+                        <argLine>--enable-preview</argLine>
                     </configuration>
                 </plugin>
                 <plugin>
@@ -210,6 +233,10 @@
             </plugins>
         </pluginManagement>
         <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-deploy-plugin</artifactId>

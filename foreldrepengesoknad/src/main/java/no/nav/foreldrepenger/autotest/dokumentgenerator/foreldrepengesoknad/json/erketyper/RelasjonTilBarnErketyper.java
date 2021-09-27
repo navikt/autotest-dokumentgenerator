@@ -3,11 +3,11 @@ package no.nav.foreldrepenger.autotest.dokumentgenerator.foreldrepengesoknad.jso
 import java.time.LocalDate;
 import java.util.List;
 
-import no.nav.foreldrepenger.autotest.dokumentgenerator.foreldrepengesoknad.json.modell.felles.relasjontilbarn.Adopsjon;
-import no.nav.foreldrepenger.autotest.dokumentgenerator.foreldrepengesoknad.json.modell.felles.relasjontilbarn.FremtidigFødsel;
-import no.nav.foreldrepenger.autotest.dokumentgenerator.foreldrepengesoknad.json.modell.felles.relasjontilbarn.Fødsel;
-import no.nav.foreldrepenger.autotest.dokumentgenerator.foreldrepengesoknad.json.modell.felles.relasjontilbarn.OmsorgsOvertakelsesÅrsak;
-import no.nav.foreldrepenger.autotest.dokumentgenerator.foreldrepengesoknad.json.modell.felles.relasjontilbarn.Omsorgsovertakelse;
+import no.nav.foreldrepenger.common.domain.felles.relasjontilbarn.Adopsjon;
+import no.nav.foreldrepenger.common.domain.felles.relasjontilbarn.FremtidigFødsel;
+import no.nav.foreldrepenger.common.domain.felles.relasjontilbarn.Fødsel;
+import no.nav.foreldrepenger.common.domain.felles.relasjontilbarn.OmsorgsOvertakelsesÅrsak;
+import no.nav.foreldrepenger.common.domain.felles.relasjontilbarn.Omsorgsovertakelse;
 
 public final class RelasjonTilBarnErketyper {
 
@@ -15,18 +15,11 @@ public final class RelasjonTilBarnErketyper {
     }
 
     public static Fødsel fødsel(int antallBarn, LocalDate fødselsdato) {
-        return Fødsel.builder()
-                .antallBarn(antallBarn)
-                .fødselsdato(List.of(fødselsdato))
-                .build();
+        return new Fødsel(antallBarn, fødselsdato);
     }
 
     public static FremtidigFødsel termin(int antallBarn, LocalDate termindato) {
-        return FremtidigFødsel.builder()
-                .antallBarn(antallBarn)
-                .terminDato(termindato)
-                .utstedtDato(termindato.minusMonths(1))
-                .build();
+        return new FremtidigFødsel(antallBarn, termindato, termindato.minusMonths(1), null);
     }
 
     public static Adopsjon adopsjon(LocalDate omsorgsovertakelsesdato, Boolean ektefellesBarn) {

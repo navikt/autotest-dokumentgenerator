@@ -30,6 +30,16 @@
             <artifactId>nv-i18n</artifactId>
             <version>1.29</version>
         </dependency>
+        <dependency>
+            <groupId>no.nav.foreldrepenger</groupId>
+            <artifactId>fpsoknad-felles</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>no.nav.foreldrepenger</groupId>
+            <artifactId>fpsoknad-felles</artifactId>
+            <type>test-jar</type>
+            <scope>test</scope>
+        </dependency>
 
         <!-- 3dje parts biblioteker -->
         <dependency>

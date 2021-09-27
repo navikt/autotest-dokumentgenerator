@@ -3,8 +3,8 @@ package no.nav.foreldrepenger.autotest.dokumentgenerator.foreldrepengesoknad.jso
 import java.time.LocalDate;
 
 import no.nav.foreldrepenger.autotest.dokumentgenerator.foreldrepengesoknad.json.builder.EngangsstønadBuilder;
-import no.nav.foreldrepenger.autotest.dokumentgenerator.foreldrepengesoknad.json.modell.BrukerRolle;
-import no.nav.foreldrepenger.autotest.dokumentgenerator.foreldrepengesoknad.json.modell.felles.relasjontilbarn.OmsorgsOvertakelsesÅrsak;
+import no.nav.foreldrepenger.common.domain.BrukerRolle;
+import no.nav.foreldrepenger.common.domain.felles.relasjontilbarn.OmsorgsOvertakelsesÅrsak;
 
 public final class SøknadEngangsstønadErketyper {
 

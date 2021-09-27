@@ -4,8 +4,8 @@ import java.time.LocalDate;
 import java.util.List;
 
 import no.nav.foreldrepenger.autotest.dokumentgenerator.foreldrepengesoknad.json.builder.SvangerskapspengerBuilder;
-import no.nav.foreldrepenger.autotest.dokumentgenerator.foreldrepengesoknad.json.modell.BrukerRolle;
-import no.nav.foreldrepenger.autotest.dokumentgenerator.foreldrepengesoknad.json.modell.svangerskapspenger.tilrettelegging.Tilrettelegging;
+import no.nav.foreldrepenger.common.domain.BrukerRolle;
+import no.nav.foreldrepenger.common.domain.svangerskapspenger.tilrettelegging.Tilrettelegging;
 
 public final class SøknadSvangerskapspengerErketyper {
 

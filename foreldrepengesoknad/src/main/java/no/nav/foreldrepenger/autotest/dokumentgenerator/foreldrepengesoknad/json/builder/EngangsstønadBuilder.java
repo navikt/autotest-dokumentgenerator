@@ -1,20 +1,20 @@
 package no.nav.foreldrepenger.autotest.dokumentgenerator.foreldrepengesoknad.json.builder;
 
-import no.nav.foreldrepenger.autotest.dokumentgenerator.foreldrepengesoknad.json.modell.BrukerRolle;
-import no.nav.foreldrepenger.autotest.dokumentgenerator.foreldrepengesoknad.json.modell.Søknad;
-import no.nav.foreldrepenger.autotest.dokumentgenerator.foreldrepengesoknad.json.modell.Ytelse;
-import no.nav.foreldrepenger.autotest.dokumentgenerator.foreldrepengesoknad.json.modell.engangsstønad.Engangsstønad;
-import no.nav.foreldrepenger.autotest.dokumentgenerator.foreldrepengesoknad.json.modell.felles.SpråkKode;
-import no.nav.foreldrepenger.autotest.dokumentgenerator.foreldrepengesoknad.json.modell.felles.annenforelder.AnnenForelder;
-import no.nav.foreldrepenger.autotest.dokumentgenerator.foreldrepengesoknad.json.modell.felles.medlemskap.Medlemsskap;
-import no.nav.foreldrepenger.autotest.dokumentgenerator.foreldrepengesoknad.json.modell.felles.relasjontilbarn.RelasjonTilBarn;
+import no.nav.foreldrepenger.common.domain.BrukerRolle;
+import no.nav.foreldrepenger.common.domain.Søknad;
+import no.nav.foreldrepenger.common.domain.Ytelse;
+import no.nav.foreldrepenger.common.domain.engangsstønad.Engangsstønad;
+import no.nav.foreldrepenger.common.domain.felles.annenforelder.AnnenForelder;
+import no.nav.foreldrepenger.common.domain.felles.medlemskap.Medlemsskap;
+import no.nav.foreldrepenger.common.domain.felles.relasjontilbarn.RelasjonTilBarn;
+import no.nav.foreldrepenger.common.oppslag.dkif.Målform;
 
 public class EngangsstønadBuilder extends SøknadBuilder<EngangsstønadBuilder> {
 
-    private final Engangsstønad engangsstønadKladd = new Engangsstønad();
+    private final Engangsstønad.EngangsstønadBuilder engangsstønadBuilder = Engangsstønad.builder();
 
     public EngangsstønadBuilder(BrukerRolle brukerRolle) {
-        this.medSøker(brukerRolle, SpråkKode.NB);
+        this.medSøker(brukerRolle, Målform.standard());
     }
 
     @Override
@@ -24,28 +24,28 @@ public class EngangsstønadBuilder extends SøknadBuilder<EngangsstønadBuilder>
 
     @Override
     protected EngangsstønadBuilder medYtelse(Ytelse ytelse) {
-        søknadKladd.setYtelse(ytelse);
+        søknadKladd.ytelse(ytelse);
         return this;
     }
 
     public EngangsstønadBuilder medAnnenForelder(AnnenForelder annenForelder) {
-        engangsstønadKladd.setAnnenForelder(annenForelder);
+        engangsstønadBuilder.annenForelder(annenForelder);
         return this;
     }
 
     public EngangsstønadBuilder medRelasjonTilBarn(RelasjonTilBarn relasjonTilBarn) {
-        engangsstønadKladd.setRelasjonTilBarn(relasjonTilBarn);
+        engangsstønadBuilder.relasjonTilBarn(relasjonTilBarn);
         return this;
     }
 
     public EngangsstønadBuilder medMedlemsskap(Medlemsskap medlemsskap) {
-        engangsstønadKladd.setMedlemsskap(medlemsskap);
+        engangsstønadBuilder.medlemsskap(medlemsskap);
         return this;
     }
 
     @Override
     public Søknad build() {
-        this.medYtelse(this.engangsstønadKladd);
+        this.medYtelse(this.engangsstønadBuilder.build());
         return super.build();
     }
 }

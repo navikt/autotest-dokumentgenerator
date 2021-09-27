@@ -3,10 +3,10 @@ package no.nav.foreldrepenger.autotest.dokumentgenerator.foreldrepengesoknad.jso
 import java.time.LocalDate;
 
 import no.nav.foreldrepenger.autotest.dokumentgenerator.foreldrepengesoknad.json.builder.ForeldrepengerBuilder;
-import no.nav.foreldrepenger.autotest.dokumentgenerator.foreldrepengesoknad.json.modell.BrukerRolle;
-import no.nav.foreldrepenger.autotest.dokumentgenerator.foreldrepengesoknad.json.modell.felles.annenforelder.UkjentForelder;
-import no.nav.foreldrepenger.autotest.dokumentgenerator.foreldrepengesoknad.json.modell.felles.opptjening.Opptjening;
-import no.nav.foreldrepenger.autotest.dokumentgenerator.foreldrepengesoknad.json.modell.foreldrepenger.Dekningsgrad;
+import no.nav.foreldrepenger.common.domain.BrukerRolle;
+import no.nav.foreldrepenger.common.domain.felles.annenforelder.UkjentForelder;
+import no.nav.foreldrepenger.common.domain.felles.opptjening.Opptjening;
+import no.nav.foreldrepenger.common.domain.foreldrepenger.Dekningsgrad;
 
 public final class SøknadForeldrepengerErketyper {
 

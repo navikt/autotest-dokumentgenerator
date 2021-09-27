@@ -3,13 +3,13 @@ package no.nav.foreldrepenger.autotest.dokumentgenerator.foreldrepengesoknad.xml
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
-import no.nav.foreldrepenger.autotest.dokumentgenerator.foreldrepengesoknad.json.modell.foreldrepenger.fordeling.MorsAktivitet;
 import no.nav.foreldrepenger.autotest.dokumentgenerator.foreldrepengesoknad.xml.OppholdÅrsak;
 import no.nav.foreldrepenger.autotest.dokumentgenerator.foreldrepengesoknad.xml.OverføringÅrsak;
 import no.nav.foreldrepenger.autotest.dokumentgenerator.foreldrepengesoknad.xml.Stønadskonto;
 import no.nav.foreldrepenger.autotest.dokumentgenerator.foreldrepengesoknad.xml.SøknadUtsettelseÅrsak;
 import no.nav.foreldrepenger.autotest.dokumentgenerator.foreldrepengesoknad.xml.builders.perioder.GraderingBuilder;
 import no.nav.foreldrepenger.autotest.dokumentgenerator.foreldrepengesoknad.xml.builders.perioder.UttaksperiodeBuilder;
+import no.nav.foreldrepenger.common.domain.foreldrepenger.fordeling.MorsAktivitet;
 import no.nav.vedtak.felles.xml.soeknad.kodeverk.v3.MorsAktivitetsTyper;
 import no.nav.vedtak.felles.xml.soeknad.kodeverk.v3.Oppholdsaarsaker;
 import no.nav.vedtak.felles.xml.soeknad.kodeverk.v3.Overfoeringsaarsaker;

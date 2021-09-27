@@ -1,19 +1,19 @@
 package no.nav.foreldrepenger.autotest.dokumentgenerator.foreldrepengesoknad.json.builder;
 
-import no.nav.foreldrepenger.autotest.dokumentgenerator.foreldrepengesoknad.json.modell.BrukerRolle;
-import no.nav.foreldrepenger.autotest.dokumentgenerator.foreldrepengesoknad.json.modell.Søknad;
-import no.nav.foreldrepenger.autotest.dokumentgenerator.foreldrepengesoknad.json.modell.Ytelse;
-import no.nav.foreldrepenger.autotest.dokumentgenerator.foreldrepengesoknad.json.modell.felles.SpråkKode;
-import no.nav.foreldrepenger.autotest.dokumentgenerator.foreldrepengesoknad.json.modell.foreldrepenger.Endringssøknad;
+import no.nav.foreldrepenger.common.domain.BrukerRolle;
+import no.nav.foreldrepenger.common.domain.Søknad;
+import no.nav.foreldrepenger.common.domain.Ytelse;
+import no.nav.foreldrepenger.common.domain.foreldrepenger.Endringssøknad;
+import no.nav.foreldrepenger.common.oppslag.dkif.Målform;
 
 // TODO: Finn ut om søknadden skal bare inneholde endringer eller om det er avvik fra forrige som er endringene.
 public class EndringssøknadBuilder extends SøknadBuilder<EndringssøknadBuilder> {
 
-    private final Endringssøknad endringssøknadKladd = new Endringssøknad();
+    private final Endringssøknad.EndringssøknadBuilder endringssøknadBuilder = Endringssøknad.EndringssøkandsBuilder();
 
     public EndringssøknadBuilder(String saksnummer, BrukerRolle brukerRolle) {
         this.medSaksnummer(saksnummer);
-        this.medSøker(brukerRolle, SpråkKode.NB);
+        this.medSøker(brukerRolle, Målform.standard());
     }
 
     @Override
@@ -23,12 +23,12 @@ public class EndringssøknadBuilder extends SøknadBuilder<EndringssøknadBuilde
 
     @Override
     protected EndringssøknadBuilder medYtelse(Ytelse ytelse) {
-        søknadKladd.setYtelse(ytelse);
+        søknadKladd.ytelse(ytelse);
         return this;
     }
 
     public EndringssøknadBuilder medSaksnummer(String saksnummer) {
-        endringssøknadKladd.setSaksnr(saksnummer);
+        endringssøknadBuilder.saksnr(saksnummer);
         return this;
     }
 
