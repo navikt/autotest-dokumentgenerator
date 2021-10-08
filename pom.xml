@@ -27,8 +27,8 @@
 
         <java.version>16</java.version>
         <felles.versjon>4.0.8</felles.versjon>
-        <fp-kontrakter.version>6.0.4</fp-kontrakter.version>
-        <mottak-felles.version>0.2.1</mottak-felles.version>
+        <mottak-felles.version>0.2.2</mottak-felles.version>
+        <jackson.version>2.12.5</jackson.version>
         <vtp.versjon>1.0.15</vtp.versjon>
     </properties>
 
@@ -61,6 +61,15 @@
 
     <dependencyManagement>
         <dependencies>
+            <!-- TODO: Fiks dependancies -->
+            <dependency>
+                <groupId>com.fasterxml.jackson</groupId>
+                <artifactId>jackson-bom</artifactId>
+                <version>${jackson.version}</version>
+                <scope>import</scope>
+                <type>pom</type>
+            </dependency>
+
             <!-- Interne avhengigheter -->
             <dependency>
                 <groupId>no.nav.foreldrepenger.autotest.dokumentgenerator</groupId>
@@ -69,6 +78,18 @@
             </dependency>
 
             <!-- Eksterne avhengigheter -->
+            <dependency>
+                <groupId>no.nav.foreldrepenger</groupId>
+                <artifactId>fpsoknad-felles</artifactId>
+                <version>${mottak-felles.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>no.nav.foreldrepenger</groupId>
+                <artifactId>fpsoknad-felles</artifactId>
+                <version>${mottak-felles.version}</version>
+                <type>test-jar</type>
+                <scope>test</scope>
+            </dependency>
             <dependency>
                 <groupId>no.nav.foreldrepenger.vtp</groupId>
                 <artifactId>testmodell</artifactId>
@@ -90,32 +111,6 @@
                 <groupId>no.nav.foreldrepenger.felles</groupId>
                 <artifactId>felles-mapper</artifactId>
                 <version>${felles.versjon}</version>
-            </dependency>
-
-            <!-- Kontraktsavhengigheter -->
-            <dependency>
-                <groupId>no.nav.foreldrepenger.kontrakter</groupId>
-                <artifactId>fp-kontrakter-root</artifactId>
-                <version>${fp-kontrakter.version}</version>
-                <scope>import</scope>
-                <type>pom</type>
-            </dependency>
-            <dependency>
-                <groupId>no.nav.foreldrepenger.kontrakter</groupId>
-                <artifactId>soeknad-v3</artifactId>
-                <version>${fp-kontrakter.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>no.nav.foreldrepenger</groupId>
-                <artifactId>fpsoknad-felles</artifactId>
-                <version>${mottak-felles.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>no.nav.foreldrepenger</groupId>
-                <artifactId>fpsoknad-felles</artifactId>
-                <version>${mottak-felles.version}</version>
-                <type>test-jar</type>
-                <scope>test</scope>
             </dependency>
 
             <dependency>
@@ -143,6 +138,12 @@
                 <version>3.20.2</version>
                 <scope>test</scope>
             </dependency>
+            <dependency>
+                <groupId>org.mockito</groupId>
+                <artifactId>mockito-core</artifactId>
+                <version>3.12.4</version>
+                <scope>test</scope>
+            </dependency>
         </dependencies>
     </dependencyManagement>
     <dependencies>
@@ -161,6 +162,10 @@
         <dependency>
             <groupId>org.assertj</groupId>
             <artifactId>assertj-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-core</artifactId>
         </dependency>
     </dependencies>
 

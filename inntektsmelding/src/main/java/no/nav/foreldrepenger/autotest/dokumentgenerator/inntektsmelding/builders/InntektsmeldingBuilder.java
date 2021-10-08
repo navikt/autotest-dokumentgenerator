@@ -11,6 +11,7 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 
+import no.nav.foreldrepenger.common.domain.felles.ProsentAndel;
 import no.nav.inntektsmelding.xml.kodeliste._20180702.NaturalytelseKodeliste;
 import no.nav.inntektsmelding.xml.kodeliste._20180702.YtelseKodeliste;
 import no.nav.inntektsmelding.xml.kodeliste._20180702.ÅrsakBeregnetInntektEndringKodeliste;
@@ -122,6 +123,10 @@ public class InntektsmeldingBuilder {
         return this;
     }
 
+    public InntektsmeldingBuilder medRefusjonsBelopPerMnd(int refusjonsBelopPerMnd) {
+        return medRefusjonsBelopPerMnd(BigDecimal.valueOf(refusjonsBelopPerMnd));
+    }
+
     public InntektsmeldingBuilder medRefusjonsBelopPerMnd(BigDecimal refusjonsBelopPerMnd) {
         if(refusjonBuilderKladd == null) {
             refusjonBuilderKladd = new RefusjonBuilder();
@@ -130,11 +135,11 @@ public class InntektsmeldingBuilder {
         return this;
     }
 
-    public InntektsmeldingBuilder medRefusjonsBelopPerMnd(int prosentAvBeregnetInntekt) {
+    public InntektsmeldingBuilder medRefusjonsBelopPerMnd(ProsentAndel prosentAvBeregnetInntekt) {
         if(refusjonBuilderKladd == null) {
             refusjonBuilderKladd = new RefusjonBuilder();
         }
-        var multiplikand = prosentAvBeregnetInntekt / 100.0;
+        var multiplikand = prosentAvBeregnetInntekt.getProsent() / 100.0;
         var refusjonsBelopPerMnd = arbeidsforholdBuilderKladd.beregnetInntektBelop.multiply(BigDecimal.valueOf(multiplikand));
         this.refusjonBuilderKladd.medRefusjonsBelopPerMnd(refusjonsBelopPerMnd);
         return this;
@@ -162,13 +167,17 @@ public class InntektsmeldingBuilder {
         return this;
     }
 
+    public InntektsmeldingBuilder medBeregnetInntekt(int beregnetInntektBelop) {
+        return medBeregnetInntekt(BigDecimal.valueOf(beregnetInntektBelop));
+    }
+
     public InntektsmeldingBuilder medBeregnetInntekt(BigDecimal beregnetInntektBelop) {
         this.arbeidsforholdBuilderKladd.medBeregnetInntekt(beregnetInntektBelop);
         return this;
     }
 
-    public InntektsmeldingBuilder medBeregnetInntekt(int prosentAvvik) {
-        var multiplikand = (100 + prosentAvvik) / 100.0;
+    public InntektsmeldingBuilder medBeregnetInntekt(ProsentAndel prosentIForholdTilRegistrertInntekt) {
+        var multiplikand = prosentIForholdTilRegistrertInntekt.getProsent() / 100.0;
         var beregnetInntektBelop = arbeidsforholdBuilderKladd.beregnetInntektBelop.multiply(BigDecimal.valueOf(multiplikand));
         this.arbeidsforholdBuilderKladd.medBeregnetInntekt(beregnetInntektBelop);
         return this;

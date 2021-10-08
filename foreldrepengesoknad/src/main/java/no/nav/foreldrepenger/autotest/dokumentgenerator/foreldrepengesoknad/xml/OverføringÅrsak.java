@@ -1,5 +1,6 @@
 package no.nav.foreldrepenger.autotest.dokumentgenerator.foreldrepengesoknad.xml;
 
+@Deprecated
 public enum OverføringÅrsak {
     INSTITUSJONSOPPHOLD_ANNEN_FORELDER,
     SYKDOM_ANNEN_FORELDER,

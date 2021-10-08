@@ -6,6 +6,7 @@ import java.util.Optional;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
+@Deprecated
 @JsonFormat(shape = JsonFormat.Shape.OBJECT)
 public enum Stønadskonto {
 

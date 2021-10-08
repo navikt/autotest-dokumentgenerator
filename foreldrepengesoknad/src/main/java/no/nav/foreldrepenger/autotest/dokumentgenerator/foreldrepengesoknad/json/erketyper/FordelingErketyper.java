@@ -2,15 +2,18 @@ package no.nav.foreldrepenger.autotest.dokumentgenerator.foreldrepengesoknad.jso
 
 import static no.nav.foreldrepenger.autotest.dokumentgenerator.foreldrepengesoknad.json.erketyper.UttaksperioderErketyper.uttaksperiode;
 import static no.nav.foreldrepenger.common.domain.foreldrepenger.fordeling.StønadskontoType.FELLESPERIODE;
+import static no.nav.foreldrepenger.common.domain.foreldrepenger.fordeling.StønadskontoType.FORELDREPENGER;
 import static no.nav.foreldrepenger.common.domain.foreldrepenger.fordeling.StønadskontoType.FORELDREPENGER_FØR_FØDSEL;
 import static no.nav.foreldrepenger.common.domain.foreldrepenger.fordeling.StønadskontoType.MØDREKVOTE;
 
 import java.time.LocalDate;
 import java.util.Arrays;
 
+import no.nav.foreldrepenger.common.domain.ArbeidsgiverIdentifikator;
 import no.nav.foreldrepenger.common.domain.BrukerRolle;
 import no.nav.foreldrepenger.common.domain.foreldrepenger.fordeling.Fordeling;
 import no.nav.foreldrepenger.common.domain.foreldrepenger.fordeling.LukketPeriodeMedVedlegg;
+import no.nav.foreldrepenger.common.domain.foreldrepenger.fordeling.StønadskontoType;
 
 public final class FordelingErketyper {
 
@@ -47,7 +50,29 @@ public final class FordelingErketyper {
                 uttaksperiode(FELLESPERIODE, familehendelseDato.plusWeeks(3), familehendelseDato.plusWeeks(5)));
     }
 
+    public static Fordeling fordelingEndringssøknadGradering(StønadskontoType stønadskonto, LocalDate fom, LocalDate tom, ArbeidsgiverIdentifikator identifikator, Integer arbeidstidsprosentIOrgnr) {
+        return generiskFordeling(UttaksperioderErketyper.graderingsperiodeArbeidstaker(stønadskonto, fom, tom, identifikator, arbeidstidsprosentIOrgnr));
+    }
+
+    public static Fordeling fordelingFarAleneomsorg(LocalDate familehendelseDato) {
+        return generiskFordelingAnnenforeldreIkkeInformert(
+                uttaksperiode(FORELDREPENGER, familehendelseDato, familehendelseDato.plusWeeks(20)));
+    }
+
+    public static Fordeling fordelingMorAleneomsorgHappyCase(LocalDate familehendelseDato) {
+        return generiskFordelingAnnenforeldreIkkeInformert(
+                uttaksperiode(FORELDREPENGER_FØR_FØDSEL, familehendelseDato.minusWeeks(3L), familehendelseDato.minusDays(1L)),
+                uttaksperiode(FORELDREPENGER, familehendelseDato, familehendelseDato.plusWeeks(100L)));
+    }
+
     public static Fordeling generiskFordeling(LukketPeriodeMedVedlegg... perioder) {
+        return Fordeling.builder()
+                .erAnnenForelderInformert(true)
+                .perioder(Arrays.asList(perioder))
+                .build();
+    }
+
+    public static Fordeling generiskFordelingAnnenforeldreIkkeInformert(LukketPeriodeMedVedlegg... perioder) {
         return Fordeling.builder()
                 .erAnnenForelderInformert(true)
                 .perioder(Arrays.asList(perioder))

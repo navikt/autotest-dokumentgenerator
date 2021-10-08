@@ -15,7 +15,7 @@ import no.nav.foreldrepenger.common.oppslag.dkif.Målform;
 
 public class ForeldrepengerBuilder extends SøknadBuilder<ForeldrepengerBuilder> {
 
-    private final Foreldrepenger.ForeldrepengerBuilder foreldrepengerBuilder = Foreldrepenger.builder();
+    protected final Foreldrepenger.ForeldrepengerBuilder foreldrepengerBuilder = Foreldrepenger.builder();
 
     public ForeldrepengerBuilder(BrukerRolle brukerRolle) {
         this.medSøker(brukerRolle, Målform.standard());

@@ -7,6 +7,7 @@ import java.util.Comparator;
 import java.util.List;
 
 import no.nav.foreldrepenger.autotest.dokumentgenerator.inntektsmelding.builders.InntektsmeldingBuilder;
+import no.nav.foreldrepenger.common.domain.ArbeidsgiverIdentifikator;
 import no.nav.foreldrepenger.common.domain.Fødselsnummer;
 import no.nav.foreldrepenger.common.domain.Orgnummer;
 import no.nav.foreldrepenger.vtp.kontrakter.TestscenarioDto;
@@ -63,10 +64,38 @@ public class InntektsmeldingForeldrepengeErketyper {
         return inntektsmeldinger;
     }
 
-    public static InntektsmeldingBuilder lagInntektsmelding(Integer beløp, Fødselsnummer fnr, LocalDate fpStartdato, Orgnummer orgNr) {
-        return lagInntektsmelding(beløp, fnr.getFnr(), fpStartdato, orgNr.orgnr());
+
+    public static InntektsmeldingBuilder lagInntektsmelding(Integer beløp, Fødselsnummer fnr, LocalDate fpStartdato, ArbeidsgiverIdentifikator arbeidsgiverIdentifikator) {
+        if (arbeidsgiverIdentifikator instanceof Orgnummer o) {
+            return new InntektsmeldingBuilder()
+                    .medBeregnetInntekt(BigDecimal.valueOf(beløp))
+                    .medArbeidstakerFNR(fnr.getFnr())
+                    .medYtelse(YtelseKodeliste.FORELDREPENGER)
+                    .medAarsakTilInnsending(ÅrsakInnsendingKodeliste.NY)
+                    .medStartdatoForeldrepengerperiodenFOM(fpStartdato)
+                    .medAvsendersystem("FS22", "1.0")
+                    .medArbeidsgiver(o.value(), "41925090");
+        } else {
+            throw new IllegalStateException("Bruk metode lagInntektsmeldingPrivateArbeidsgiver() siden det er privat arbeidsgiver!");
+        }
     }
 
+    public static InntektsmeldingBuilder lagInntektsmeldingPrivateArbeidsgiver(Integer beløp, Fødselsnummer fnr,
+                                                                               LocalDate fpStartdato,
+                                                                               Fødselsnummer fnrArbeidsgiver) {
+        return new InntektsmeldingBuilder()
+                .medBeregnetInntekt(BigDecimal.valueOf(beløp))
+                .medArbeidstakerFNR(fnr.getFnr())
+                .medYtelse(YtelseKodeliste.FORELDREPENGER)
+                .medAarsakTilInnsending(ÅrsakInnsendingKodeliste.NY)
+                .medStartdatoForeldrepengerperiodenFOM(fpStartdato)
+                .medAvsendersystem("FS22", "1.0")
+                .medArbeidsgiverPrivat(fnrArbeidsgiver.getFnr(), "41925090");
+    }
+
+
+
+    @Deprecated
     public static InntektsmeldingBuilder lagInntektsmelding(Integer beløp, String fnr, LocalDate fpStartdato, String orgNr) {
         return new InntektsmeldingBuilder()
                 .medBeregnetInntekt(BigDecimal.valueOf(beløp))
@@ -78,6 +107,7 @@ public class InntektsmeldingForeldrepengeErketyper {
                 .medArbeidsgiver(orgNr, "41925090");
     }
 
+    @Deprecated
     public static InntektsmeldingBuilder lagInntektsmeldingPrivateArbeidsgiver(Integer beløp, String fnr,
                                                                                LocalDate fpStartdato,
                                                                                String fnrArbeidsgiver) {

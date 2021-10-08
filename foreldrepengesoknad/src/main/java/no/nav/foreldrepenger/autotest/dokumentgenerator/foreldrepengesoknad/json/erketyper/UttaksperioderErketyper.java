@@ -3,10 +3,10 @@ package no.nav.foreldrepenger.autotest.dokumentgenerator.foreldrepengesoknad.jso
 import java.time.LocalDate;
 import java.util.List;
 
-import no.nav.foreldrepenger.common.domain.Orgnummer;
+import no.nav.foreldrepenger.common.domain.ArbeidsgiverIdentifikator;
 import no.nav.foreldrepenger.common.domain.felles.ProsentAndel;
-import no.nav.foreldrepenger.common.domain.foreldrepenger.fordeling.FriUtsettelsesPeriode;
 import no.nav.foreldrepenger.common.domain.foreldrepenger.fordeling.GradertUttaksPeriode;
+import no.nav.foreldrepenger.common.domain.foreldrepenger.fordeling.MorsAktivitet;
 import no.nav.foreldrepenger.common.domain.foreldrepenger.fordeling.OppholdsPeriode;
 import no.nav.foreldrepenger.common.domain.foreldrepenger.fordeling.Oppholdsårsak;
 import no.nav.foreldrepenger.common.domain.foreldrepenger.fordeling.OverføringsPeriode;
@@ -30,6 +30,15 @@ public final class UttaksperioderErketyper {
                 .build();
     }
 
+    public static UttaksPeriode uttaksperiode(StønadskontoType stønadskonto, LocalDate fom, LocalDate tom, MorsAktivitet morsAktivitet) {
+        return UttaksPeriode.UttaksPeriodeBuilder()
+                .uttaksperiodeType(stønadskonto)
+                .fom(fom)
+                .tom(tom)
+                .morsAktivitetsType(morsAktivitet)
+                .build();
+    }
+
     public static UttaksPeriode uttaksperiode(StønadskontoType stønadskontoType, LocalDate fom, LocalDate tom,
                                               Boolean flerbarnsdager,
                                               Boolean samtidigUttak) {
@@ -50,12 +59,12 @@ public final class UttaksperioderErketyper {
     }
 
     public static GradertUttaksPeriode graderingsperiodeArbeidstaker(StønadskontoType stønadskontoType, LocalDate fom, LocalDate tom,
-                                                                     Orgnummer orgnummer, Integer arbeidstidsprosentIOrgnr) {
+                                                                     ArbeidsgiverIdentifikator arbeidsgiverIdentifikator, Integer arbeidstidsprosentIOrgnr) {
         return GradertUttaksPeriode.GradertUttaksPeriodeBuilder()
                 .uttaksperiodeType(stønadskontoType)
                 .fom(fom)
                 .tom(tom)
-                .virksomhetsnummer(List.of(orgnummer.orgnr()))
+                .virksomhetsnummer(List.of(arbeidsgiverIdentifikator.value()))
                 .arbeidsForholdSomskalGraderes(true)
                 .arbeidstidProsent(new ProsentAndel(Double.valueOf(arbeidstidsprosentIOrgnr)))
                 .erArbeidstaker(true)
@@ -104,11 +113,12 @@ public final class UttaksperioderErketyper {
                 .build();
     }
 
-    public static UtsettelsesPeriode friutsettelsesperiode(UtsettelsesÅrsak utsettelseÅrsak, LocalDate fom, LocalDate tom) {
-        return FriUtsettelsesPeriode.FriUtsettelsesPeriodeBuilder()
+    public static UtsettelsesPeriode utsettelsesperiode(UtsettelsesÅrsak utsettelseÅrsak, LocalDate fom, LocalDate tom, MorsAktivitet aktivitet) {
+        return UtsettelsesPeriode.UtsettelsesPeriodeBuilder()
                 .fom(fom)
                 .tom(tom)
                 .årsak(utsettelseÅrsak)
+                .morsAktivitetsType(aktivitet)
                 // TODO: Følgende eksistere ikke i Utsettelsesperiode for XML.
                 //  stønadskontotype, erarbeidstaker, virksomhetsnummer og morsaktiattstype
                 .build();

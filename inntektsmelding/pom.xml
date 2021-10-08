@@ -28,11 +28,6 @@
             <groupId>no.nav.foreldrepenger.autotest.dokumentgenerator</groupId>
             <artifactId>foreldrepengesoknad</artifactId>
         </dependency>
-        <dependency>
-            <groupId>no.nav.foreldrepenger.kontrakter</groupId>
-            <artifactId>inntektsmelding-v1</artifactId>
-        </dependency>
-
 
         <!-- 3dje parts biblioteker -->
         <dependency>

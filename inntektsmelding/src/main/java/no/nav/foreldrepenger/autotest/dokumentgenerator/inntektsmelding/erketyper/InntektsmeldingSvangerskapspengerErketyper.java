@@ -3,6 +3,7 @@ package no.nav.foreldrepenger.autotest.dokumentgenerator.inntektsmelding.erketyp
 import java.math.BigDecimal;
 
 import no.nav.foreldrepenger.autotest.dokumentgenerator.inntektsmelding.builders.InntektsmeldingBuilder;
+import no.nav.foreldrepenger.common.domain.ArbeidsgiverIdentifikator;
 import no.nav.foreldrepenger.common.domain.Fødselsnummer;
 import no.nav.foreldrepenger.common.domain.Orgnummer;
 import no.nav.inntektsmelding.xml.kodeliste._20180702.YtelseKodeliste;
@@ -14,9 +15,15 @@ public class InntektsmeldingSvangerskapspengerErketyper {
     }
 
     public static InntektsmeldingBuilder lagSvangerskapspengerInntektsmelding(Fødselsnummer fnr, Integer beløp,
-                                                                              Orgnummer orgnummer) {
-        return lagSvangerskapspengerInntektsmelding(fnr.getFnr(), beløp, orgnummer.orgnr());
+                                                                              ArbeidsgiverIdentifikator arbeidsgiverIdentifikator) {
+        if (arbeidsgiverIdentifikator instanceof Orgnummer o) {
+            return lagSvangerskapspengerInntektsmelding(fnr.getFnr(), beløp, o.value());
+        } else {
+            throw new IllegalStateException("Ikke støttet!");
+        }
     }
+
+    @Deprecated
     public static InntektsmeldingBuilder lagSvangerskapspengerInntektsmelding(String fnr, Integer beløp,
             String orgnummer) {
         return new InntektsmeldingBuilder()
@@ -26,5 +33,27 @@ public class InntektsmeldingSvangerskapspengerErketyper {
                 .medAarsakTilInnsending(ÅrsakInnsendingKodeliste.NY)
                 .medArbeidsgiver(orgnummer, "41925090")
                 .medAvsendersystem("FS32", "1.0");
+    }
+
+    public static InntektsmeldingBuilder lagSvangerskapspengerInntektsmelding(Fødselsnummer fnr, Integer beløp,
+                                                                              Orgnummer orgnummer) {
+        return new InntektsmeldingBuilder()
+                .medArbeidstakerFNR(fnr.getFnr())
+                .medBeregnetInntekt(BigDecimal.valueOf(beløp))
+                .medYtelse(YtelseKodeliste.SVANGERSKAPSPENGER)
+                .medAarsakTilInnsending(ÅrsakInnsendingKodeliste.NY)
+                .medArbeidsgiver(orgnummer.value(), "41925090")
+                .medAvsendersystem("FS32", "1.0");
+    }
+
+    public static InntektsmeldingBuilder lagInntektsmeldingPrivateArbeidsgiver(Fødselsnummer fnr, Integer beløp,
+            Fødselsnummer fnrArbeidsgiver) {
+        return new InntektsmeldingBuilder()
+                .medArbeidstakerFNR(fnr.getFnr())
+                .medBeregnetInntekt(BigDecimal.valueOf(beløp))
+                .medYtelse(YtelseKodeliste.SVANGERSKAPSPENGER)
+                .medAarsakTilInnsending(ÅrsakInnsendingKodeliste.NY)
+                .medAvsendersystem("FS32", "1.0")
+                .medArbeidsgiverPrivat(fnrArbeidsgiver.getFnr(), "41925090");
     }
 }
