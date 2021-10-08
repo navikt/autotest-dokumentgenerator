@@ -28,7 +28,7 @@
         <java.version>16</java.version>
         <felles.versjon>4.0.8</felles.versjon>
         <mottak-felles.version>0.2.2</mottak-felles.version>
-        <jackson.version>2.12.5</jackson.version>
+        <jackson.version>2.13.0</jackson.version>
         <vtp.versjon>1.0.15</vtp.versjon>
     </properties>
 
