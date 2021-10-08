@@ -26,7 +26,7 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
         <java.version>16</java.version>
-        <felles.versjon>4.0.8</felles.versjon>
+        <felles.versjon>4.0.10</felles.versjon>
         <mottak-felles.version>0.2.2</mottak-felles.version>
         <jackson.version>2.12.5</jackson.version>
         <vtp.versjon>1.0.15</vtp.versjon>
