@@ -12,7 +12,7 @@ import no.nav.foreldrepenger.common.domain.foreldrepenger.Rettigheter;
 import no.nav.foreldrepenger.common.domain.foreldrepenger.fordeling.Fordeling;
 import no.nav.foreldrepenger.common.oppslag.dkif.Målform;
 
-// TODO: Trenger ikke en slik builder for endringsøknad... men for å gjøre ting likt så kan vi ha den frem til
+//  TODO: Trenger ikke en slik builder for endringsøknad... men for å gjøre ting likt så kan vi ha den frem til
 //  refaktorering av disse builderne.
 public class EndringssøknadBuilder {
 

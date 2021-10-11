@@ -26,10 +26,8 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
         <java.version>16</java.version>
-        <felles.versjon>4.0.8</felles.versjon>
-        <mottak-felles.version>0.2.2</mottak-felles.version>
-        <jackson.version>2.12.5</jackson.version>
-        <vtp.versjon>1.0.15</vtp.versjon>
+        <felles.versjon>4.0.10</felles.versjon>
+        <mottak-felles.version>0.2.3</mottak-felles.version>
     </properties>
 
     <organization>
@@ -61,23 +59,14 @@
 
     <dependencyManagement>
         <dependencies>
-            <!-- TODO: Fiks dependancies -->
+            <!-- Interne avhengigheter -->
             <dependency>
-                <groupId>com.fasterxml.jackson</groupId>
-                <artifactId>jackson-bom</artifactId>
-                <version>${jackson.version}</version>
+                <groupId>no.nav.foreldrepenger</groupId>
+                <artifactId>fpsoknad-felles</artifactId>
+                <version>${mottak-felles.version}</version>
                 <scope>import</scope>
                 <type>pom</type>
             </dependency>
-
-            <!-- Interne avhengigheter -->
-            <dependency>
-                <groupId>no.nav.foreldrepenger.autotest.dokumentgenerator</groupId>
-                <artifactId>foreldrepengesoknad</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-
-            <!-- Eksterne avhengigheter -->
             <dependency>
                 <groupId>no.nav.foreldrepenger</groupId>
                 <artifactId>fpsoknad-felles</artifactId>
@@ -91,81 +80,35 @@
                 <scope>test</scope>
             </dependency>
             <dependency>
-                <groupId>no.nav.foreldrepenger.vtp</groupId>
-                <artifactId>testmodell</artifactId>
-                <version>${vtp.versjon}</version>
-                <scope>provided</scope>
+                <groupId>no.nav.foreldrepenger.autotest.dokumentgenerator</groupId>
+                <artifactId>foreldrepengesoknad</artifactId>
+                <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>no.nav.foreldrepenger.vtp</groupId>
-                <artifactId>kontrakter</artifactId>
-                <version>${vtp.versjon}</version>
-                <scope>provided</scope>
-            </dependency>
-            <dependency>
-                <groupId>no.nav.foreldrepenger.felles</groupId>
-                <artifactId>felles-log</artifactId>
-                <version>${felles.versjon}</version>
-            </dependency>
-            <dependency>
-                <groupId>no.nav.foreldrepenger.felles</groupId>
-                <artifactId>felles-mapper</artifactId>
-                <version>${felles.versjon}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>org.projectlombok</groupId>
-                <artifactId>lombok</artifactId>
-                <version>1.18.20</version>
-            </dependency>
-            <dependency>
-                <groupId>com.neovisionaries</groupId>
-                <artifactId>nv-i18n</artifactId>
-                <version>1.29</version>
-            </dependency>
-
-
-            <!-- Testavhengigheter -->
-            <dependency>
-                <groupId>org.junit.jupiter</groupId>
-                <artifactId>junit-jupiter</artifactId>
-                <version>5.7.2</version>
-                <scope>test</scope>
-            </dependency>
-            <dependency>
-                <groupId>org.assertj</groupId>
-                <artifactId>assertj-core</artifactId>
-                <version>3.20.2</version>
-                <scope>test</scope>
-            </dependency>
-            <dependency>
-                <groupId>org.mockito</groupId>
-                <artifactId>mockito-core</artifactId>
-                <version>3.12.4</version>
-                <scope>test</scope>
+                <groupId>no.nav.foreldrepenger.autotest.dokumentgenerator</groupId>
+                <artifactId>inntektsmelding</artifactId>
+                <version>${project.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
     <dependencies>
         <dependency>
             <groupId>no.nav.foreldrepenger.felles</groupId>
-            <artifactId>felles-log</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>no.nav.foreldrepenger.felles</groupId>
             <artifactId>felles-mapper</artifactId>
+            <version>${felles.versjon}</version>
+            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter</artifactId>
+            <version>5.8.1</version>
+            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.assertj</groupId>
             <artifactId>assertj-core</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.mockito</groupId>
-            <artifactId>mockito-core</artifactId>
+            <version>3.21.0</version>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 
@@ -241,13 +184,6 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-deploy-plugin</artifactId>
-                <configuration>
-                    <skip>true</skip>
-                </configuration>
             </plugin>
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>

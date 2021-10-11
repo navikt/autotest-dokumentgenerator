@@ -17,14 +17,6 @@
 
     <dependencies>
         <dependency>
-            <groupId>no.nav.foreldrepenger.vtp</groupId>
-            <artifactId>testmodell</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>no.nav.foreldrepenger.vtp</groupId>
-            <artifactId>kontrakter</artifactId>
-        </dependency>
-        <dependency>
             <groupId>no.nav.foreldrepenger.autotest.dokumentgenerator</groupId>
             <artifactId>foreldrepengesoknad</artifactId>
         </dependency>
@@ -39,16 +31,4 @@
             <artifactId>jackson-module-parameter-names</artifactId>
         </dependency>
     </dependencies>
-
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-deploy-plugin</artifactId>
-                <configuration>
-                    <skip>false</skip>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
 </project>

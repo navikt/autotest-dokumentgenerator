@@ -15,7 +15,6 @@ import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.fasterxml.jackson.module.paramnames.ParameterNamesModule;
 
 
@@ -27,14 +26,11 @@ public class SerializationTestBase {
     @BeforeAll
     public static void beforeAll() {
         mapper = getObjectMapper();
-        mapper.registerModule(new JavaTimeModule());
         mapper.registerModule(new ParameterNamesModule(JsonCreator.Mode.PROPERTIES));
-
         mapper.setVisibility(PropertyAccessor.GETTER, JsonAutoDetect.Visibility.NONE);
         mapper.setVisibility(PropertyAccessor.SETTER, JsonAutoDetect.Visibility.NONE);
         mapper.setVisibility(PropertyAccessor.FIELD, JsonAutoDetect.Visibility.ANY);
         mapper.setVisibility(PropertyAccessor.CREATOR, JsonAutoDetect.Visibility.ANY);
-
         mapper.configure(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY, true);
         mapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
     }
