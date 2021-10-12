@@ -17,22 +17,10 @@ public class InntektsmeldingSvangerskapspengerErketyper {
     public static InntektsmeldingBuilder lagSvangerskapspengerInntektsmelding(Fødselsnummer fnr, Integer beløp,
                                                                               ArbeidsgiverIdentifikator arbeidsgiverIdentifikator) {
         if (arbeidsgiverIdentifikator instanceof Orgnummer o) {
-            return lagSvangerskapspengerInntektsmelding(fnr.getFnr(), beløp, o.value());
+            return lagSvangerskapspengerInntektsmelding(fnr, beløp, o);
         } else {
             throw new IllegalStateException("Ikke støttet!");
         }
-    }
-
-    @Deprecated
-    public static InntektsmeldingBuilder lagSvangerskapspengerInntektsmelding(String fnr, Integer beløp,
-            String orgnummer) {
-        return new InntektsmeldingBuilder()
-                .medArbeidstakerFNR(fnr)
-                .medBeregnetInntekt(BigDecimal.valueOf(beløp))
-                .medYtelse(YtelseKodeliste.SVANGERSKAPSPENGER)
-                .medAarsakTilInnsending(ÅrsakInnsendingKodeliste.NY)
-                .medArbeidsgiver(orgnummer, "41925090")
-                .medAvsendersystem("FS32", "1.0");
     }
 
     public static InntektsmeldingBuilder lagSvangerskapspengerInntektsmelding(Fødselsnummer fnr, Integer beløp,
