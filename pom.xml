@@ -27,7 +27,7 @@
 
         <java.version>16</java.version>
         <felles.versjon>4.0.11</felles.versjon>
-        <mottak-felles.version>0.2.3</mottak-felles.version>
+        <mottak-felles.version>0.2.4</mottak-felles.version>
     </properties>
 
     <organization>
