@@ -11,7 +11,7 @@ public final class RettigheterErketyper {
     public static Rettigheter beggeForeldreRettIkkeAleneomsorg() {
         return new Rettigheter(
                 true,
-                true,
+                false,
                 false);
     }
 
@@ -26,7 +26,7 @@ public final class RettigheterErketyper {
     public static Rettigheter harIkkeAleneomsorgOgAnnenpartIkkeRett() {
         return new Rettigheter(
                 false,
-                true,
+                false,
                 false);
     }
 }
