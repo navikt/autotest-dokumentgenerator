@@ -1,8 +1,6 @@
 package no.nav.foreldrepenger.autotest.dokumentgenerator.foreldrepengesoknad.json.erketyper;
 
 
-import java.time.LocalDate;
-
 import no.nav.foreldrepenger.common.domain.foreldrepenger.Rettigheter;
 
 public final class RettigheterErketyper {
@@ -14,8 +12,7 @@ public final class RettigheterErketyper {
         return new Rettigheter(
                 true,
                 true,
-                false,
-                null);
+                false);
     }
 
     // NB! Default verdi hvis annenpart er "ukjent foreldre"!
@@ -23,15 +20,13 @@ public final class RettigheterErketyper {
         return new Rettigheter(
                 false,
                 true,
-                true,
-                LocalDate.now()); // Finn ut hva som skal stå på "datoForAleneomsorg"
+                false);
     }
 
     public static Rettigheter harIkkeAleneomsorgOgAnnenpartIkkeRett() {
         return new Rettigheter(
                 false,
                 true,
-                false,
-                null);
+                false);
     }
 }

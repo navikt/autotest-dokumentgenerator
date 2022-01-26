@@ -26,7 +26,7 @@ public class InntektsmeldingSvangerskapspengerErketyper {
     public static InntektsmeldingBuilder lagSvangerskapspengerInntektsmelding(Fødselsnummer fnr, Integer beløp,
                                                                               Orgnummer orgnummer) {
         return new InntektsmeldingBuilder()
-                .medArbeidstakerFNR(fnr.getFnr())
+                .medArbeidstakerFNR(fnr.value())
                 .medBeregnetInntekt(BigDecimal.valueOf(beløp))
                 .medYtelse(YtelseKodeliste.SVANGERSKAPSPENGER)
                 .medAarsakTilInnsending(ÅrsakInnsendingKodeliste.NY)
@@ -37,11 +37,11 @@ public class InntektsmeldingSvangerskapspengerErketyper {
     public static InntektsmeldingBuilder lagInntektsmeldingPrivateArbeidsgiver(Fødselsnummer fnr, Integer beløp,
             Fødselsnummer fnrArbeidsgiver) {
         return new InntektsmeldingBuilder()
-                .medArbeidstakerFNR(fnr.getFnr())
+                .medArbeidstakerFNR(fnr.value())
                 .medBeregnetInntekt(BigDecimal.valueOf(beløp))
                 .medYtelse(YtelseKodeliste.SVANGERSKAPSPENGER)
                 .medAarsakTilInnsending(ÅrsakInnsendingKodeliste.NY)
                 .medAvsendersystem("FS32", "1.0")
-                .medArbeidsgiverPrivat(fnrArbeidsgiver.getFnr(), "41925090");
+                .medArbeidsgiverPrivat(fnrArbeidsgiver.value(), "41925090");
     }
 }
