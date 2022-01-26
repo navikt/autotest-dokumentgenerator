@@ -70,6 +70,7 @@ public final class OpptjeningErketyper {
         return new Frilans(periode,
                 false,
                 false,
+                false,
                 List.of(frilansOppdrag),
                 null);
     }

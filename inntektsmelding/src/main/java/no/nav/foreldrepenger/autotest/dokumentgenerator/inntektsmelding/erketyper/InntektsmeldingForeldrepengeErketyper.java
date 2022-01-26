@@ -19,7 +19,7 @@ public class InntektsmeldingForeldrepengeErketyper {
         if (arbeidsgiverIdentifikator instanceof Orgnummer o) {
             return new InntektsmeldingBuilder()
                     .medBeregnetInntekt(BigDecimal.valueOf(beløp))
-                    .medArbeidstakerFNR(fnr.getFnr())
+                    .medArbeidstakerFNR(fnr.value())
                     .medYtelse(YtelseKodeliste.FORELDREPENGER)
                     .medAarsakTilInnsending(ÅrsakInnsendingKodeliste.NY)
                     .medStartdatoForeldrepengerperiodenFOM(fpStartdato)
@@ -35,11 +35,11 @@ public class InntektsmeldingForeldrepengeErketyper {
                                                                                Fødselsnummer fnrArbeidsgiver) {
         return new InntektsmeldingBuilder()
                 .medBeregnetInntekt(BigDecimal.valueOf(beløp))
-                .medArbeidstakerFNR(fnr.getFnr())
+                .medArbeidstakerFNR(fnr.value())
                 .medYtelse(YtelseKodeliste.FORELDREPENGER)
                 .medAarsakTilInnsending(ÅrsakInnsendingKodeliste.NY)
                 .medStartdatoForeldrepengerperiodenFOM(fpStartdato)
                 .medAvsendersystem("FS22", "1.0")
-                .medArbeidsgiverPrivat(fnrArbeidsgiver.getFnr(), "41925090");
+                .medArbeidsgiverPrivat(fnrArbeidsgiver.value(), "41925090");
     }
 }
