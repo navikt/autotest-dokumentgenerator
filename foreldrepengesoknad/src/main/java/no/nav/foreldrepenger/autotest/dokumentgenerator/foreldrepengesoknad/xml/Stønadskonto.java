@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Deprecated
 @JsonFormat(shape = JsonFormat.Shape.OBJECT)
@@ -30,7 +31,11 @@ public enum Stønadskonto {
     }
 
     @JsonCreator
-    public static Stønadskonto fraKode(String kode) {
+    public static Stønadskonto fraKode(@JsonProperty(value = "kode") Object node) {
+        if (node == null) {
+            return null;
+        }
+        var kode = TempAvledeKode.getVerdi(Stønadskonto.class, node, "kode");
         return Arrays.stream(Stønadskonto.values())
                 .filter(value -> value.getKode().equalsIgnoreCase(kode))
                 .findFirst()

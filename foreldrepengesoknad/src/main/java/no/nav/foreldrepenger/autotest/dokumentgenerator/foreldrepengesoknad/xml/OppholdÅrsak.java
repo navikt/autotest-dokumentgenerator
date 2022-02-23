@@ -23,7 +23,11 @@ public enum OppholdÅrsak {
     }
 
     @JsonCreator
-    public static OppholdÅrsak fraKode(@JsonProperty("kode") String kode) {
+    public static OppholdÅrsak fraKode(@JsonProperty(value = "kode") Object node) {
+        if (node == null) {
+            return null;
+        }
+        var kode = TempAvledeKode.getVerdi(OppholdÅrsak.class, node, "kode");
         return Arrays.stream(OppholdÅrsak.values())
                 .filter(value -> value.getKode().equalsIgnoreCase(kode))
                 .findFirst()
