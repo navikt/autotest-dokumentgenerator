@@ -30,7 +30,7 @@ public enum Stønadskonto {
         this.kode = Optional.ofNullable(kode).orElse(name());
     }
 
-    @JsonCreator
+    @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
     public static Stønadskonto fraKode(@JsonProperty(value = "kode") Object node) {
         if (node == null) {
             return null;

@@ -22,7 +22,7 @@ public enum OppholdÅrsak {
         this.kode = kode;
     }
 
-    @JsonCreator
+    @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
     public static OppholdÅrsak fraKode(@JsonProperty(value = "kode") Object node) {
         if (node == null) {
             return null;
