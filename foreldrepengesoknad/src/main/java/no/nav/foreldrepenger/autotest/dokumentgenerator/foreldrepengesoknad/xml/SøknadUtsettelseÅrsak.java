@@ -29,7 +29,7 @@ public enum SøknadUtsettelseÅrsak {
         this.kode = kode;
     }
 
-    @JsonCreator
+    @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
     public static SøknadUtsettelseÅrsak fraKode(@JsonProperty(value = "kode") Object node) {
         if (node == null) {
             return null;
