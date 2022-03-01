@@ -1,6 +1,8 @@
 package no.nav.foreldrepenger.autotest.dokumentgenerator.foreldrepengesoknad.xml;
 
-import com.fasterxml.jackson.annotation.JsonEnumDefaultValue;
+import java.util.Optional;
+
+import com.fasterxml.jackson.annotation.JsonValue;
 
 @Deprecated
 public enum Stønadskonto {
@@ -11,8 +13,21 @@ public enum Stønadskonto {
     FORELDREPENGER,
     FLERBARNSDAGER,
     FORELDREPENGER_FØR_FØDSEL,
-    @JsonEnumDefaultValue
-    INGEN_STØNADSKONTO,
+    INGEN_STØNADSKONTO("-"),
     ;
 
+    @JsonValue
+    private final String kode;
+
+    Stønadskonto() {
+        this(null);
+    }
+
+    Stønadskonto(String kode) {
+        this.kode = Optional.ofNullable(kode).orElse(name());
+    }
+
+    public String getKode() {
+        return kode;
+    }
 }
