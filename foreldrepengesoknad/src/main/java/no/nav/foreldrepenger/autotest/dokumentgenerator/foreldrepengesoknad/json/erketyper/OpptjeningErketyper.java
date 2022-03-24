@@ -71,8 +71,7 @@ public final class OpptjeningErketyper {
                 false,
                 false,
                 false,
-                List.of(frilansOppdrag),
-                null);
+                List.of(frilansOppdrag));
     }
 
     private static NorskOrganisasjon lagNorskOrganisasjon(LocalDate fom, LocalDate tom, Boolean erNyIArbeidslivet, Number næringsInntekt, Boolean varigEndretNæring) {
