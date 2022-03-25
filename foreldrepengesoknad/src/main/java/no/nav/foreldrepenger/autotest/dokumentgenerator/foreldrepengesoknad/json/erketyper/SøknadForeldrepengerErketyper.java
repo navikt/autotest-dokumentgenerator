@@ -33,6 +33,16 @@ public final class SøknadForeldrepengerErketyper {
                 .medRelasjonTilBarn(RelasjonTilBarnErketyper.fødsel(1, fødselsdato));
     }
 
+    public static ForeldrepengerBuilder lagSøknadForeldrepengerTerminFødsel(LocalDate fødselsdato, BrukerRolle brukerRolle) {
+        return lagSøknadForeldrepenger(fødselsdato, brukerRolle)
+            .medRelasjonTilBarn(RelasjonTilBarnErketyper.fødselMedTermin(1, fødselsdato, fødselsdato));
+    }
+
+    public static ForeldrepengerBuilder lagSøknadForeldrepengerTerminFødsel(LocalDate termindato, LocalDate fødselsdato, BrukerRolle brukerRolle) {
+        return lagSøknadForeldrepenger(termindato, brukerRolle)
+            .medRelasjonTilBarn(RelasjonTilBarnErketyper.fødselMedTermin(1, fødselsdato, termindato));
+    }
+
     public static ForeldrepengerBuilder lagSøknadForeldrepengerAdopsjon(LocalDate omsorgsovertakelsedatoen,
                                                                         BrukerRolle brukerRolle,
                                                                         Boolean ektefellesBarn) {

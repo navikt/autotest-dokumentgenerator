@@ -18,6 +18,10 @@ public final class RelasjonTilBarnErketyper {
         return new Fødsel(antallBarn, fødselsdato);
     }
 
+    public static Fødsel fødselMedTermin(int antallBarn, LocalDate fødselsdato, LocalDate termindato) {
+        return new Fødsel(antallBarn, fødselsdato, termindato);
+    }
+
     public static FremtidigFødsel termin(int antallBarn, LocalDate termindato) {
         return new FremtidigFødsel(antallBarn, termindato, termindato.minusMonths(1), null);
     }
