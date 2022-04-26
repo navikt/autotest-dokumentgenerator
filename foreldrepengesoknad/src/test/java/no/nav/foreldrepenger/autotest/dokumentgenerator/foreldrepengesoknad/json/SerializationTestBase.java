@@ -1,6 +1,6 @@
 package no.nav.foreldrepenger.autotest.dokumentgenerator.foreldrepengesoknad.json;
 
-import static no.nav.foreldrepenger.felles.integrasjon.rest.DefaultJsonMapper.getObjectMapper;
+import static no.nav.vedtak.mapper.json.DefaultJsonMapper.getObjectMapper;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
