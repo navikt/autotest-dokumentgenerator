@@ -7,12 +7,12 @@
     <parent>
         <groupId>no.nav.foreldrepenger.autotest.dokumentgenerator</groupId>
         <artifactId>dokumentgenerator</artifactId>
-        <version>${revision}${sha1}${changelist}</version>
+        <version>1.0-SNAPSHOT</version>
     </parent>
 
+    <name>Dokumentgenerator :: Foreldrepengesoknad</name>
     <artifactId>foreldrepengesoknad</artifactId>
     <packaging>jar</packaging>
-    <name>Dokumentgenerator :: Foreldrepengesoknad</name>
 
 
     <dependencies>
@@ -33,14 +33,13 @@
 
         <!-- 3dje parts biblioteker -->
         <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-annotations</artifactId>
-        </dependency>
-
-        <!-- Skriv bortifra denne! -->
-        <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-annotations</artifactId>
+            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>com.fasterxml.jackson.module</groupId>
@@ -50,17 +49,7 @@
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-core</artifactId>
-            <version>4.4.0</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
-
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.projectlombok</groupId>
-                <artifactId>lombok-maven-plugin</artifactId>
-            </plugin>
-        </plugins>
-    </build>
 </project>

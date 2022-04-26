@@ -11,11 +11,11 @@ import no.nav.foreldrepenger.autotest.dokumentgenerator.inntektsmelding.builders
 import no.nav.inntektsmelding.xml.kodeliste._20180702.YtelseKodeliste;
 import no.nav.inntektsmelding.xml.kodeliste._20180702.ÅrsakInnsendingKodeliste;
 
-public class InntektsmeldingBuilderTest{
+class InntektsmeldingBuilderTest{
 
 
     @Test
-    public void IMtest(){
+    void IMtest(){
         var inntektsmeldingBuilder = new InntektsmeldingBuilder()
                 .medBeregnetInntekt(BigDecimal.valueOf(3000))
                 .medArbeidstakerFNR("111111")
