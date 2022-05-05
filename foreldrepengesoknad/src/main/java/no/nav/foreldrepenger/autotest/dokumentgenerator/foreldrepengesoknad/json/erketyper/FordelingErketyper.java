@@ -74,7 +74,7 @@ public final class FordelingErketyper {
 
     public static Fordeling generiskFordelingAnnenforeldreIkkeInformert(LukketPeriodeMedVedlegg... perioder) {
         return Fordeling.builder()
-                .erAnnenForelderInformert(true)
+                .erAnnenForelderInformert(false)
                 .perioder(Arrays.asList(perioder))
                 .build();
     }
