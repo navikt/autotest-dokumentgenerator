@@ -29,4 +29,11 @@ public final class RettigheterErketyper {
                 false,
                 false);
     }
+
+    public static Rettigheter annenpartIkkeRettOgMorHarUføretrygd() {
+        return new Rettigheter(
+                false,
+                false,
+                true);
+    }
 }
