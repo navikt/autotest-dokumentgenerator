@@ -2,6 +2,7 @@ package no.nav.foreldrepenger.autotest.dokumentgenerator.foreldrepengesoknad.jso
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Set;
 
 import no.nav.foreldrepenger.common.domain.ArbeidsgiverIdentifikator;
 import no.nav.foreldrepenger.common.domain.felles.ProsentAndel;
@@ -40,20 +41,19 @@ public final class UttaksperioderErketyper {
     }
 
     public static UttaksPeriode uttaksperiode(StønadskontoType stønadskontoType, LocalDate fom, LocalDate tom,
-                                              Boolean flerbarnsdager,
-                                              Boolean samtidigUttak) {
-        return uttaksperiode(stønadskontoType, fom, tom, flerbarnsdager, samtidigUttak, 100);
+                                              UttaksperiodeType... uttaksperiodeTyper) {
+        return uttaksperiode(stønadskontoType, fom, tom, 100, uttaksperiodeTyper);
     }
 
     public static UttaksPeriode uttaksperiode(StønadskontoType stønadskontoType, LocalDate fom, LocalDate tom,
-                                              Boolean flerbarnsdager,
-                                              Boolean samtidigUttak, int uttaksprosent) {
+                                              int uttaksprosent, UttaksperiodeType... uttaksperiodeTyper) {
+        var periodetype = Set.of(uttaksperiodeTyper);
         return UttaksPeriode.UttaksPeriodeBuilder()
                 .uttaksperiodeType(stønadskontoType)
                 .fom(fom)
                 .tom(tom)
-                .ønskerFlerbarnsdager(flerbarnsdager)
-                .ønskerSamtidigUttak(samtidigUttak)
+                .ønskerFlerbarnsdager(periodetype.contains(UttaksperiodeType.FLERBARNSDAGER))
+                .ønskerSamtidigUttak(periodetype.contains(UttaksperiodeType.SAMTIDIGUTTAK))
                 .samtidigUttakProsent(new ProsentAndel((double) uttaksprosent))
                 .build();
     }
