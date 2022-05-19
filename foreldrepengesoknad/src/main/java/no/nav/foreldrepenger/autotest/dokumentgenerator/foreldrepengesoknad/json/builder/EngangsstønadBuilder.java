@@ -4,7 +4,6 @@ import no.nav.foreldrepenger.common.domain.BrukerRolle;
 import no.nav.foreldrepenger.common.domain.Søknad;
 import no.nav.foreldrepenger.common.domain.Ytelse;
 import no.nav.foreldrepenger.common.domain.engangsstønad.Engangsstønad;
-import no.nav.foreldrepenger.common.domain.felles.annenforelder.AnnenForelder;
 import no.nav.foreldrepenger.common.domain.felles.medlemskap.Medlemsskap;
 import no.nav.foreldrepenger.common.domain.felles.relasjontilbarn.RelasjonTilBarn;
 import no.nav.foreldrepenger.common.oppslag.dkif.Målform;
@@ -25,11 +24,6 @@ public class EngangsstønadBuilder extends SøknadBuilder<EngangsstønadBuilder>
     @Override
     protected EngangsstønadBuilder medYtelse(Ytelse ytelse) {
         søknadKladd.ytelse(ytelse);
-        return this;
-    }
-
-    public EngangsstønadBuilder medAnnenForelder(AnnenForelder annenForelder) {
-        engangsstønadBuilder.annenForelder(annenForelder);
         return this;
     }
 
