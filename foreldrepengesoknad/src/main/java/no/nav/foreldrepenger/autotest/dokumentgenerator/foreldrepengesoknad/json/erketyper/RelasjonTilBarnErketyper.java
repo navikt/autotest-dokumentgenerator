@@ -6,7 +6,6 @@ import java.util.List;
 import no.nav.foreldrepenger.common.domain.felles.relasjontilbarn.Adopsjon;
 import no.nav.foreldrepenger.common.domain.felles.relasjontilbarn.FremtidigFødsel;
 import no.nav.foreldrepenger.common.domain.felles.relasjontilbarn.Fødsel;
-import no.nav.foreldrepenger.common.domain.felles.relasjontilbarn.OmsorgsOvertakelsesÅrsak;
 import no.nav.foreldrepenger.common.domain.felles.relasjontilbarn.Omsorgsovertakelse;
 
 public final class RelasjonTilBarnErketyper {
@@ -15,11 +14,11 @@ public final class RelasjonTilBarnErketyper {
     }
 
     public static Fødsel fødsel(int antallBarn, LocalDate fødselsdato) {
-        return new Fødsel(antallBarn, fødselsdato);
+        return new Fødsel(antallBarn, List.of(fødselsdato), fødselsdato, null);
     }
 
     public static Fødsel fødselMedTermin(int antallBarn, LocalDate fødselsdato, LocalDate termindato) {
-        return new Fødsel(antallBarn, fødselsdato, termindato);
+        return new Fødsel(antallBarn, List.of(fødselsdato), termindato, null);
     }
 
     public static FremtidigFødsel termin(int antallBarn, LocalDate termindato) {
@@ -36,12 +35,11 @@ public final class RelasjonTilBarnErketyper {
                 .build();
     }
 
-    public static Omsorgsovertakelse omsorgsovertakelse(LocalDate omsorgsovertakelsedato, OmsorgsOvertakelsesÅrsak omsorgsOvertakelsesÅrsak) {
+    public static Omsorgsovertakelse omsorgsovertakelse(LocalDate omsorgsovertakelsedato) {
         return Omsorgsovertakelse.builder()
                 .antallBarn(1)
                 .fødselsdato(List.of(LocalDate.now().minusMonths(6)))
                 .omsorgsovertakelsesdato(omsorgsovertakelsedato)
-                .årsak(omsorgsOvertakelsesÅrsak)
                 .build();
     }
 

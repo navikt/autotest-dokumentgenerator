@@ -4,7 +4,6 @@ import java.time.LocalDate;
 
 import no.nav.foreldrepenger.autotest.dokumentgenerator.foreldrepengesoknad.json.builder.EngangsstønadBuilder;
 import no.nav.foreldrepenger.common.domain.BrukerRolle;
-import no.nav.foreldrepenger.common.domain.felles.relasjontilbarn.OmsorgsOvertakelsesÅrsak;
 
 public final class SøknadEngangsstønadErketyper {
 
@@ -34,9 +33,8 @@ public final class SøknadEngangsstønadErketyper {
     }
 
     public static EngangsstønadBuilder lagEngangstønadOmsorg(BrukerRolle brukerRolle,
-                                                             LocalDate omsorgsovertakelsedato,
-                                                             OmsorgsOvertakelsesÅrsak årsak) {
+                                                             LocalDate omsorgsovertakelsedato) {
         return lagEngangsstønad(brukerRolle)
-                .medRelasjonTilBarn(RelasjonTilBarnErketyper.omsorgsovertakelse(omsorgsovertakelsedato, årsak));
+                .medRelasjonTilBarn(RelasjonTilBarnErketyper.omsorgsovertakelse(omsorgsovertakelsedato));
     }
 }

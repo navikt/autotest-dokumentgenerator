@@ -139,7 +139,7 @@ public class InntektsmeldingBuilder {
         if(refusjonBuilderKladd == null) {
             refusjonBuilderKladd = new RefusjonBuilder();
         }
-        var multiplikand = prosentAvBeregnetInntekt.getProsent() / 100.0;
+        var multiplikand = prosentAvBeregnetInntekt.prosent() / 100.0;
         var refusjonsBelopPerMnd = arbeidsforholdBuilderKladd.beregnetInntektBelop.multiply(BigDecimal.valueOf(multiplikand));
         this.refusjonBuilderKladd.medRefusjonsBelopPerMnd(refusjonsBelopPerMnd);
         return this;
@@ -177,7 +177,7 @@ public class InntektsmeldingBuilder {
     }
 
     public InntektsmeldingBuilder medBeregnetInntekt(ProsentAndel prosentIForholdTilRegistrertInntekt) {
-        var multiplikand = prosentIForholdTilRegistrertInntekt.getProsent() / 100.0;
+        var multiplikand = prosentIForholdTilRegistrertInntekt.prosent() / 100.0;
         var beregnetInntektBelop = arbeidsforholdBuilderKladd.beregnetInntektBelop.multiply(BigDecimal.valueOf(multiplikand));
         this.arbeidsforholdBuilderKladd.medBeregnetInntekt(beregnetInntektBelop);
         return this;

@@ -12,7 +12,6 @@ import static no.nav.foreldrepenger.autotest.dokumentgenerator.foreldrepengesokn
 import static no.nav.foreldrepenger.autotest.dokumentgenerator.foreldrepengesoknad.json.erketyper.TilretteleggingsErketyper.helTilrettelegging;
 import static no.nav.foreldrepenger.autotest.dokumentgenerator.foreldrepengesoknad.json.erketyper.TilretteleggingsErketyper.ingenTilrettelegging;
 import static no.nav.foreldrepenger.common.domain.BrukerRolle.MOR;
-import static no.nav.foreldrepenger.common.domain.felles.relasjontilbarn.OmsorgsOvertakelsesÅrsak.SKAL_OVERTA_ALENE;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -62,7 +61,7 @@ public class SøknadSeraliseringDeserialiseringTest extends SerializationTestBas
         test(lagEngangstønadFødsel(MOR, LocalDate.now().minusWeeks(4)).build());
         test(lagEngangstønadTermin(MOR, LocalDate.now().plusWeeks(4)).build());
         test(lagEngangstønadAdopsjon(MOR, LocalDate.now(), false).build());
-        test(lagEngangstønadOmsorg(MOR, LocalDate.now(), SKAL_OVERTA_ALENE).build());
+        test(lagEngangstønadOmsorg(MOR, LocalDate.now()).build());
     }
 
     @Test
