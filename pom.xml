@@ -27,7 +27,8 @@
         <sonar.projectKey>navikt_autotest-dokumentgenerator</sonar.projectKey>
 
         <felles.versjon>4.1.25</felles.versjon>
-        <mottak-felles.version>0.8.0</mottak-felles.version>
+        <fp-kontrakter.version>6.1.21</fp-kontrakter.version>
+        <mottak-felles.version>0.8.4</mottak-felles.version>
         <junit.version>5.8.2</junit.version>
         <assertj.version>3.22.0</assertj.version>
         <mockito.version>4.5.1</mockito.version>
@@ -96,6 +97,11 @@
         </dependencies>
     </dependencyManagement>
     <dependencies>
+        <dependency>
+            <groupId>no.nav.foreldrepenger.kontrakter</groupId>
+            <artifactId>inntektsmelding-v1</artifactId>
+            <version>${fp-kontrakter.version}</version>
+        </dependency>
         <dependency>
             <groupId>no.nav.foreldrepenger.felles</groupId>
             <artifactId>felles-mapper</artifactId>
