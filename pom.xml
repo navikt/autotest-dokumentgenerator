@@ -26,7 +26,7 @@
         <sonar.organization>navit</sonar.organization>
         <sonar.projectKey>navikt_autotest-dokumentgenerator</sonar.projectKey>
 
-        <felles.versjon>4.1.25</felles.versjon>
+        <felles.versjon>4.1.28</felles.versjon>
         <fp-kontrakter.version>6.1.21</fp-kontrakter.version>
         <mottak-felles.version>0.8.4</mottak-felles.version>
         <junit.version>5.8.2</junit.version>
