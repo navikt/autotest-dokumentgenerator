@@ -14,7 +14,7 @@ import no.nav.foreldrepenger.common.oppslag.dkif.Målform;
 
 public class SvangerskapspengerBuilder extends SøknadBuilder<SvangerskapspengerBuilder> {
 
-    private final Svangerskapspenger.SvangerskapspengerBuilder svpBuilder = Svangerskapspenger.builder();
+    private final Svangerskapspenger.SvangerskapspengerBuilder builder = Svangerskapspenger.builder();
     private boolean opptjeningSatt = false;
 
     public SvangerskapspengerBuilder(BrukerRolle brukerRolle, List<Tilrettelegging> tilretteleggingListe) {
@@ -34,28 +34,28 @@ public class SvangerskapspengerBuilder extends SøknadBuilder<Svangerskapspenger
     }
 
     public SvangerskapspengerBuilder medTermindato(LocalDate termindato) {
-        svpBuilder.termindato(termindato);
+        builder.termindato(termindato);
         return this;
     }
 
     public SvangerskapspengerBuilder medFødselsdato(LocalDate fødselsdato) {
-        svpBuilder.fødselsdato(fødselsdato);
+        builder.fødselsdato(fødselsdato);
         return this;
     }
 
     public SvangerskapspengerBuilder medMedlemsskap(Medlemsskap medlemsskap) {
-        svpBuilder.medlemsskap(medlemsskap);
+        builder.medlemsskap(medlemsskap);
         return this;
     }
 
     public SvangerskapspengerBuilder medOpptjening(Opptjening opptjening) {
-        svpBuilder.opptjening(opptjening);
+        builder.opptjening(opptjening);
         opptjeningSatt = true;
         return this;
     }
 
     public SvangerskapspengerBuilder medTilrettelegging(List<Tilrettelegging> tilrettelegginger) {
-        svpBuilder.tilrettelegging(tilrettelegginger);
+        builder.tilrettelegging(tilrettelegginger);
         return this;
     }
 
@@ -64,7 +64,7 @@ public class SvangerskapspengerBuilder extends SøknadBuilder<Svangerskapspenger
         if (!opptjeningSatt) {
             this.medOpptjening(Opptjening.builder().build());
         }
-        this.medYtelse(this.svpBuilder.build());
+        this.medYtelse(this.builder.build());
         return super.build();
     }
 }
