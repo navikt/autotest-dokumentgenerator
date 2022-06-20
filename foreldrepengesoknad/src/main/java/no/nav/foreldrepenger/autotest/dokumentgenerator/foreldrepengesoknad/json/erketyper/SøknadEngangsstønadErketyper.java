@@ -15,8 +15,7 @@ public final class SøknadEngangsstønadErketyper {
                 .medMedlemsskap(MedlemsskapErketyper.medlemsskapNorge());
     }
 
-    public static EngangsstønadBuilder lagEngangstønadFødsel(BrukerRolle brukerRolle,
-                                                             LocalDate familiehendelse) {
+    public static EngangsstønadBuilder lagEngangstønadFødsel(BrukerRolle brukerRolle, LocalDate familiehendelse) {
         return lagEngangsstønad(brukerRolle)
                 .medRelasjonTilBarn(RelasjonTilBarnErketyper.fødsel(1, familiehendelse));
     }
@@ -26,14 +25,13 @@ public final class SøknadEngangsstønadErketyper {
                 .medRelasjonTilBarn(RelasjonTilBarnErketyper.termin(1, familiehendelse));
     }
 
-    public static EngangsstønadBuilder lagEngangstønadAdopsjon(BrukerRolle brukerRolle,
-                                                               LocalDate omsorgsovertakelsedato, Boolean ektefellesBarn) {
+    public static EngangsstønadBuilder lagEngangstønadAdopsjon(BrukerRolle brukerRolle, LocalDate omsorgsovertakelsedato,
+                                                               Boolean ektefellesBarn) {
         return lagEngangsstønad(brukerRolle)
                 .medRelasjonTilBarn(RelasjonTilBarnErketyper.adopsjon(omsorgsovertakelsedato, ektefellesBarn));
     }
 
-    public static EngangsstønadBuilder lagEngangstønadOmsorg(BrukerRolle brukerRolle,
-                                                             LocalDate omsorgsovertakelsedato) {
+    public static EngangsstønadBuilder lagEngangstønadOmsorg(BrukerRolle brukerRolle, LocalDate omsorgsovertakelsedato) {
         return lagEngangsstønad(brukerRolle)
                 .medRelasjonTilBarn(RelasjonTilBarnErketyper.omsorgsovertakelse(omsorgsovertakelsedato));
     }

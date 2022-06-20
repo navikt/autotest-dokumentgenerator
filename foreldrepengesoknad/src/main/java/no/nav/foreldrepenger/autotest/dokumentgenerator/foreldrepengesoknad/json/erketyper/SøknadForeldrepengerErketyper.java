@@ -16,7 +16,7 @@ public final class SøknadForeldrepengerErketyper {
     private static ForeldrepengerBuilder lagSøknadForeldrepenger(LocalDate familiehendelse, BrukerRolle brukerRolle) {
         return new ForeldrepengerBuilder(brukerRolle)
                 .medFordeling(FordelingErketyper.fordelingHappyCase(familiehendelse, brukerRolle))
-                .medDekningsgrad(Dekningsgrad.GRAD100)
+                .medDekningsgrad(Dekningsgrad.HUNDRE)
                 .medMedlemsskap(MedlemsskapErketyper.medlemsskapNorge())
                 .medOpptjening(Opptjening.builder().build())
                 .medRettigheter(RettigheterErketyper.beggeForeldreRettIkkeAleneomsorg())
