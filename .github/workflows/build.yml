@@ -34,7 +34,7 @@ jobs:
       - name: Build & Deploy
         run: |
           echo "Building $(echo $GITHUB_SHA | cut -c1-7)"
-          mvn verify -e -B -s settings.xml -Dfile.encoding=UTF-8 -DtrimStackTrace=false
+          mvn install -e -B -s settings.xml -Dfile.encoding=UTF-8 -DtrimStackTrace=false
 
       - uses: release-drafter/release-drafter@v5
         if: success()
