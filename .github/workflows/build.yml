@@ -3,43 +3,46 @@ name: Bygg og deploy
 on:
   push:
     branches:
-      - master         # Push events on master branch
+      - master
+    paths-ignore:
+      - '**.md'
+      - '**.MD'
+      - '.gitignore'
+      - '.github/workflows/build-pr.yml'
+      - '.github/dependabot.yml'
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
-
     steps:
       - uses: actions/checkout@v3
-
       - name: Setup maven
         uses: whelk-io/maven-settings-xml-action@v20
         with:
           repositories: '[{ "id": "github", "name": "github", "url": "https://maven.pkg.github.com/${{ github.repository }}", "releases": { "enabled": "true" }, "snapshots": { "enabled": "false" } }]'
           servers: '[{ "id": "github", "username": "${{ github.actor }}", "password": "${{ secrets.GITHUB_TOKEN }}" }]'
           output_file: settings.xml
-
       - uses: actions/setup-java@v3
         with:
           distribution: 'temurin'
           java-version: 17
           cache: 'maven'
+
       - name: Set build version
         run: |
           echo "BUILD_VERSION=$(date +%Y.%m.%d.%H%M%S)-$(echo $GITHUB_SHA | cut -c1-7)" >> $GITHUB_ENV
       - name: Build & Deploy
-        shell: bash
         run: |
           echo "Building $(echo $GITHUB_SHA | cut -c1-7)"
           mvn verify -e -B -s settings.xml -Dfile.encoding=UTF-8 -DtrimStackTrace=false
-          echo "Deployed artifacts"
-        env:
-          GITHUB_USERNAME: x-access-token
-          GITHUB_PASSWORD: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Release Drafter
-        uses: release-drafter/release-drafter@v5
+      - uses: release-drafter/release-drafter@v5
         if: success()
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Sonar analyse
+        run: |
+          mvn jacoco:prepare-agent jacoco:report sonar:sonar -s settings.xml -Dsonar.login=${SONAR_TOKEN}
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
