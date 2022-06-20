@@ -15,7 +15,7 @@ import no.nav.foreldrepenger.common.oppslag.dkif.Målform;
 
 public class ForeldrepengerBuilder extends SøknadBuilder<ForeldrepengerBuilder> {
 
-    protected final Foreldrepenger.ForeldrepengerBuilder foreldrepengerBuilder = Foreldrepenger.builder();
+    protected final Foreldrepenger.ForeldrepengerBuilder builder = Foreldrepenger.builder();
 
     public ForeldrepengerBuilder(BrukerRolle brukerRolle) {
         this.medSøker(brukerRolle, Målform.standard());
@@ -33,43 +33,43 @@ public class ForeldrepengerBuilder extends SøknadBuilder<ForeldrepengerBuilder>
     }
 
     public ForeldrepengerBuilder medAnnenForelder(AnnenForelder annenForelder) {
-        foreldrepengerBuilder.annenForelder(annenForelder);
+        builder.annenForelder(annenForelder);
         return this;
     }
 
     public ForeldrepengerBuilder medRelasjonTilBarn(RelasjonTilBarn relasjonTilBarn) {
-        foreldrepengerBuilder.relasjonTilBarn(relasjonTilBarn);
+        builder.relasjonTilBarn(relasjonTilBarn);
         return this;
     }
 
     public ForeldrepengerBuilder medRettigheter(Rettigheter rettigheter) {
-        foreldrepengerBuilder.rettigheter(rettigheter);
+        builder.rettigheter(rettigheter);
         return this;
     }
 
     public ForeldrepengerBuilder medDekningsgrad(Dekningsgrad dekningsgrad) {
-        foreldrepengerBuilder.dekningsgrad(dekningsgrad);
+        builder.dekningsgrad(dekningsgrad);
         return this;
     }
 
     public ForeldrepengerBuilder medOpptjening(Opptjening opptjening) {
-        foreldrepengerBuilder.opptjening(opptjening);
+        builder.opptjening(opptjening);
         return this;
     }
 
     public ForeldrepengerBuilder medFordeling(Fordeling fordeling) {
-        foreldrepengerBuilder.fordeling(fordeling);
+        builder.fordeling(fordeling);
         return this;
     }
 
     public ForeldrepengerBuilder medMedlemsskap(Medlemsskap medlemsskap) {
-        foreldrepengerBuilder.medlemsskap(medlemsskap);
+        builder.medlemsskap(medlemsskap);
         return this;
     }
 
     @Override
     public Søknad build() {
-        this.medYtelse(this.foreldrepengerBuilder.build());
+        this.medYtelse(this.builder.build());
         return super.build();
     }
 }

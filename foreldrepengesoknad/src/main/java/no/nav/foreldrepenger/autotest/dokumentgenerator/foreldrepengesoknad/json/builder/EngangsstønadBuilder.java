@@ -10,7 +10,7 @@ import no.nav.foreldrepenger.common.oppslag.dkif.Målform;
 
 public class EngangsstønadBuilder extends SøknadBuilder<EngangsstønadBuilder> {
 
-    private final Engangsstønad.EngangsstønadBuilder engangsstønadBuilder = Engangsstønad.builder();
+    private final Engangsstønad.EngangsstønadBuilder builder = Engangsstønad.builder();
 
     public EngangsstønadBuilder(BrukerRolle brukerRolle) {
         this.medSøker(brukerRolle, Målform.standard());
@@ -28,18 +28,18 @@ public class EngangsstønadBuilder extends SøknadBuilder<EngangsstønadBuilder>
     }
 
     public EngangsstønadBuilder medRelasjonTilBarn(RelasjonTilBarn relasjonTilBarn) {
-        engangsstønadBuilder.relasjonTilBarn(relasjonTilBarn);
+        builder.relasjonTilBarn(relasjonTilBarn);
         return this;
     }
 
     public EngangsstønadBuilder medMedlemsskap(Medlemsskap medlemsskap) {
-        engangsstønadBuilder.medlemsskap(medlemsskap);
+        builder.medlemsskap(medlemsskap);
         return this;
     }
 
     @Override
     public Søknad build() {
-        this.medYtelse(this.engangsstønadBuilder.build());
+        this.medYtelse(this.builder.build());
         return super.build();
     }
 }
