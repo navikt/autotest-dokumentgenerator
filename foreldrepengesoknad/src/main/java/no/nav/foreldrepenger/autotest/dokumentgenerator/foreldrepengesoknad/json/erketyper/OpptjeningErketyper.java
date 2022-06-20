@@ -55,7 +55,7 @@ public final class OpptjeningErketyper {
                 .build();
     }
 
-    public static Opptjening medUtenlandskArbeidsforhold(String landKode) {
+    public static Opptjening medUtenlandskArbeidsforhold(CountryCode landKode) {
         var utenlandskArbeidsforhold = lagUtenlandskArbeidsforhold(landKode);
         return Opptjening.builder()
                 .utenlandskArbeidsforhold(List.of(utenlandskArbeidsforhold))
@@ -93,11 +93,11 @@ public final class OpptjeningErketyper {
                 .build();
     }
 
-    private static UtenlandskArbeidsforhold lagUtenlandskArbeidsforhold(String landKode) {
+    private static UtenlandskArbeidsforhold lagUtenlandskArbeidsforhold(CountryCode landKode) {
         return UtenlandskArbeidsforhold.builder()
                 .periode(new ÅpenPeriode(LocalDate.now().minusYears(4), LocalDate.now()))
                 .arbeidsgiverNavn("Utenlandsk selskap AS")
-                .land(CountryCode.getByCodeIgnoreCase(landKode))
+                .land(landKode)
                 .build();
     }
 

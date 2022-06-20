@@ -27,9 +27,8 @@
         <sonar.host.url>https://sonarcloud.io</sonar.host.url>
         <sonar.projectKey>navikt_autotest-dokumentgenerator</sonar.projectKey>
 
-        <felles.versjon>4.1.28</felles.versjon>
         <fp-kontrakter.version>6.1.21</fp-kontrakter.version>
-        <fpsoknad-felles.version>0.8.7</fpsoknad-felles.version>
+        <fpsoknad-felles.version>0.8.13</fpsoknad-felles.version>
     </properties>
 
     <organization>
@@ -94,12 +93,6 @@
             <artifactId>inntektsmelding-v1</artifactId>
             <version>${fp-kontrakter.version}</version>
         </dependency>
-        <dependency>
-            <groupId>no.nav.foreldrepenger.felles</groupId>
-            <artifactId>felles-mapper</artifactId>
-            <version>${felles.versjon}</version>
-            <scope>test</scope>
-        </dependency>
     </dependencies>
 
     <build>
@@ -129,19 +122,6 @@
                         <phase>clean</phase>
                         <goals>
                             <goal>clean</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.projectlombok</groupId>
-                <artifactId>lombok-maven-plugin</artifactId>
-                <version>1.18.20.0</version>
-                <executions>
-                    <execution>
-                        <phase>generate-sources</phase>
-                        <goals>
-                            <goal>delombok</goal>
                         </goals>
                     </execution>
                 </executions>
