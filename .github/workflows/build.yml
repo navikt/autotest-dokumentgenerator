@@ -43,6 +43,6 @@ jobs:
 
       - name: Sonar analyse
         run: |
-          mvn jacoco:prepare-agent jacoco:report sonar:sonar -s settings.xml -Dsonar.login=${SONAR_TOKEN}
+          mvn jacoco:prepare-agent jacoco:report sonar:sonar -s settings.xml
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
