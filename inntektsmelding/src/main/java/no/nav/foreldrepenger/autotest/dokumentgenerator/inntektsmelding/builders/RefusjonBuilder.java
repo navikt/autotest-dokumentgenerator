@@ -5,7 +5,6 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-import java.util.stream.Collectors;
 
 import no.seres.xsd.nav.inntektsmelding_m._20181211.EndringIRefusjon;
 import no.seres.xsd.nav.inntektsmelding_m._20181211.ObjectFactory;
@@ -35,9 +34,9 @@ public class RefusjonBuilder {
         return this;
     }
     RefusjonBuilder medEndringIRefusjonslist(Map<LocalDate, BigDecimal> endringRefusjonMap) {
-       medEndringIRefusjonslist(endringRefusjonMap.entrySet().stream().map(
-               entry -> createEndringIRefusjon(entry.getKey(), entry.getValue())
-       ).collect(Collectors.toList()));
+       medEndringIRefusjonslist(endringRefusjonMap.entrySet().stream()
+               .map(entry -> createEndringIRefusjon(entry.getKey(), entry.getValue()))
+               .toList());
         return this;
     }
     RefusjonBuilder medRefusjonsOpphordato(LocalDate refusjonsOpphordato) {

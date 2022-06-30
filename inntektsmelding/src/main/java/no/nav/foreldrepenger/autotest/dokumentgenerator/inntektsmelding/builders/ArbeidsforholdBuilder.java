@@ -17,8 +17,7 @@ import no.seres.xsd.nav.inntektsmelding_m._20181211.Periode;
 import no.seres.xsd.nav.inntektsmelding_m._20181211.UtsettelseAvForeldrepenger;
 
 public class ArbeidsforholdBuilder {
-    private ObjectFactory objectFactory = new ObjectFactory();
-//    private Arbeidsforhold arbeidsforholdKladd;
+    private final ObjectFactory objectFactory = new ObjectFactory();
 
     private String arbeidsforholdId = null;
     private ÅrsakBeregnetInntektEndringKodeliste aarsakVedEndring;

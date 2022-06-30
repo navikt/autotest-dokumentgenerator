@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.Collections;
 
 import no.nav.foreldrepenger.common.domain.BrukerRolle;
+import no.nav.foreldrepenger.common.domain.Saksnummer;
 import no.nav.foreldrepenger.common.domain.Søker;
 import no.nav.foreldrepenger.common.domain.felles.annenforelder.AnnenForelder;
 import no.nav.foreldrepenger.common.domain.felles.relasjontilbarn.Fødsel;
@@ -12,15 +13,13 @@ import no.nav.foreldrepenger.common.domain.foreldrepenger.Rettigheter;
 import no.nav.foreldrepenger.common.domain.foreldrepenger.fordeling.Fordeling;
 import no.nav.foreldrepenger.common.oppslag.dkif.Målform;
 
-//  TODO: Trenger ikke en slik builder for endringsøknad... men for å gjøre ting likt så kan vi ha den frem til
-//  refaktorering av disse builderne.
 public class EndringssøknadBuilder {
 
     private final Endringssøknad.EndringssøknadBuilder builder = Endringssøknad.EndringssøkandsBuilder();
 
     private boolean mottattDatoSatt = false;
 
-    public EndringssøknadBuilder(String saksnummer, BrukerRolle brukerRolle) {
+    public EndringssøknadBuilder(Saksnummer saksnummer, BrukerRolle brukerRolle) {
         this.medSøker(new Søker(brukerRolle, Målform.standard()));
         this.medSaksnummer(saksnummer);
     }
@@ -56,7 +55,7 @@ public class EndringssøknadBuilder {
         return this;
     }
 
-    public EndringssøknadBuilder medSaksnummer(String saksnummer) {
+    public EndringssøknadBuilder medSaksnummer(Saksnummer saksnummer) {
         builder.saksnr(saksnummer);
         return this;
     }

@@ -23,7 +23,7 @@ class mapperForJSONTilXMLTest {
     Oppslag oppslag = Mockito.mock(Oppslag.class);
 
     @Test
-    public void sjekkerMapping() {
+    void sjekkerMapping() {
         var fødselsdato = LocalDate.now().minusWeeks(3);
         var søknadJson = SøknadForeldrepengerErketyper.lagSøknadForeldrepengerTermin(fødselsdato, BrukerRolle.MOR)
                 .medOpptjening(no.nav.foreldrepenger.autotest.dokumentgenerator.foreldrepengesoknad.json.erketyper.OpptjeningErketyper.medFrilansOpptjening())
