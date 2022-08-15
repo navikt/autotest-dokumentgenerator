@@ -30,7 +30,7 @@
         <sonar.host.url>https://sonarcloud.io</sonar.host.url>
 
         <fp-kontrakter.version>6.1.21</fp-kontrakter.version>
-        <fpsoknad-felles.version>0.8.14</fpsoknad-felles.version>
+        <fpsoknad-felles.version>0.8.16</fpsoknad-felles.version>
     </properties>
 
     <organization>
