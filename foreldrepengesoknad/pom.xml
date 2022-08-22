@@ -19,6 +19,7 @@
         <dependency>
             <groupId>com.neovisionaries</groupId>
             <artifactId>nv-i18n</artifactId>
+            <version>1.29</version>
         </dependency>
         <dependency>
             <groupId>no.nav.foreldrepenger</groupId>
@@ -27,6 +28,7 @@
         <dependency>
             <groupId>no.nav.foreldrepenger</groupId>
             <artifactId>fpsoknad-felles</artifactId>
+            <version>${fpsoknad-felles.version}</version>
             <type>test-jar</type>
             <scope>test</scope>
         </dependency>
