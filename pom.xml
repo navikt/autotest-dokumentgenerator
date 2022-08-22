@@ -6,7 +6,7 @@
     <parent>
         <groupId>no.nav.foreldrepenger.felles</groupId>
         <artifactId>fp-bom</artifactId>
-        <version>0.3.1</version>
+        <version>0.3.2</version>
     </parent>
 
     <groupId>no.nav.foreldrepenger.autotest.dokumentgenerator</groupId>
@@ -22,14 +22,9 @@
     </modules>
 
     <properties>
-        <java.version>17</java.version>
-
         <sonar.moduleKey>${project.artifactId}</sonar.moduleKey>
         <sonar.projectKey>navikt_autotest-dokumentgenerator</sonar.projectKey>
-        <sonar.organization>navikt</sonar.organization>
-        <sonar.host.url>https://sonarcloud.io</sonar.host.url>
-
-        <fp-kontrakter.version>6.1.21</fp-kontrakter.version>
+        <fp-kontrakter.version>6.1.23</fp-kontrakter.version>
         <fpsoknad-felles.version>0.8.18</fpsoknad-felles.version>
     </properties>
 
@@ -66,36 +61,19 @@
                 <groupId>no.nav.foreldrepenger</groupId>
                 <artifactId>fpsoknad-felles</artifactId>
                 <version>${fpsoknad-felles.version}</version>
-                <scope>import</scope>
-                <type>pom</type>
-            </dependency>
-            <dependency>
-                <groupId>no.nav.foreldrepenger</groupId>
-                <artifactId>fpsoknad-felles</artifactId>
-                <version>${fpsoknad-felles.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>no.nav.foreldrepenger</groupId>
-                <artifactId>fpsoknad-felles</artifactId>
-                <version>${fpsoknad-felles.version}</version>
-                <type>test-jar</type>
-                <scope>test</scope>
             </dependency>
             <dependency>
                 <groupId>no.nav.foreldrepenger.autotest.dokumentgenerator</groupId>
                 <artifactId>foreldrepengesoknad</artifactId>
                 <version>${project.version}</version>
             </dependency>
+            <dependency>
+                <groupId>no.nav.foreldrepenger.autotest.dokumentgenerator</groupId>
+                <artifactId>inntektsmelding</artifactId>
+                <version>${project.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
-
-    <dependencies>
-        <dependency>
-            <groupId>no.nav.foreldrepenger.kontrakter</groupId>
-            <artifactId>inntektsmelding-v1</artifactId>
-            <version>${fp-kontrakter.version}</version>
-        </dependency>
-    </dependencies>
 
     <build>
         <plugins>

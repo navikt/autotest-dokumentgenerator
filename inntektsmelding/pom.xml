@@ -20,6 +20,11 @@
             <groupId>no.nav.foreldrepenger.autotest.dokumentgenerator</groupId>
             <artifactId>foreldrepengesoknad</artifactId>
         </dependency>
+        <dependency>
+            <groupId>no.nav.foreldrepenger.kontrakter</groupId>
+            <artifactId>inntektsmelding-v1</artifactId>
+            <version>${fp-kontrakter.version}</version>
+        </dependency>
 
         <!-- 3dje parts biblioteker -->
         <dependency>
