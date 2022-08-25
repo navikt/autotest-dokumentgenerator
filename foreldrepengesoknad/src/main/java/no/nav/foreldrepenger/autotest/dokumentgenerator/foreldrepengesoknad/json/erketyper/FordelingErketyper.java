@@ -66,17 +66,19 @@ public final class FordelingErketyper {
     }
 
     public static Fordeling generiskFordeling(LukketPeriodeMedVedlegg... perioder) {
-        return Fordeling.builder()
+        return basicBuilder(perioder)
                 .erAnnenForelderInformert(true)
-                .perioder(Arrays.asList(perioder))
                 .build();
     }
 
     public static Fordeling generiskFordelingAnnenforeldreIkkeInformert(LukketPeriodeMedVedlegg... perioder) {
-        return Fordeling.builder()
+        return basicBuilder(perioder)
                 .erAnnenForelderInformert(false)
-                .perioder(Arrays.asList(perioder))
                 .build();
+    }
+
+    private static Fordeling.FordelingBuilder basicBuilder(LukketPeriodeMedVedlegg[] perioder) {
+        return Fordeling.builder().ønskerJustertUttakVedFødsel(false).perioder(Arrays.asList(perioder));
     }
 
 }
