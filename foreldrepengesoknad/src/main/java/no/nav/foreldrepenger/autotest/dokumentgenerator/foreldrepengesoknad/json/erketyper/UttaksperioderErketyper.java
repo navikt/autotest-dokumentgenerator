@@ -1,5 +1,9 @@
 package no.nav.foreldrepenger.autotest.dokumentgenerator.foreldrepengesoknad.json.erketyper;
 
+import static no.nav.foreldrepenger.autotest.dokumentgenerator.foreldrepengesoknad.json.util.VirkedagUtil.helgejustertTilFredag;
+import static no.nav.foreldrepenger.autotest.dokumentgenerator.foreldrepengesoknad.json.util.VirkedagUtil.helgejustertTilMandag;
+import static no.nav.foreldrepenger.common.domain.foreldrepenger.fordeling.UttaksPeriode.UttaksPeriodeBuilder;
+
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Set;
@@ -24,18 +28,18 @@ public final class UttaksperioderErketyper {
     }
 
     public static UttaksPeriode uttaksperiode(StønadskontoType stønadskontoType, LocalDate fom, LocalDate tom) {
-        return UttaksPeriode.UttaksPeriodeBuilder()
+        return UttaksPeriodeBuilder()
                 .uttaksperiodeType(stønadskontoType)
-                .fom(fom)
-                .tom(tom)
+                .fom(helgejustertTilMandag(fom))
+                .tom(helgejustertTilFredag(tom))
                 .build();
     }
 
     public static UttaksPeriode uttaksperiode(StønadskontoType stønadskonto, LocalDate fom, LocalDate tom, MorsAktivitet morsAktivitet) {
-        return UttaksPeriode.UttaksPeriodeBuilder()
+        return UttaksPeriodeBuilder()
                 .uttaksperiodeType(stønadskonto)
-                .fom(fom)
-                .tom(tom)
+                .fom(helgejustertTilMandag(fom))
+                .tom(helgejustertTilFredag(tom))
                 .morsAktivitetsType(morsAktivitet)
                 .build();
     }
@@ -48,25 +52,27 @@ public final class UttaksperioderErketyper {
     public static UttaksPeriode uttaksperiode(StønadskontoType stønadskontoType, LocalDate fom, LocalDate tom,
                                               int uttaksprosent, UttaksperiodeType... uttaksperiodeTyper) {
         var periodetype = Set.of(uttaksperiodeTyper);
-        return UttaksPeriode.UttaksPeriodeBuilder()
+        return UttaksPeriodeBuilder()
                 .uttaksperiodeType(stønadskontoType)
-                .fom(fom)
-                .tom(tom)
+                .fom(helgejustertTilMandag(fom))
+                .tom(helgejustertTilFredag(tom))
                 .ønskerFlerbarnsdager(periodetype.contains(UttaksperiodeType.FLERBARNSDAGER))
                 .ønskerSamtidigUttak(periodetype.contains(UttaksperiodeType.SAMTIDIGUTTAK))
-                .samtidigUttakProsent(new ProsentAndel((double) uttaksprosent))
+                .samtidigUttakProsent(ProsentAndel.valueOf(uttaksprosent))
                 .build();
     }
 
-    public static GradertUttaksPeriode graderingsperiodeArbeidstaker(StønadskontoType stønadskontoType, LocalDate fom, LocalDate tom,
-                                                                     ArbeidsgiverIdentifikator arbeidsgiverIdentifikator, Integer arbeidstidsprosentIOrgnr) {
+    public static GradertUttaksPeriode graderingsperiodeArbeidstaker(StønadskontoType stønadskontoType,
+                                                                     LocalDate fom, LocalDate tom,
+                                                                     ArbeidsgiverIdentifikator arbeidsgiverIdentifikator,
+                                                                     Integer arbeidstidsprosentIOrgnr) {
         return GradertUttaksPeriode.GradertUttaksPeriodeBuilder()
                 .uttaksperiodeType(stønadskontoType)
-                .fom(fom)
-                .tom(tom)
+                .fom(helgejustertTilMandag(fom))
+                .tom(helgejustertTilFredag(tom))
                 .virksomhetsnummer(List.of(arbeidsgiverIdentifikator.value()))
                 .arbeidsForholdSomskalGraderes(true)
-                .arbeidstidProsent(new ProsentAndel(Double.valueOf(arbeidstidsprosentIOrgnr)))
+                .arbeidstidProsent(ProsentAndel.valueOf(arbeidstidsprosentIOrgnr))
                 .erArbeidstaker(true)
                 .frilans(false)
                 .selvstendig(false)
@@ -78,10 +84,10 @@ public final class UttaksperioderErketyper {
                                                            Integer arbeidstidsprosent) {
         return GradertUttaksPeriode.GradertUttaksPeriodeBuilder()
                 .uttaksperiodeType(stønadskontoType)
-                .fom(fom)
-                .tom(tom)
+                .fom(helgejustertTilMandag(fom))
+                .tom(helgejustertTilFredag(tom))
                 .arbeidsForholdSomskalGraderes(true)
-                .arbeidstidProsent(new ProsentAndel(Double.valueOf(arbeidstidsprosent)))
+                .arbeidstidProsent(ProsentAndel.valueOf(arbeidstidsprosent))
                 .erArbeidstaker(false)
                 .frilans(true)
                 .selvstendig(false)
@@ -93,10 +99,10 @@ public final class UttaksperioderErketyper {
                                                            Integer arbeidstidsprosent) {
         return GradertUttaksPeriode.GradertUttaksPeriodeBuilder()
                 .uttaksperiodeType(stønadskontoType)
-                .fom(fom)
-                .tom(tom)
+                .fom(helgejustertTilMandag(fom))
+                .tom(helgejustertTilFredag(tom))
                 .arbeidsForholdSomskalGraderes(true)
-                .arbeidstidProsent(new ProsentAndel(Double.valueOf(arbeidstidsprosent)))
+                .arbeidstidProsent(ProsentAndel.valueOf(arbeidstidsprosent))
                 .erArbeidstaker(false)
                 .frilans(false)
                 .selvstendig(true)
@@ -105,8 +111,8 @@ public final class UttaksperioderErketyper {
 
     public static UtsettelsesPeriode utsettelsesperiode(UtsettelsesÅrsak utsettelseÅrsak, LocalDate fom, LocalDate tom) {
         return UtsettelsesPeriode.UtsettelsesPeriodeBuilder()
-                .fom(fom)
-                .tom(tom)
+                .fom(helgejustertTilMandag(fom))
+                .tom(helgejustertTilFredag(tom))
                 .årsak(utsettelseÅrsak)
                 // TODO: Følgende eksistere ikke i Utsettelsesperiode for XML.
                 //  stønadskontotype, erarbeidstaker, virksomhetsnummer og morsaktiattstype
@@ -115,8 +121,8 @@ public final class UttaksperioderErketyper {
 
     public static UtsettelsesPeriode utsettelsesperiode(UtsettelsesÅrsak utsettelseÅrsak, LocalDate fom, LocalDate tom, MorsAktivitet aktivitet) {
         return UtsettelsesPeriode.UtsettelsesPeriodeBuilder()
-                .fom(fom)
-                .tom(tom)
+                .fom(helgejustertTilMandag(fom))
+                .tom(helgejustertTilFredag(tom))
                 .årsak(utsettelseÅrsak)
                 .morsAktivitetsType(aktivitet)
                 // TODO: Følgende eksistere ikke i Utsettelsesperiode for XML.
@@ -124,21 +130,21 @@ public final class UttaksperioderErketyper {
                 .build();
     }
 
-    public static OverføringsPeriode overføringsperiode(Overføringsårsak overføringÅrsak, StønadskontoType stønadskontoType,
+    public static OverføringsPeriode overføringsperiode(Overføringsårsak overføringÅrsak,
+                                                        StønadskontoType stønadskontoType,
                                                         LocalDate fom, LocalDate tom) {
         return OverføringsPeriode.builder()
-                .fom(fom)
-                .tom(tom)
+                .fom(helgejustertTilMandag(fom))
+                .tom(helgejustertTilFredag(tom))
                 .årsak(overføringÅrsak)
                 .uttaksperiodeType(stønadskontoType)
                 .build();
     }
 
     public static OppholdsPeriode oppholdsperiode(Oppholdsårsak oppholdsårsak, LocalDate fom, LocalDate tom) {
-
         return OppholdsPeriode.builder()
-                .fom(fom)
-                .tom(tom)
+                .fom(helgejustertTilMandag(fom))
+                .tom(helgejustertTilFredag(tom))
                 .årsak(oppholdsårsak)
                 .build();
     }

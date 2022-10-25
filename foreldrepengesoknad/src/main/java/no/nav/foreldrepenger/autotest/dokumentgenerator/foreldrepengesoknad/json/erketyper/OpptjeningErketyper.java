@@ -21,32 +21,32 @@ public final class OpptjeningErketyper {
     private OpptjeningErketyper() {
     }
 
-    public static Opptjening medFrilansOpptjening() {
-        return medFrilansOpptjening(LocalDate.now().minusYears(2), LocalDate.now());
+    public static Opptjening frilansOpptjening() {
+        return frilansOpptjening(LocalDate.now().minusYears(2), LocalDate.now());
     }
 
-    public static Opptjening medFrilansOpptjening(LocalDate fom, LocalDate tom) {
+    public static Opptjening frilansOpptjening(LocalDate fom, LocalDate tom) {
         var frilans = lagFrilans(fom, tom);
         return Opptjening.builder()
                 .frilans(frilans)
                 .build();
     }
 
-    public static Opptjening medEgenNaeringOpptjening(Boolean erNyIArbeidslivet, double næringsInntekt,
-                                                      Boolean varigEndretNæring) {
-        return medEgenNaeringOpptjening(LocalDate.now().minusYears(4), LocalDate.now(), erNyIArbeidslivet,
+    public static Opptjening egenNaeringOpptjening(Boolean erNyIArbeidslivet, double næringsInntekt,
+                                                   Boolean varigEndretNæring) {
+        return egenNaeringOpptjening(LocalDate.now().minusYears(4), LocalDate.now(), erNyIArbeidslivet,
                 næringsInntekt, varigEndretNæring);
     }
 
-    public static Opptjening medEgenNaeringOpptjening(LocalDate fom, LocalDate tom, Boolean erNyIArbeidslivet,
-                                                      Number næringsInntekt, Boolean varigEndretNæring) {
+    public static Opptjening egenNaeringOpptjening(LocalDate fom, LocalDate tom, Boolean erNyIArbeidslivet,
+                                                   Number næringsInntekt, Boolean varigEndretNæring) {
         var norskOrganisasjon = lagNorskOrganisasjon(fom, tom, erNyIArbeidslivet, næringsInntekt, varigEndretNæring);
         return Opptjening.builder()
                 .egenNæring(List.of(norskOrganisasjon))
                 .build();
     }
 
-    public static Opptjening medEgenNaeringOgFrilansOpptjening() {
+    public static Opptjening egenNaeringOgFrilansOpptjening() {
         return Opptjening.builder()
                 .egenNæring(List.of(
                         lagNorskOrganisasjon(LocalDate.now().minusYears(4), LocalDate.now(),
@@ -55,7 +55,7 @@ public final class OpptjeningErketyper {
                 .build();
     }
 
-    public static Opptjening medUtenlandskArbeidsforhold(CountryCode landKode) {
+    public static Opptjening utenlandskArbeidsforhold(CountryCode landKode) {
         var utenlandskArbeidsforhold = lagUtenlandskArbeidsforhold(landKode);
         return Opptjening.builder()
                 .utenlandskArbeidsforhold(List.of(utenlandskArbeidsforhold))
