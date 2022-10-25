@@ -1,10 +1,10 @@
 package no.nav.foreldrepenger.autotest.dokumentgenerator.foreldrepengesoknad.json.erketyper;
 
-import static no.nav.foreldrepenger.autotest.dokumentgenerator.foreldrepengesoknad.json.erketyper.FordelingErketyper.generiskFordeling;
+import static no.nav.foreldrepenger.autotest.dokumentgenerator.foreldrepengesoknad.json.erketyper.FordelingErketyper.fordeling;
 import static no.nav.foreldrepenger.autotest.dokumentgenerator.foreldrepengesoknad.json.erketyper.MedlemsskapErketyper.medlemskapUtlandetForrige12mnd;
 import static no.nav.foreldrepenger.autotest.dokumentgenerator.foreldrepengesoknad.json.erketyper.MedlemsskapErketyper.medlemsskapNorge;
-import static no.nav.foreldrepenger.autotest.dokumentgenerator.foreldrepengesoknad.json.erketyper.OpptjeningErketyper.medEgenNaeringOgFrilansOpptjening;
-import static no.nav.foreldrepenger.autotest.dokumentgenerator.foreldrepengesoknad.json.erketyper.OpptjeningErketyper.medUtenlandskArbeidsforhold;
+import static no.nav.foreldrepenger.autotest.dokumentgenerator.foreldrepengesoknad.json.erketyper.OpptjeningErketyper.egenNaeringOgFrilansOpptjening;
+import static no.nav.foreldrepenger.autotest.dokumentgenerator.foreldrepengesoknad.json.erketyper.OpptjeningErketyper.utenlandskArbeidsforhold;
 import static no.nav.foreldrepenger.autotest.dokumentgenerator.foreldrepengesoknad.json.erketyper.RelasjonTilBarnErketyper.termin;
 import static no.nav.foreldrepenger.autotest.dokumentgenerator.foreldrepengesoknad.json.erketyper.RettigheterErketyper.annenpartIkkeRettOgMorHarUføretrygd;
 import static no.nav.foreldrepenger.autotest.dokumentgenerator.foreldrepengesoknad.json.erketyper.SøknadForeldrepengerErketyper.lagSøknadForeldrepengerFødsel;
@@ -45,15 +45,15 @@ class SoeknadBuilderIntegritetTest {
     @Test
     void verifiserAtDefaultVerdierBlirOverskrevetForForeldrepengeBuilder() {
         var fpStartdato = FØDSELSDATO;
-        var fordeling = generiskFordeling(
+        var fordeling = fordeling(
                 uttaksperiode(StønadskontoType.FORELDREPENGER, fpStartdato, fpStartdato.plusWeeks(5).minusDays(1), ARBEID),
                 utsettelsesperiode(UtsettelsesÅrsak.FRI, fpStartdato.plusWeeks(5), fpStartdato.plusWeeks(10).minusDays(1), TRENGER_HJELP),
                 uttaksperiode(StønadskontoType.FORELDREPENGER, fpStartdato.plusWeeks(10), fpStartdato.plusWeeks(15).minusDays(1), ARBEID),
                 utsettelsesperiode(UtsettelsesÅrsak.FRI, fpStartdato.plusWeeks(15), fpStartdato.plusWeeks(38).minusDays(1), TRENGER_HJELP),
                 uttaksperiode(StønadskontoType.FORELDREPENGER, fpStartdato.plusWeeks(38), fpStartdato.plusWeeks(43).minusDays(1), UFØRE)
-        );
+        ).build();
         var medlemsskap = medlemsskapNorge();
-        var opptjening = medEgenNaeringOgFrilansOpptjening();
+        var opptjening = egenNaeringOgFrilansOpptjening();
         var termin = termin(2, NOW.minusMonths(4));
         var rettigheter = annenpartIkkeRettOgMorHarUføretrygd();
         var norskForelder = new NorskForelder(new Fødselsnummer("111111111111"), "Frodig Salat");
@@ -107,7 +107,7 @@ class SoeknadBuilderIntegritetTest {
     @Test
     void verifiserAtDefaultVerdierBlirOverskrevetForSvangerskapspenger() {
         var medlemsskap = medlemskapUtlandetForrige12mnd();
-        var opptjening = medUtenlandskArbeidsforhold(CountryCode.AR);
+        var opptjening = utenlandskArbeidsforhold(CountryCode.AR);
         var tilrettelegging1 = TilretteleggingsErketyper.ingenTilrettelegging(
                 LocalDate.now(),
                 LocalDate.now(),

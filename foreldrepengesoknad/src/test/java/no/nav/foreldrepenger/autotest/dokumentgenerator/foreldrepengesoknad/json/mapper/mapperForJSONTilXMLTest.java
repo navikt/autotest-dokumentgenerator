@@ -26,7 +26,7 @@ class mapperForJSONTilXMLTest {
     void sjekkerMapping() {
         var fødselsdato = LocalDate.now().minusWeeks(3);
         var søknadJson = SøknadForeldrepengerErketyper.lagSøknadForeldrepengerTermin(fødselsdato, BrukerRolle.MOR)
-                .medOpptjening(no.nav.foreldrepenger.autotest.dokumentgenerator.foreldrepengesoknad.json.erketyper.OpptjeningErketyper.medFrilansOpptjening())
+                .medOpptjening(no.nav.foreldrepenger.autotest.dokumentgenerator.foreldrepengesoknad.json.erketyper.OpptjeningErketyper.frilansOpptjening())
                 .medAnnenForelder(new NorskForelder(new Fødselsnummer("12345678910"), null));
 
         when(oppslag.aktørId(any())).thenReturn(new AktørId("111111111111"));
