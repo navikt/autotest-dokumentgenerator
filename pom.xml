@@ -24,7 +24,7 @@
     <properties>
         <sonar.moduleKey>${project.artifactId}</sonar.moduleKey>
         <sonar.projectKey>navikt_autotest-dokumentgenerator</sonar.projectKey>
-        <fp-kontrakter.version>6.2.9</fp-kontrakter.version>
+        <fp-kontrakter.version>6.2.10</fp-kontrakter.version>
         <fpsoknad-felles.version>0.8.44</fpsoknad-felles.version>
     </properties>
 
