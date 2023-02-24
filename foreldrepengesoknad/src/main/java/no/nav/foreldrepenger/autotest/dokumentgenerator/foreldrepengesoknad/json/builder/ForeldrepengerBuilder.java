@@ -13,9 +13,16 @@ import no.nav.foreldrepenger.common.domain.foreldrepenger.Rettigheter;
 import no.nav.foreldrepenger.common.domain.foreldrepenger.fordeling.Fordeling;
 import no.nav.foreldrepenger.common.oppslag.dkif.Målform;
 
-public class ForeldrepengerBuilder extends SøknadBuilder<ForeldrepengerBuilder> {
+import javax.validation.Valid;
 
-    protected final Foreldrepenger.ForeldrepengerBuilder builder = Foreldrepenger.builder();
+public class ForeldrepengerBuilder extends SøknadBuilder<ForeldrepengerBuilder> {
+    private AnnenForelder annenForelder;
+    private RelasjonTilBarn relasjonTilBarn;
+    private Rettigheter rettigheter;
+    private Dekningsgrad dekningsgrad;
+    private Opptjening opptjening;
+    private Fordeling fordeling;
+    private Medlemsskap medlemsskap;
 
     public ForeldrepengerBuilder(BrukerRolle brukerRolle) {
         this.medSøker(brukerRolle, Målform.standard());
@@ -28,48 +35,48 @@ public class ForeldrepengerBuilder extends SøknadBuilder<ForeldrepengerBuilder>
 
     @Override
     protected ForeldrepengerBuilder medYtelse(Ytelse ytelse) {
-        søknadKladd.ytelse(ytelse);
+        this.ytelse = ytelse;
         return this;
     }
 
     public ForeldrepengerBuilder medAnnenForelder(AnnenForelder annenForelder) {
-        builder.annenForelder(annenForelder);
+        this.annenForelder = annenForelder;
         return this;
     }
 
     public ForeldrepengerBuilder medRelasjonTilBarn(RelasjonTilBarn relasjonTilBarn) {
-        builder.relasjonTilBarn(relasjonTilBarn);
+        this.relasjonTilBarn = relasjonTilBarn;
         return this;
     }
 
     public ForeldrepengerBuilder medRettigheter(Rettigheter rettigheter) {
-        builder.rettigheter(rettigheter);
+        this.rettigheter = rettigheter;
         return this;
     }
 
     public ForeldrepengerBuilder medDekningsgrad(Dekningsgrad dekningsgrad) {
-        builder.dekningsgrad(dekningsgrad);
+        this.dekningsgrad = dekningsgrad;
         return this;
     }
 
     public ForeldrepengerBuilder medOpptjening(Opptjening opptjening) {
-        builder.opptjening(opptjening);
+        this.opptjening = opptjening;
         return this;
     }
 
     public ForeldrepengerBuilder medFordeling(Fordeling fordeling) {
-        builder.fordeling(fordeling);
+        this.fordeling = fordeling;
         return this;
     }
 
     public ForeldrepengerBuilder medMedlemsskap(Medlemsskap medlemsskap) {
-        builder.medlemsskap(medlemsskap);
+        this.medlemsskap = medlemsskap;
         return this;
     }
 
     @Override
     public Søknad build() {
-        this.medYtelse(this.builder.build());
+        this.medYtelse(new Foreldrepenger(annenForelder, relasjonTilBarn, rettigheter, dekningsgrad, opptjening, fordeling, medlemsskap));
         return super.build();
     }
 }

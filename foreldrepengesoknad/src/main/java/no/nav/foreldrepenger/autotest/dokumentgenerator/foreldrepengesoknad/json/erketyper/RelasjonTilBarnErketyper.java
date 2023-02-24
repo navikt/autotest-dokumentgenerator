@@ -26,21 +26,24 @@ public final class RelasjonTilBarnErketyper {
     }
 
     public static Adopsjon adopsjon(LocalDate omsorgsovertakelsesdato, Boolean ektefellesBarn) {
-        return Adopsjon.builder()
-                .antallBarn(1)
-                .ektefellesBarn(ektefellesBarn)
-                .fødselsdato(List.of(LocalDate.now().minusYears(10)))
-                .ankomstDato(omsorgsovertakelsesdato)
-                .omsorgsovertakelsesdato(omsorgsovertakelsesdato)
-                .build();
+        return new Adopsjon(
+                1,
+                omsorgsovertakelsesdato,
+                ektefellesBarn,
+                false,
+                null,
+                omsorgsovertakelsesdato,
+                List.of(LocalDate.now().minusYears(10))
+        );
     }
 
     public static Omsorgsovertakelse omsorgsovertakelse(LocalDate omsorgsovertakelsedato) {
-        return Omsorgsovertakelse.builder()
-                .antallBarn(1)
-                .fødselsdato(List.of(LocalDate.now().minusMonths(6)))
-                .omsorgsovertakelsesdato(omsorgsovertakelsedato)
-                .build();
+        return new Omsorgsovertakelse(
+                1,
+                omsorgsovertakelsedato,
+                List.of(LocalDate.now().minusMonths(6)),
+                null
+        );
     }
 
 }

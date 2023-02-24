@@ -11,10 +11,13 @@ import no.nav.foreldrepenger.common.domain.Ytelse;
 import no.nav.foreldrepenger.common.domain.felles.Vedlegg;
 import no.nav.foreldrepenger.common.oppslag.dkif.Målform;
 
-public abstract class SøknadBuilder<B extends SøknadBuilder> {
-    protected Søknad.SøknadBuilder søknadKladd = Søknad.builder();
+abstract class SøknadBuilder<B extends SøknadBuilder> {
+    protected LocalDate mottattdato;
+    protected Søker søker;
+    protected String tilleggsopplysninger;
+    protected List<Vedlegg> vedlegg;
 
-    private boolean mottattDatoSatt = false;
+    protected Ytelse ytelse;
 
     SøknadBuilder() {
     }
@@ -23,39 +26,30 @@ public abstract class SøknadBuilder<B extends SøknadBuilder> {
 
     protected abstract B medYtelse(Ytelse ytelse);
 
-    public B medMottatdato(LocalDate mottatdato) {
-        this.søknadKladd.mottattdato(mottatdato);
-        this.mottattDatoSatt = true;
+    public B medMottattDato(LocalDate mottattdato) {
+        this.mottattdato = mottattdato;
         return this.self();
     }
 
     public B medSøker(BrukerRolle brukerRolle, Målform språkKode) {
-        this.søknadKladd.søker(new Søker(brukerRolle, språkKode));
-        return this.self();
-    }
-
-
-    public B medBegrunnelseForSenSøknad(String begrunnelseForSenSoeknad) {
-        this.søknadKladd.begrunnelseForSenSøknad(begrunnelseForSenSoeknad);
+        this.søker = new Søker(brukerRolle, språkKode);
         return this.self();
     }
 
     public B medTilleggsopplysninger(String tilleggsopplysninger) {
-        this.søknadKladd.tilleggsopplysninger(tilleggsopplysninger);
+        this.tilleggsopplysninger = tilleggsopplysninger;
         return this.self();
     }
 
-    public B medVedlegg(List<Vedlegg> vedleggListe) {
-        this.søknadKladd.vedlegg(vedleggListe);
+    public B medVedlegg(List<Vedlegg> vedlegg) {
+        this.vedlegg = vedlegg;
         return this.self();
     }
 
     protected Søknad build() {
-        søknadKladd.tilleggsopplysninger("");
-        if(!mottattDatoSatt) {
-            søknadKladd.mottattdato(LocalDate.now());
-        }
-        søknadKladd.vedlegg(Collections.emptyList());
-        return søknadKladd.build();
+        if (tilleggsopplysninger == null) this.tilleggsopplysninger = "";
+        if (mottattdato == null) this.mottattdato = LocalDate.now();
+        if(vedlegg == null) this.vedlegg = Collections.emptyList();
+        return new Søknad(this.mottattdato, this.søker, this.ytelse, this.tilleggsopplysninger, this.vedlegg);
     }
 }
