@@ -26,7 +26,7 @@ abstract class SøknadBuilder<B extends SøknadBuilder> {
 
     protected abstract B medYtelse(Ytelse ytelse);
 
-    public B medMottattDato(LocalDate mottatdato) {
+    public B medMottattDato(LocalDate mottattdato) {
         this.mottattdato = mottattdato;
         return this.self();
     }
@@ -41,7 +41,7 @@ abstract class SøknadBuilder<B extends SøknadBuilder> {
         return this.self();
     }
 
-    public B medVedlegg(List<Vedlegg> vedleggListe) {
+    public B medVedlegg(List<Vedlegg> vedlegg) {
         this.vedlegg = vedlegg;
         return this.self();
     }
