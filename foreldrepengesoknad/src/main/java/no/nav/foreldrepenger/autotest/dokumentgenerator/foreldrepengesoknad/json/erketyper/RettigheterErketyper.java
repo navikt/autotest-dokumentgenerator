@@ -13,6 +13,7 @@ public final class RettigheterErketyper {
                 true,
                 false,
                 false,
+                false,
                 false);
     }
 
@@ -22,11 +23,13 @@ public final class RettigheterErketyper {
                 false,
                 true,
                 false,
+                false,
                 false);
     }
 
     public static Rettigheter harIkkeAleneomsorgOgAnnenpartIkkeRett() {
         return new Rettigheter(
+                false,
                 false,
                 false,
                 false,
@@ -38,6 +41,7 @@ public final class RettigheterErketyper {
                 false,
                 false,
                 true,
+                false,
                 false);
     }
 }

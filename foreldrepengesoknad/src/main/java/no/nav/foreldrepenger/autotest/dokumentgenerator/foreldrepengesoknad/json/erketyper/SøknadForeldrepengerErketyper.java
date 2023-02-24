@@ -18,7 +18,7 @@ public final class SøknadForeldrepengerErketyper {
                 .medFordeling(FordelingErketyper.fordelingHappyCase(familiehendelse, brukerRolle).build())
                 .medDekningsgrad(Dekningsgrad.HUNDRE)
                 .medMedlemsskap(MedlemsskapErketyper.medlemsskapNorge())
-                .medOpptjening(Opptjening.builder().build())
+                .medOpptjening(new Opptjening(null, null, null, null))
                 .medRettigheter(RettigheterErketyper.beggeForeldreRettIkkeAleneomsorg())
                 .medAnnenForelder(new UkjentForelder());
     }

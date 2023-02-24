@@ -22,6 +22,6 @@ public class SøknadEndringErketyper {
 
     public static EndringssøknadBuilder lagEndringssøknadFødsel(LocalDate fødselsdato, BrukerRolle brukerRolle, Fordeling fordeling, Saksnummer saksnummer) {
         return lagEndringssøknad(brukerRolle, fordeling, saksnummer)
-                .medFødsel(RelasjonTilBarnErketyper.fødsel(1, fødselsdato));
+                .medRelasjonTilBarn(RelasjonTilBarnErketyper.fødsel(1, fødselsdato));
     }
 }

@@ -8,9 +8,13 @@ import no.nav.foreldrepenger.common.domain.felles.medlemskap.Medlemsskap;
 import no.nav.foreldrepenger.common.domain.felles.relasjontilbarn.RelasjonTilBarn;
 import no.nav.foreldrepenger.common.oppslag.dkif.Målform;
 
+import javax.validation.Valid;
+
 public class EngangsstønadBuilder extends SøknadBuilder<EngangsstønadBuilder> {
 
-    private final Engangsstønad.EngangsstønadBuilder builder = Engangsstønad.builder();
+    private Medlemsskap medlemsskap;
+    private RelasjonTilBarn relasjonTilBarn;
+
 
     public EngangsstønadBuilder(BrukerRolle brukerRolle) {
         this.medSøker(brukerRolle, Målform.standard());
@@ -23,23 +27,23 @@ public class EngangsstønadBuilder extends SøknadBuilder<EngangsstønadBuilder>
 
     @Override
     protected EngangsstønadBuilder medYtelse(Ytelse ytelse) {
-        søknadKladd.ytelse(ytelse);
+        this.ytelse = ytelse;
         return this;
     }
 
     public EngangsstønadBuilder medRelasjonTilBarn(RelasjonTilBarn relasjonTilBarn) {
-        builder.relasjonTilBarn(relasjonTilBarn);
+        this.relasjonTilBarn = relasjonTilBarn;
         return this;
     }
 
     public EngangsstønadBuilder medMedlemsskap(Medlemsskap medlemsskap) {
-        builder.medlemsskap(medlemsskap);
+        this.medlemsskap = medlemsskap;
         return this;
     }
 
     @Override
     public Søknad build() {
-        this.medYtelse(this.builder.build());
+        this.medYtelse(new Engangsstønad(this.medlemsskap, this.relasjonTilBarn));
         return super.build();
     }
 }

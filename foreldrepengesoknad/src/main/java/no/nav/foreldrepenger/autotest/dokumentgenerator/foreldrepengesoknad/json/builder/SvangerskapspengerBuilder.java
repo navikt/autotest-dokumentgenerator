@@ -13,9 +13,11 @@ import no.nav.foreldrepenger.common.domain.svangerskapspenger.tilrettelegging.Ti
 import no.nav.foreldrepenger.common.oppslag.dkif.Målform;
 
 public class SvangerskapspengerBuilder extends SøknadBuilder<SvangerskapspengerBuilder> {
-
-    private final Svangerskapspenger.SvangerskapspengerBuilder builder = Svangerskapspenger.builder();
-    private boolean opptjeningSatt = false;
+    private LocalDate termindato;
+    private LocalDate fødselsdato;
+    private Medlemsskap medlemsskap;
+    private Opptjening opptjening;
+    private List<Tilrettelegging> tilrettelegging;
 
     public SvangerskapspengerBuilder(BrukerRolle brukerRolle, List<Tilrettelegging> tilretteleggingListe) {
         this.medSøker(brukerRolle, Målform.standard());
@@ -29,42 +31,39 @@ public class SvangerskapspengerBuilder extends SøknadBuilder<Svangerskapspenger
 
     @Override
     protected SvangerskapspengerBuilder medYtelse(Ytelse ytelse) {
-        søknadKladd.ytelse(ytelse);
+        this.ytelse = ytelse;
         return this;
     }
 
     public SvangerskapspengerBuilder medTermindato(LocalDate termindato) {
-        builder.termindato(termindato);
+        this.termindato = termindato;
         return this;
     }
 
     public SvangerskapspengerBuilder medFødselsdato(LocalDate fødselsdato) {
-        builder.fødselsdato(fødselsdato);
+        this.fødselsdato = fødselsdato;
         return this;
     }
 
     public SvangerskapspengerBuilder medMedlemsskap(Medlemsskap medlemsskap) {
-        builder.medlemsskap(medlemsskap);
+        this.medlemsskap = medlemsskap;
         return this;
     }
 
     public SvangerskapspengerBuilder medOpptjening(Opptjening opptjening) {
-        builder.opptjening(opptjening);
-        opptjeningSatt = true;
+        this.opptjening = opptjening;
         return this;
     }
 
     public SvangerskapspengerBuilder medTilrettelegging(List<Tilrettelegging> tilrettelegginger) {
-        builder.tilrettelegging(tilrettelegginger);
+        this.tilrettelegging = tilrettelegginger;
         return this;
     }
 
     @Override
     public Søknad build() {
-        if (!opptjeningSatt) {
-            this.medOpptjening(Opptjening.builder().build());
-        }
-        this.medYtelse(this.builder.build());
+        if (opptjening == null) this.opptjening = new Opptjening(null, null, null, null);
+        this.medYtelse(new Svangerskapspenger(termindato, fødselsdato, medlemsskap, opptjening, tilrettelegging));
         return super.build();
     }
 }
