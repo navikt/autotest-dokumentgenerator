@@ -145,7 +145,7 @@ public final class UttaksperioderErketyper {
     public static UtsettelsesPeriode utsettelsesperiode(UtsettelsesÅrsak utsettelseÅrsak, LocalDate fom, LocalDate tom) {
         return new UtsettelsesPeriode(
                 helgejustertTilMandag(fom),
-                helgejustertTilMandag(tom),
+                helgejustertTilFredag(tom),
                 false,
                 utsettelseÅrsak,
                 null,
@@ -156,7 +156,7 @@ public final class UttaksperioderErketyper {
     public static UtsettelsesPeriode utsettelsesperiode(UtsettelsesÅrsak utsettelseÅrsak, LocalDate fom, LocalDate tom, MorsAktivitet aktivitet) {
         return new UtsettelsesPeriode(
                 helgejustertTilMandag(fom),
-                helgejustertTilMandag(tom),
+                helgejustertTilFredag(tom),
                 false,
                 utsettelseÅrsak,
                 aktivitet,
