@@ -1,6 +1,7 @@
 package no.nav.foreldrepenger.autotest.dokumentgenerator.foreldrepengesoknad.json.erketyper;
 
 import static no.nav.foreldrepenger.autotest.dokumentgenerator.foreldrepengesoknad.json.erketyper.FordelingErketyper.fordeling;
+import static no.nav.foreldrepenger.autotest.dokumentgenerator.foreldrepengesoknad.json.erketyper.FordelingErketyper.fordelingFarAleneomsorg;
 import static no.nav.foreldrepenger.autotest.dokumentgenerator.foreldrepengesoknad.json.erketyper.MedlemsskapErketyper.medlemskapUtlandetForrige12mnd;
 import static no.nav.foreldrepenger.autotest.dokumentgenerator.foreldrepengesoknad.json.erketyper.MedlemsskapErketyper.medlemsskapNorge;
 import static no.nav.foreldrepenger.autotest.dokumentgenerator.foreldrepengesoknad.json.erketyper.OpptjeningErketyper.egenNaeringOgFrilansOpptjening;
@@ -18,6 +19,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import java.time.LocalDate;
 import java.util.List;
+
+import no.nav.foreldrepenger.common.domain.Saksnummer;
+
+import no.nav.foreldrepenger.common.domain.foreldrepenger.Endringssøknad;
 
 import org.junit.jupiter.api.Test;
 
@@ -41,6 +46,18 @@ class SoeknadBuilderIntegritetTest {
     public static final LocalDate NOW = LocalDate.now();
     public static final LocalDate FØDSELSDATO = NOW.minusMonths(1);
     public static final LocalDate TERMINDATO = NOW.minusMonths(1).minusWeeks(3);
+
+    @Test
+    void endringssøknadRi() {
+        var tid = LocalDate.now().minusWeeks(5);
+        var endringssøknad = SøknadEndringErketyper.lagEndringssøknadFødsel(tid, BrukerRolle.FAR,
+                        fordelingFarAleneomsorg(tid).build(), Saksnummer.valueOf("123"))
+                .medMottattDato(tid)
+                .build();
+
+        assertThat(endringssøknad).isInstanceOf(Endringssøknad.class);
+        assertThat(endringssøknad.getMottattdato()).isEqualTo(tid);
+    }
 
     @Test
     void verifiserAtDefaultVerdierBlirOverskrevetForForeldrepengeBuilder() {

@@ -13,16 +13,14 @@ import no.nav.foreldrepenger.common.domain.foreldrepenger.Rettigheter;
 import no.nav.foreldrepenger.common.domain.foreldrepenger.fordeling.Fordeling;
 import no.nav.foreldrepenger.common.oppslag.dkif.Målform;
 
-import javax.validation.Valid;
-
 public class ForeldrepengerBuilder extends SøknadBuilder<ForeldrepengerBuilder> {
-    private AnnenForelder annenForelder;
-    private RelasjonTilBarn relasjonTilBarn;
-    private Rettigheter rettigheter;
-    private Dekningsgrad dekningsgrad;
-    private Opptjening opptjening;
-    private Fordeling fordeling;
-    private Medlemsskap medlemsskap;
+    protected AnnenForelder annenForelder;
+    protected RelasjonTilBarn relasjonTilBarn;
+    protected Rettigheter rettigheter;
+    protected Dekningsgrad dekningsgrad;
+    protected Opptjening opptjening;
+    protected Fordeling fordeling;
+    protected Medlemsskap medlemsskap;
 
     public ForeldrepengerBuilder(BrukerRolle brukerRolle) {
         this.medSøker(brukerRolle, Målform.standard());
