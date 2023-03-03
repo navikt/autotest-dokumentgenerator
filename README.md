@@ -14,4 +14,3 @@ inntektsmeldinger til testformål.
 ### Repositoriet består av to moduler:
 * Foreldrepengesøknad – Buildere for søknadsobjekt som sendes inn til fpsoknad-mottak (json)
 * Inntektsmelding – byggere for å lage forskjellige typer innteksmeldinger.
-
