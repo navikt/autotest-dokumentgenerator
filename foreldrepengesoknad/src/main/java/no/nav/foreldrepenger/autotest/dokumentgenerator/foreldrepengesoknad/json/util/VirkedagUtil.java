@@ -14,6 +14,7 @@ public final class VirkedagUtil {
             default -> dato;
         };
     }
+    
 
     public static LocalDate helgejustertTilFredag(LocalDate dato) {
         return switch (dato.getDayOfWeek()) {
