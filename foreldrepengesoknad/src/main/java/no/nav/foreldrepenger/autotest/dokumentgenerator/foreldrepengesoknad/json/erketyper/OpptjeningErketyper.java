@@ -23,22 +23,22 @@ public final class OpptjeningErketyper {
         return new Opptjening(null, null, null, frilans);
     }
 
-    public static Opptjening egenNaeringOpptjening(Boolean erNyIArbeidslivet, double næringsInntekt, Boolean varigEndretNæring) {
-        return egenNaeringOpptjening(LocalDate.now().minusYears(4), LocalDate.now(), erNyIArbeidslivet,
+    public static Opptjening egenNaeringOpptjening(String orgnummer, Boolean erNyIArbeidslivet, double næringsInntekt, Boolean varigEndretNæring) {
+        return egenNaeringOpptjening(orgnummer, LocalDate.now().minusYears(4), LocalDate.now(), erNyIArbeidslivet,
                 næringsInntekt, varigEndretNæring);
     }
 
-    public static Opptjening egenNaeringOpptjening(LocalDate fom, LocalDate tom, Boolean erNyIArbeidslivet,
+    public static Opptjening egenNaeringOpptjening(String orgnummer, LocalDate fom, LocalDate tom, Boolean erNyIArbeidslivet,
                                                    Number næringsInntekt, Boolean varigEndretNæring) {
-        var norskOrganisasjon = lagNorskOrganisasjon(fom, tom, erNyIArbeidslivet, næringsInntekt, varigEndretNæring);
+        var norskOrganisasjon = lagNorskOrganisasjon(orgnummer, fom, tom, erNyIArbeidslivet, næringsInntekt, varigEndretNæring);
         return new Opptjening(null, List.of(norskOrganisasjon), null, null);
     }
 
-    public static Opptjening egenNaeringOgFrilansOpptjening() {
+    public static Opptjening egenNaeringOgFrilansOpptjening(String orgnummer) {
         return new Opptjening(
                 null,
                 List.of(
-                        lagNorskOrganisasjon(LocalDate.now().minusYears(4), LocalDate.now(), false, 1_500_000, true)
+                        lagNorskOrganisasjon(orgnummer, LocalDate.now().minusYears(4), LocalDate.now(), false, 1_500_000, true)
                 ),
                 null,
                 lagFrilans(LocalDate.now().minusYears(2), LocalDate.now())
@@ -62,10 +62,10 @@ public final class OpptjeningErketyper {
                 List.of(frilansOppdrag));
     }
 
-    private static EgenNæring lagNorskOrganisasjon(LocalDate fom, LocalDate tom, Boolean erNyIArbeidslivet, Number næringsInntekt, Boolean varigEndretNæring) {
+    private static EgenNæring lagNorskOrganisasjon(String orgnummer, LocalDate fom, LocalDate tom, Boolean erNyIArbeidslivet, Number næringsInntekt, Boolean varigEndretNæring) {
         return new EgenNæring(
                 CountryCode.NO,
-                new Orgnummer("910909088"),
+                new Orgnummer(orgnummer),
                 "Navnet Organisasjon",
                 List.of(Virksomhetstype.ANNEN),
                 new ÅpenPeriode(fom, tom),
