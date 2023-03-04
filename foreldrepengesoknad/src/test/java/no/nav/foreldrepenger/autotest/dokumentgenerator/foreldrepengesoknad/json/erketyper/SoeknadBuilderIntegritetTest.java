@@ -70,7 +70,7 @@ class SoeknadBuilderIntegritetTest {
                 uttaksperiode(StønadskontoType.FORELDREPENGER, fpStartdato.plusWeeks(38), fpStartdato.plusWeeks(43).minusDays(1), UFØRE)
         ).build();
         var medlemsskap = medlemsskapNorge();
-        var opptjening = egenNaeringOgFrilansOpptjening();
+        var opptjening = egenNaeringOgFrilansOpptjening("342352362"); // Validerer ikke
         var termin = termin(2, NOW.minusMonths(4));
         var rettigheter = annenpartIkkeRettOgMorHarUføretrygd();
         var norskForelder = new NorskForelder(new Fødselsnummer("111111111111"), "Frodig Salat");
