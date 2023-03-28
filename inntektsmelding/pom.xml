@@ -14,11 +14,10 @@
     <artifactId>inntektsmelding</artifactId>
     <packaging>jar</packaging>
 
-
     <dependencies>
         <dependency>
-            <groupId>no.nav.foreldrepenger.autotest.dokumentgenerator</groupId>
-            <artifactId>foreldrepengesoknad</artifactId>
+            <groupId>no.nav.foreldrepenger</groupId>
+            <artifactId>fpsoknad-felles</artifactId>
         </dependency>
         <dependency>
             <groupId>no.nav.foreldrepenger.kontrakter</groupId>
@@ -30,10 +29,12 @@
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-annotations</artifactId>
+            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>com.fasterxml.jackson.module</groupId>
             <artifactId>jackson-module-parameter-names</artifactId>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 </project>
