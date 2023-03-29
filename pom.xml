@@ -102,7 +102,7 @@
             <dependency>
                 <groupId>org.mockito</groupId>
                 <artifactId>mockito-bom</artifactId>
-                <version>5.1.1</version>
+                <version>5.2.0</version>
                 <scope>import</scope>
                 <type>pom</type>
             </dependency>
@@ -168,7 +168,7 @@
                 <plugin>
                     <groupId>org.codehaus.mojo</groupId>
                     <artifactId>flatten-maven-plugin</artifactId>
-                    <version>1.4.0</version>
+                    <version>1.4.1</version>
                     <configuration>
                         <flattenMode>bom</flattenMode>
                         <flattenedPomFilename>.flattened</flattenedPomFilename>
@@ -241,10 +241,6 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-source-plugin</artifactId>
             </plugin>
         </plugins>
     </build>
