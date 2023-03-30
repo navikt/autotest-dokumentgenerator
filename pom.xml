@@ -31,7 +31,7 @@
 
         <fp-kontrakter.version>6.2.15</fp-kontrakter.version>
 
-        <fpsoknad-felles.version>0.0.1-SNAPSHOT</fpsoknad-felles.version>
+        <fpsoknad-felles.version>1.0.1</fpsoknad-felles.version>
     </properties>
 
     <organization>
