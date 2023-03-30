@@ -31,7 +31,7 @@
 
         <fp-kontrakter.version>6.2.15</fp-kontrakter.version>
 
-        <fpsoknad-felles.version>1.0.1</fpsoknad-felles.version>
+        <fpsoknad-felles.version>0.0.1-SNAPSHOT</fpsoknad-felles.version>
     </properties>
 
     <organization>
@@ -69,6 +69,21 @@
                 <version>2.14.2</version>
                 <scope>import</scope>
                 <type>pom</type>
+            </dependency>
+
+            <!-- JAXB BOM-->
+            <dependency>
+                <groupId>org.glassfish.jaxb</groupId>
+                <artifactId>jaxb-bom</artifactId>
+                <version>2.3.6</version>
+                <scope>import</scope>
+                <type>pom</type>
+            </dependency>
+
+            <dependency>
+                <groupId>io.micrometer</groupId>
+                <artifactId>micrometer-registry-prometheus</artifactId>
+                <version>1.10.5</version>
             </dependency>
 
             <!-- Interne avhengigheter -->

@@ -25,6 +25,16 @@
             <artifactId>fpsoknad-felles</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>org.glassfish.jaxb</groupId>
+            <artifactId>jaxb-runtime</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>io.micrometer</groupId>
+            <artifactId>micrometer-registry-prometheus</artifactId>
+        </dependency>
+
         <!-- 3dje parts biblioteker -->
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
