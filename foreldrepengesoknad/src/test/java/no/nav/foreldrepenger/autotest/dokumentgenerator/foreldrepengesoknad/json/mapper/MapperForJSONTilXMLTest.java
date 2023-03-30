@@ -18,7 +18,7 @@ import no.nav.foreldrepenger.common.innsending.SøknadEgenskap;
 import no.nav.foreldrepenger.common.innsending.mappers.V3ForeldrepengerDomainMapper;
 import no.nav.foreldrepenger.common.oppslag.Oppslag;
 
-class mapperForJSONTilXMLTest {
+class MapperForJSONTilXMLTest {
 
     Oppslag oppslag = Mockito.mock(Oppslag.class);
 

@@ -71,6 +71,21 @@
                 <type>pom</type>
             </dependency>
 
+            <!-- JAXB BOM-->
+            <dependency>
+                <groupId>org.glassfish.jaxb</groupId>
+                <artifactId>jaxb-bom</artifactId>
+                <version>2.3.6</version>
+                <scope>import</scope>
+                <type>pom</type>
+            </dependency>
+
+            <dependency>
+                <groupId>io.micrometer</groupId>
+                <artifactId>micrometer-registry-prometheus</artifactId>
+                <version>1.10.5</version>
+            </dependency>
+
             <!-- Interne avhengigheter -->
             <dependency>
                 <groupId>no.nav.foreldrepenger</groupId>
